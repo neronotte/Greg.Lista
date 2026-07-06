@@ -44,31 +44,37 @@ export default async function InvitesPage() {
               {pendingInvites.length}{" "}
               {pendingInvites.length === 1 ? "invito" : "inviti"}
             </p>
-            {pendingInvites.map((invite) => (
-              <Link
-                key={invite.id}
-                href={`/invite/${invite.token}`}
-                className="flex items-center gap-3 bg-bg-surface px-4 py-3 border-b border-border"
-              >
-                <Users size={20} className="text-text-secondary shrink-0" />
-                <div className="flex-1 min-w-0">
-                  <p className="text-base text-text-primary truncate">
-                    {invite.family?.name ?? "Famiglia"}
-                  </p>
-                  <p className="text-sm text-text-secondary">
-                    In attesa dal{" "}
-                    {new Date(invite.created_at).toLocaleDateString("it-IT", {
-                      day: "numeric",
-                      month: "short",
-                    })}
-                  </p>
-                </div>
-                <ChevronRight
-                  size={16}
-                  className="text-text-disabled shrink-0"
-                />
-              </Link>
-            ))}
+            {pendingInvites.map((invite) => {
+              const family = (
+                Array.isArray(invite.family) ? invite.family[0] : invite.family
+              ) as { name: string } | null;
+
+              return (
+                <Link
+                  key={invite.id}
+                  href={`/invite/${invite.token}`}
+                  className="flex items-center gap-3 bg-bg-surface px-4 py-3 border-b border-border"
+                >
+                  <Users size={20} className="text-text-secondary shrink-0" />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-base text-text-primary truncate">
+                      {family?.name ?? "Famiglia"}
+                    </p>
+                    <p className="text-sm text-text-secondary">
+                      In attesa dal{" "}
+                      {new Date(invite.created_at).toLocaleDateString("it-IT", {
+                        day: "numeric",
+                        month: "short",
+                      })}
+                    </p>
+                  </div>
+                  <ChevronRight
+                    size={16}
+                    className="text-text-disabled shrink-0"
+                  />
+                </Link>
+              );
+            })}
           </section>
         )}
       </main>
