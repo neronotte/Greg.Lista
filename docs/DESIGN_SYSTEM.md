@@ -14,6 +14,13 @@ Ispirazione: WhatsApp. Mobile-first (phone → tablet → desktop).
 | **Leggibile**    | Contrasto elevato, font grande, densità bassa — lista della spesa = corsia illuminata        |
 | **Persistente**  | Lo stato sopravvive al refresh; nessuna perdita di dati visibile                             |
 
+### Navigazione e caricamento dati
+
+- La navigazione tra route deve essere immediata: l'utente vede subito la pagina di atterraggio.
+- Stack routing: usare Next.js App Router (`next/link`, `loading.tsx`); non introdurre `react-router`.
+- Il caricamento dati deve mostrare skeleton contestuali alla pagina, evitando schermate vuote bloccanti.
+- Quando i dati sono pronti, lo skeleton viene sostituito dal contenuto reale senza salti di layout.
+
 ---
 
 ## 2. Palette colori

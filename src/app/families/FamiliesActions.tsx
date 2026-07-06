@@ -1,11 +1,13 @@
 'use client'
 
 import { useState, useTransition } from 'react'
+import { useRouter } from 'next/navigation'
 import FAB from '@/components/ui/FAB'
 import BottomSheet from '@/components/ui/BottomSheet'
 import { createFamily } from '@/lib/actions/families'
 
 export default function FamiliesActions() {
+  const router = useRouter()
   const [open, setOpen] = useState(false)
   const [name, setName] = useState('')
   const [error, setError] = useState<string | null>(null)
@@ -18,6 +20,7 @@ export default function FamiliesActions() {
     startTransition(async () => {
       try {
         await createFamily(name.trim())
+        router.refresh()
         setOpen(false)
         setName('')
       } catch (err) {

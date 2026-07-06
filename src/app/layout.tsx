@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import pkg from '../package.json'
+import pkg from "../package.json";
 
 export const metadata: Metadata = {
   title: `Greg List@ v${pkg.version}`,
@@ -23,11 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="it"
-      className="h-full"
-      suppressHydrationWarning
-    >
+    <html lang="it" className="h-full" suppressHydrationWarning>
+      <link rel="icon" type="image/x-icon" href="favicon.png"></link>
       <body className="min-h-full flex flex-col bg-bg-app text-text-primary antialiased font-sans">
         {children}
       </body>

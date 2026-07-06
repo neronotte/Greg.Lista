@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useTransition } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 import {
   DndContext,
   closestCenter,
@@ -29,7 +29,16 @@ interface SortableItemListProps {
 
 export default function SortableItemList({ listId, items: initialItems, onEdit, onDelete }: SortableItemListProps) {
   const [items, setItems] = useState(initialItems)
+  const [mounted, setMounted] = useState(false)
   const [, startTransition] = useTransition()
+
+  useEffect(() => {
+    setItems(initialItems)
+  }, [initialItems])
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 8 } }))
 
@@ -44,6 +53,16 @@ export default function SortableItemList({ listId, items: initialItems, onEdit, 
     startTransition(() => reorderItems(listId, newOrder.map(i => i.id)))
   }
 
+  if (!mounted) {
+    return (
+      <>
+        {items.map(item => (
+          <PlainRow key={item.id} item={item} onEdit={onEdit} onDelete={onDelete} />
+        ))}
+      </>
+    )
+  }
+
   return (
     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
       <SortableContext items={items.map(i => i.id)} strategy={verticalListSortingStrategy}>
@@ -52,6 +71,56 @@ export default function SortableItemList({ listId, items: initialItems, onEdit, 
         ))}
       </SortableContext>
     </DndContext>
+  )
+}
+
+function PlainRow({ item, onEdit, onDelete }: { item: ListItem; onEdit: (i: ListItem) => void; onDelete: (i: ListItem) => void }) {
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  return (
+    <div className="flex items-center gap-2 bg-bg-surface px-4 min-h-[60px] border-b border-border">
+      <span className="text-text-disabled shrink-0" aria-hidden="true">
+        <GripVertical size={20} />
+      </span>
+
+      <div className="flex-1 min-w-0">
+        <p className="text-base text-text-primary truncate">{item.name}</p>
+        {(item.quantity || item.unit) && (
+          <p className="text-sm text-text-secondary">
+            {[item.quantity, item.unit].filter(Boolean).join(' ')}
+          </p>
+        )}
+      </div>
+
+      <div className="relative shrink-0">
+        <button
+          onClick={() => setMenuOpen(v => !v)}
+          aria-label="Opzioni articolo"
+          className="w-8 h-8 flex items-center justify-center text-text-secondary"
+        >
+          <MoreVertical size={20} />
+        </button>
+        {menuOpen && (
+          <div
+            className="absolute right-0 top-8 z-20 bg-bg-surface rounded-lg border border-border min-w-[140px]"
+            style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.12)' }}
+          >
+            <button
+              className="w-full text-left px-4 py-3 text-sm text-text-primary hover:bg-bg-header"
+              onClick={() => { onEdit(item); setMenuOpen(false) }}
+            >
+              Modifica
+            </button>
+            <button
+              className="w-full text-left px-4 py-3 text-sm text-error hover:bg-bg-header"
+              onClick={() => { onDelete(item); setMenuOpen(false) }}
+            >
+              Elimina
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
   )
 }
 

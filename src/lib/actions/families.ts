@@ -9,22 +9,29 @@ export async function createFamily(name: string) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) throw new Error('Non autenticato')
 
-  const { data: family, error } = await supabase
+  const familyId = randomUUID()
+
+  const { error } = await supabase
     .from('families')
-    .insert({ name, created_by: user.id })
-    .select()
-    .single()
+    .insert({ id: familyId, name, created_by: user.id })
 
-  if (error || !family) throw new Error(error?.message ?? 'Errore')
+  if (error) throw new Error(error.message)
 
-  await supabase.from('family_members').insert({
-    family_id: family.id,
+  const { error: memberError } = await supabase.from('family_members').insert({
+    family_id: familyId,
     user_id: user.id,
     role: 'owner',
   })
 
+  if (memberError) {
+    // Best-effort cleanup to avoid orphan families when membership insert fails.
+    await supabase.from('families').delete().eq('id', familyId).eq('created_by', user.id)
+    throw new Error(memberError.message)
+  }
+
   revalidatePath('/families')
-  return family
+  revalidatePath('/profile')
+  return { id: familyId, name, created_by: user.id }
 }
 
 export async function renameFamily(familyId: string, name: string) {
@@ -47,6 +54,7 @@ export async function inviteMember(familyId: string, email: string) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) throw new Error('Non autenticato')
+  const normalizedEmail = email.trim().toLowerCase()
 
   // Verify caller is owner
   const { data: membership } = await supabase
@@ -58,21 +66,20 @@ export async function inviteMember(familyId: string, email: string) {
 
   if (membership?.role !== 'owner') throw new Error('Solo il proprietario può invitare membri')
 
-  // Find invited user by email
-  const { data: invited } = await supabase
-    .from('profiles')
-    .select('id')
-    .eq('email', email)
-    .single()
+  // Resolve invited user by email through a security-definer DB function.
+  // It also ensures a profile row exists for already-registered users.
+  const { data: invitedId, error: resolveErr } = await supabase
+    .rpc('resolve_profile_id_by_email', { p_email: normalizedEmail })
 
-  if (!invited) throw new Error('Utente non trovato. Assicurati che si sia già registrato a List@.')
+  if (resolveErr) throw new Error(resolveErr.message)
+  if (!invitedId) throw new Error('Utente non trovato. Assicurati che si sia già registrato a List@.')
 
   // Check not already a member
   const { data: existing } = await supabase
     .from('family_members')
     .select('user_id')
     .eq('family_id', familyId)
-    .eq('user_id', invited.id)
+    .eq('user_id', invitedId)
     .single()
 
   if (existing) throw new Error('L\'utente è già membro della famiglia')
@@ -81,7 +88,7 @@ export async function inviteMember(familyId: string, email: string) {
   const token = randomUUID()
   const { error } = await supabase.from('family_invites').insert({
     family_id: familyId,
-    invited_email: email,
+    invited_email: normalizedEmail,
     token,
     status: 'pending',
   })

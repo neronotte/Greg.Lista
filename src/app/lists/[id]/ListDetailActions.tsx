@@ -32,25 +32,23 @@ export default function ListDetailActions({
   const [supermarket, setSupermarket] = useState("");
   const [, startTransition] = useTransition();
 
-  if (sectionOnly) {
-    return (
-      <SortableItemList
-        listId={listId}
-        items={items}
-        onEdit={(item) => {
-          setEditItem(item);
-          setSheetOpen(true);
-        }}
-        onDelete={(item) => {
-          startTransition(() => deleteItem(item.id, listId));
-        }}
-      />
-    );
-  }
-
   return (
     <>
-      {fab && (
+      {sectionOnly && (
+        <SortableItemList
+          listId={listId}
+          items={items}
+          onEdit={(item) => {
+            setEditItem(item);
+            setSheetOpen(true);
+          }}
+          onDelete={(item) => {
+            startTransition(() => deleteItem(item.id, listId));
+          }}
+        />
+      )}
+
+      {fab && !sectionOnly && (
         <FAB
           onClick={() => {
             setEditItem(null);
@@ -91,40 +89,42 @@ export default function ListDetailActions({
         />
       </BottomSheet>
 
-      <BottomSheet
-        open={sessionSheetOpen}
-        onClose={() => setSessionSheetOpen(false)}
-        title="Avvia spesa"
-      >
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            startTransition(() =>
-              startSession(listId, supermarket || undefined),
-            );
-          }}
-          className="flex flex-col gap-4"
+      {!sectionOnly && (
+        <BottomSheet
+          open={sessionSheetOpen}
+          onClose={() => setSessionSheetOpen(false)}
+          title="Avvia spesa"
         >
-          <div>
-            <label className="block text-xs text-text-secondary mb-1">
-              Supermercato (opzionale)
-            </label>
-            <input
-              type="text"
-              value={supermarket}
-              onChange={(e) => setSupermarket(e.target.value)}
-              placeholder="es. Carrefour, Esselunga…"
-              className="w-full border-b border-border focus:border-brand-mid outline-none py-2 text-base text-text-primary bg-transparent"
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full py-3 rounded-lg bg-brand-bright text-white font-semibold text-base mt-2"
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              startTransition(() =>
+                startSession(listId, supermarket || undefined),
+              );
+            }}
+            className="flex flex-col gap-4"
           >
-            Inizia
-          </button>
-        </form>
-      </BottomSheet>
+            <div>
+              <label className="block text-xs text-text-secondary mb-1">
+                Supermercato (opzionale)
+              </label>
+              <input
+                type="text"
+                value={supermarket}
+                onChange={(e) => setSupermarket(e.target.value)}
+                placeholder="es. Carrefour, Esselunga…"
+                className="w-full border-b border-border focus:border-brand-mid outline-none py-2 text-base text-text-primary bg-transparent"
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full py-3 rounded-lg bg-brand-bright text-white font-semibold text-base mt-2"
+            >
+              Inizia
+            </button>
+          </form>
+        </BottomSheet>
+      )}
     </>
   );
 }

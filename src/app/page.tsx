@@ -9,6 +9,8 @@ import ListCard from '@/components/ui/ListCard'
 import HomeActions from './HomeActions'
 import { Search, ShoppingCart } from 'lucide-react'
 
+export const dynamic = 'force-dynamic'
+
 export default async function Home() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()

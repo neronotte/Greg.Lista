@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useTransition } from 'react'
+import { useRouter } from 'next/navigation'
 import { addItem, updateItem } from '@/lib/actions/items'
 import type { Category } from '@/lib/types'
 
@@ -19,6 +20,7 @@ interface ItemFormProps {
 }
 
 export default function ItemForm({ listId, categories, initial, onDone }: ItemFormProps) {
+  const router = useRouter()
   const [name, setName] = useState(initial?.name ?? '')
   const [quantity, setQuantity] = useState(initial?.quantity ?? '')
   const [unit, setUnit] = useState(initial?.unit ?? '')
@@ -45,6 +47,7 @@ export default function ItemForm({ listId, categories, initial, onDone }: ItemFo
         } else {
           await addItem(listId, data)
         }
+        router.refresh()
         onDone()
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Errore')

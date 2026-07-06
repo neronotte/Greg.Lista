@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useTransition } from 'react'
+import { useRouter } from 'next/navigation'
 import { createList, updateList } from '@/lib/actions/lists'
 import type { Visibility } from '@/lib/types'
 
@@ -11,6 +12,7 @@ interface ListFormProps {
 }
 
 export default function ListForm({ families = [], initial, onDone }: ListFormProps) {
+  const router = useRouter()
   const [name, setName] = useState(initial?.name ?? '')
   const [visibility, setVisibility] = useState<Visibility>(initial?.visibility ?? 'private')
   const [familyId, setFamilyId] = useState(initial?.familyId ?? '')
@@ -28,6 +30,7 @@ export default function ListForm({ families = [], initial, onDone }: ListFormPro
         } else {
           await createList(name.trim(), visibility, visibility === 'family' ? familyId || undefined : undefined)
         }
+        router.refresh()
         onDone()
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Errore')
