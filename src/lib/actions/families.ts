@@ -1,196 +1,222 @@
-'use server'
+"use server";
 
-import { createClient } from '@/lib/supabase/server'
-import { revalidatePath } from 'next/cache'
-import { randomUUID } from 'crypto'
+import { createClient } from "@/lib/supabase/server";
+import { revalidatePath } from "next/cache";
+import { randomUUID } from "crypto";
 
 export async function createFamily(name: string) {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) throw new Error('Non autenticato')
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Non autenticato");
 
-  const familyId = randomUUID()
+  const familyId = randomUUID();
 
   const { error } = await supabase
-    .from('families')
-    .insert({ id: familyId, name, created_by: user.id })
+    .from("families")
+    .insert({ id: familyId, name, created_by: user.id });
 
-  if (error) throw new Error(error.message)
+  if (error) throw new Error(error.message);
 
-  const { error: memberError } = await supabase.from('family_members').insert({
+  const { error: memberError } = await supabase.from("family_members").insert({
     family_id: familyId,
     user_id: user.id,
-    role: 'owner',
-  })
+    role: "owner",
+  });
 
   if (memberError) {
     // Best-effort cleanup to avoid orphan families when membership insert fails.
-    await supabase.from('families').delete().eq('id', familyId).eq('created_by', user.id)
-    throw new Error(memberError.message)
+    await supabase
+      .from("families")
+      .delete()
+      .eq("id", familyId)
+      .eq("created_by", user.id);
+    throw new Error(memberError.message);
   }
 
-  revalidatePath('/families')
-  revalidatePath('/profile')
-  return { id: familyId, name, created_by: user.id }
+  revalidatePath("/families");
+  revalidatePath("/profile");
+  return { id: familyId, name, created_by: user.id };
 }
 
 export async function renameFamily(familyId: string, name: string) {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) throw new Error('Non autenticato')
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Non autenticato");
 
   const { error } = await supabase
-    .from('families')
+    .from("families")
     .update({ name })
-    .eq('id', familyId)
-    .eq('created_by', user.id)
+    .eq("id", familyId)
+    .eq("created_by", user.id);
 
-  if (error) throw new Error(error.message)
-  revalidatePath('/families')
-  revalidatePath(`/families/${familyId}`)
+  if (error) throw new Error(error.message);
+  revalidatePath("/families");
+  revalidatePath(`/families/${familyId}`);
 }
 
 export async function inviteMember(familyId: string, email: string) {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) throw new Error('Non autenticato')
-  const normalizedEmail = email.trim().toLowerCase()
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Non autenticato");
+  const normalizedEmail = email.trim().toLowerCase();
 
   // Verify caller is owner
   const { data: membership } = await supabase
-    .from('family_members')
-    .select('role')
-    .eq('family_id', familyId)
-    .eq('user_id', user.id)
-    .single()
+    .from("family_members")
+    .select("role")
+    .eq("family_id", familyId)
+    .eq("user_id", user.id)
+    .single();
 
-  if (membership?.role !== 'owner') throw new Error('Solo il proprietario può invitare membri')
+  if (membership?.role !== "owner")
+    throw new Error("Solo il proprietario può invitare membri");
 
   // Resolve invited user by email through a security-definer DB function.
   // It also ensures a profile row exists for already-registered users.
-  const { data: invitedId, error: resolveErr } = await supabase
-    .rpc('resolve_profile_id_by_email', { p_email: normalizedEmail })
+  const { data: invitedId, error: resolveErr } = await supabase.rpc(
+    "resolve_profile_id_by_email",
+    { p_email: normalizedEmail },
+  );
 
-  if (resolveErr) throw new Error(resolveErr.message)
-  if (!invitedId) throw new Error('Utente non trovato. Assicurati che si sia già registrato a List@.')
+  if (resolveErr) throw new Error(resolveErr.message);
+  if (!invitedId)
+    throw new Error(
+      "Utente non trovato. Assicurati che si sia già registrato a List@.",
+    );
 
   // Check not already a member
   const { data: existing } = await supabase
-    .from('family_members')
-    .select('user_id')
-    .eq('family_id', familyId)
-    .eq('user_id', invitedId)
-    .single()
+    .from("family_members")
+    .select("user_id")
+    .eq("family_id", familyId)
+    .eq("user_id", invitedId)
+    .single();
 
-  if (existing) throw new Error('L\'utente è già membro della famiglia')
+  if (existing) throw new Error("L'utente è già membro della famiglia");
 
   // Create invite
-  const token = randomUUID()
-  const { error } = await supabase.from('family_invites').insert({
+  const token = randomUUID();
+  const { error } = await supabase.from("family_invites").insert({
     family_id: familyId,
     invited_email: normalizedEmail,
     token,
-    status: 'pending',
-  })
+    status: "pending",
+  });
 
-  if (error) throw new Error(error.message)
-  revalidatePath(`/families/${familyId}`)
-  return token
+  if (error) throw new Error(error.message);
+  revalidatePath(`/families/${familyId}`);
+  return token;
 }
 
 export async function acceptInvite(token: string) {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) throw new Error('Non autenticato')
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Non autenticato");
 
   const { data: invite } = await supabase
-    .from('family_invites')
-    .select('*')
-    .eq('token', token)
-    .eq('status', 'pending')
-    .single()
+    .from("family_invites")
+    .select("*")
+    .eq("token", token)
+    .eq("status", "pending")
+    .single();
 
-  if (!invite) throw new Error('Invito non valido o già utilizzato')
+  if (!invite) throw new Error("Invito non valido o già utilizzato");
 
-  await supabase.from('family_members').insert({
+  await supabase.from("family_members").insert({
     family_id: invite.family_id,
     user_id: user.id,
-    role: 'member',
-  })
+    role: "member",
+  });
 
   await supabase
-    .from('family_invites')
-    .update({ status: 'accepted' })
-    .eq('token', token)
+    .from("family_invites")
+    .update({ status: "accepted" })
+    .eq("token", token);
 
-  revalidatePath('/families')
-  revalidatePath('/')
+  revalidatePath("/families");
+  revalidatePath("/");
 }
 
 export async function rejectInvite(token: string) {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) throw new Error('Non autenticato')
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Non autenticato");
 
   await supabase
-    .from('family_invites')
-    .update({ status: 'expired' })
-    .eq('token', token)
+    .from("family_invites")
+    .update({ status: "expired" })
+    .eq("token", token);
 
-  revalidatePath('/profile')
+  revalidatePath("/profile");
 }
 
 export async function removeMember(familyId: string, userId: string) {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) throw new Error('Non autenticato')
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Non autenticato");
 
   const { data: membership } = await supabase
-    .from('family_members')
-    .select('role')
-    .eq('family_id', familyId)
-    .eq('user_id', user.id)
-    .single()
+    .from("family_members")
+    .select("role")
+    .eq("family_id", familyId)
+    .eq("user_id", user.id)
+    .single();
 
-  if (membership?.role !== 'owner') throw new Error('Solo il proprietario può rimuovere membri')
-  if (userId === user.id) throw new Error('Non puoi rimuovere te stesso')
+  if (membership?.role !== "owner")
+    throw new Error("Solo il proprietario può rimuovere membri");
+  if (userId === user.id) throw new Error("Non puoi rimuovere te stesso");
 
   await supabase
-    .from('family_members')
+    .from("family_members")
     .delete()
-    .eq('family_id', familyId)
-    .eq('user_id', userId)
+    .eq("family_id", familyId)
+    .eq("user_id", userId);
 
-  revalidatePath(`/families/${familyId}`)
+  revalidatePath(`/families/${familyId}`);
 }
 
 export async function leaveFamily(familyId: string) {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) throw new Error('Non autenticato')
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("Non autenticato");
 
   const { data: membership } = await supabase
-    .from('family_members')
-    .select('role')
-    .eq('family_id', familyId)
-    .eq('user_id', user.id)
-    .single()
+    .from("family_members")
+    .select("role")
+    .eq("family_id", familyId)
+    .eq("user_id", user.id)
+    .single();
 
-  if (membership?.role === 'owner') {
+  if (membership?.role === "owner") {
     const { count } = await supabase
-      .from('family_members')
-      .select('*', { count: 'exact', head: true })
-      .eq('family_id', familyId)
+      .from("family_members")
+      .select("*", { count: "exact", head: true })
+      .eq("family_id", familyId);
 
-    if ((count ?? 0) > 1) throw new Error('Trasferisci la proprietà prima di lasciare la famiglia')
+    if ((count ?? 0) > 1)
+      throw new Error("Trasferisci la proprietà prima di lasciare la famiglia");
   }
 
   await supabase
-    .from('family_members')
+    .from("family_members")
     .delete()
-    .eq('family_id', familyId)
-    .eq('user_id', user.id)
+    .eq("family_id", familyId)
+    .eq("user_id", user.id);
 
-  revalidatePath('/families')
-  revalidatePath('/')
+  revalidatePath("/families");
+  revalidatePath("/");
 }

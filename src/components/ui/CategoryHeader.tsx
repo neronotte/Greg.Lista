@@ -1,5 +1,5 @@
 interface CategoryHeaderProps {
-  name: string
+  name: string;
 }
 
 export default function CategoryHeader({ name }: CategoryHeaderProps) {
@@ -9,5 +9,5 @@ export default function CategoryHeader({ name }: CategoryHeaderProps) {
         {name}
       </span>
     </div>
-  )
+  );
 }

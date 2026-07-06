@@ -1,51 +1,66 @@
-import { createClient } from '@/lib/supabase/server'
-import { redirect } from 'next/navigation'
-import { getNavCounts } from '@/lib/nav-counts'
-import AppBar from '@/components/ui/AppBar'
-import BottomNav from '@/components/ui/BottomNav'
-import EmptyState from '@/components/ui/EmptyState'
-import CategoryHeader from '@/components/ui/CategoryHeader'
-import ListCard from '@/components/ui/ListCard'
-import HomeActions from './HomeActions'
-import { Search, ShoppingCart } from 'lucide-react'
+import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
+import { getNavCounts } from "@/lib/nav-counts";
+import AppBar from "@/components/ui/AppBar";
+import BottomNav from "@/components/ui/BottomNav";
+import EmptyState from "@/components/ui/EmptyState";
+import CategoryHeader from "@/components/ui/CategoryHeader";
+import ListCard from "@/components/ui/ListCard";
+import HomeActions from "./HomeActions";
+import { Search, ShoppingCart } from "lucide-react";
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) redirect('/login')
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/login");
 
   const [{ data: lists }, { data: families }, navCounts] = await Promise.all([
     supabase
-      .from('lists')
-      .select(`
+      .from("lists")
+      .select(
+        `
         *,
         family:families(id, name),
         item_count:list_items(count)
-      `)
-      .order('updated_at', { ascending: false }),
+      `,
+      )
+      .order("updated_at", { ascending: false }),
     supabase
-      .from('family_members')
-      .select('families(id, name)')
-      .eq('user_id', user.id),
+      .from("family_members")
+      .select("families(id, name)")
+      .eq("user_id", user.id),
     getNavCounts(),
-  ])
+  ]);
 
-  const myLists = (lists ?? []).filter(l => l.owner_id === user.id && l.visibility === 'private')
-  const familyLists = (lists ?? []).filter(l => l.visibility === 'family')
+  const myLists = (lists ?? []).filter(
+    (l) => l.owner_id === user.id && l.visibility === "private",
+  );
+  const familyLists = (lists ?? []).filter((l) => l.visibility === "family");
 
   const familyOptions = (families ?? [])
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    .map((m: any) => (Array.isArray(m.families) ? m.families[0] : m.families) as { id: string; name: string } | null)
-    .filter(Boolean) as { id: string; name: string }[]
+    .map(
+      (m: any) =>
+        (Array.isArray(m.families) ? m.families[0] : m.families) as {
+          id: string;
+          name: string;
+        } | null,
+    )
+    .filter(Boolean) as { id: string; name: string }[];
 
   return (
     <div className="min-h-screen flex flex-col bg-bg-app">
       <AppBar
         title="List@"
         actions={
-          <button aria-label="Cerca" className="w-10 h-10 flex items-center justify-center text-white rounded-full active:bg-white/10">
+          <button
+            aria-label="Cerca"
+            className="w-10 h-10 flex items-center justify-center text-white rounded-full active:bg-white/10"
+          >
             <Search size={24} />
           </button>
         }
@@ -63,7 +78,7 @@ export default async function Home() {
             {myLists.length > 0 && (
               <section>
                 <CategoryHeader name="Le mie liste" />
-                {myLists.map(l => (
+                {myLists.map((l) => (
                   <ListCard
                     key={l.id}
                     id={l.id}
@@ -78,7 +93,7 @@ export default async function Home() {
             {familyLists.length > 0 && (
               <section>
                 <CategoryHeader name="Famiglia" />
-                {familyLists.map(l => (
+                {familyLists.map((l) => (
                   <ListCard
                     key={l.id}
                     id={l.id}
@@ -96,7 +111,10 @@ export default async function Home() {
       </main>
 
       <HomeActions families={familyOptions} />
-      <BottomNav pendingInvites={navCounts.pendingInvites} activeSessions={navCounts.activeSessions} />
+      <BottomNav
+        pendingInvites={navCounts.pendingInvites}
+        activeSessions={navCounts.activeSessions}
+      />
     </div>
-  )
+  );
 }
