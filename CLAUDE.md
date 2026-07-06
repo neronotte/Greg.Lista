@@ -11,6 +11,10 @@ Mobile-first: the primary use case is checking off items while walking through a
 Greg.Lista/          ← repo root (documentation)
   CLAUDE.md
   README.md
+  docs/
+    DESIGN_SYSTEM.md ← Design system and ui/ux rules
+    FUNCTIONAL_REQUIREMENTS.md ← Functional requirements for the app
+    TECHNICAL_REQUIREMENTS.md ← Technical requirements for the app
   src/               ← Next.js project (run npm commands from here)
     app/             ← Next.js App Router
     public/
@@ -22,15 +26,19 @@ Greg.Lista/          ← repo root (documentation)
 
 > **Vercel**: set `src` as the Root Directory in project settings.
 
+Always update the docs with indications provided by the user.
+
 ## Core Features
 
 ### List Management
+
 - Create, edit, and delete named shopping lists
 - Visibility: **private** (owner only) or **family** (all family members)
 - Copy a list (to reuse it as a template)
 - Each list contains items organized by product category (matching supermarket departments)
 
 ### Shopping Mode ("Modalità Spesa")
+
 - Start a shopping session from any list
 - Creates a timestamped **instance** of the list (tagged with date/time, user, and supermarket name)
 - The original list remains untouched
@@ -39,7 +47,9 @@ Greg.Lista/          ← repo root (documentation)
 - Instance visibility mirrors the parent list (private → owner only; family → all family members)
 
 ### Category Ordering
+
 Items are automatically sorted by product category, aligned with typical supermarket department order:
+
 1. Frutta e verdura
 2. Pane e panificati
 3. Carne e pesce
@@ -52,6 +62,7 @@ Items are automatically sorted by product category, aligned with typical superma
 10. Varie
 
 ### Families
+
 - A user can create a **Family** and invite other users by email
 - A user can belong to **multiple families**
 - Family lists and instances are visible and editable by all family members
@@ -99,18 +110,21 @@ SessionEntry
 ```
 
 ### Visibility rules
+
 | List visibility | Who can see/edit the list | Who can use a session |
-|---|---|---|
-| private | owner only | owner only |
-| family | all family members | all family members |
+| --------------- | ------------------------- | --------------------- |
+| private         | owner only                | owner only            |
+| family          | all family members        | all family members    |
 
 ## Supabase Notes
+
 - Row Level Security (RLS) enforces visibility at DB level
 - OAuth redirect URLs configured for Google in Supabase dashboard
 - `@supabase/ssr` used for Next.js App Router compatibility
 - Migrations live in `src/supabase/migrations/`
 
 ## Development Notes
+
 - UI must be mobile-first (phone in supermarket scenario)
 - Shopping session state persisted in Supabase (survives page refresh)
 - Multiple concurrent sessions from the same list are supported

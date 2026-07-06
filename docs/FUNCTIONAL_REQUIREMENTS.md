@@ -41,6 +41,7 @@
 | RF-04.2 | Una lista può essere **privata** (visibile solo al creatore) o **di famiglia** (visibile a tutti i membri della famiglia scelta) |
 | RF-04.3 | L'utente può modificare il nome e la visibilità di una lista |
 | RF-04.4 | L'utente può eliminare una lista di sua proprietà |
+| RF-04.4a | Prima dell'eliminazione della lista, il sistema richiede una conferma esplicita dell'utente |
 | RF-04.5 | L'utente può copiare una lista esistente (crea una nuova lista con gli stessi articoli) |
 | RF-04.6 | I membri della famiglia possono visualizzare e modificare le liste di famiglia |
 
