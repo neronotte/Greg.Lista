@@ -114,6 +114,7 @@ export default async function Home() {
       <BottomNav
         pendingInvites={navCounts.pendingInvites}
         activeSessions={navCounts.activeSessions}
+        latestActiveSessionId={navCounts.latestActiveSessionId}
       />
     </div>
   );

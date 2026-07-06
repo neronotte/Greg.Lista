@@ -21,15 +21,17 @@
 
 ## RF-03 Famiglie
 
-| ID      | Requisito                                                                       |
-| ------- | ------------------------------------------------------------------------------- |
-| RF-03.1 | L'utente può creare una famiglia, diventandone automaticamente owner            |
-| RF-03.2 | L'owner può invitare altri utenti in una famiglia tramite indirizzo email       |
-| RF-03.3 | L'utente invitato riceve una notifica/link e può accettare o rifiutare l'invito |
-| RF-03.4 | Un utente può appartenere a più famiglie contemporaneamente                     |
-| RF-03.5 | L'owner può rimuovere un membro dalla famiglia                                  |
-| RF-03.6 | Un membro può lasciare una famiglia                                             |
-| RF-03.7 | L'owner può rinominare la famiglia                                              |
+| ID       | Requisito                                                                                   |
+| -------- | ------------------------------------------------------------------------------------------- |
+| RF-03.1  | L'utente può creare una famiglia, diventandone automaticamente owner                        |
+| RF-03.2  | L'owner può invitare altri utenti in una famiglia tramite indirizzo email                   |
+| RF-03.3  | L'utente invitato riceve una notifica/link e può accettare o rifiutare l'invito             |
+| RF-03.3a | L'utente può consultare gli inviti pendenti in una pagina dedicata "Inviti in attesa"       |
+| RF-03.3b | L'app mostra un badge con il numero di inviti pendenti nelle aree di navigazione pertinenti |
+| RF-03.4  | Un utente può appartenere a più famiglie contemporaneamente                                 |
+| RF-03.5  | L'owner può rimuovere un membro dalla famiglia                                              |
+| RF-03.6  | Un membro può lasciare una famiglia                                                         |
+| RF-03.7  | L'owner può rinominare la famiglia                                                          |
 
 ---
 
@@ -71,16 +73,17 @@
 
 ## RF-07 Modalità Spesa (Sessioni)
 
-| ID      | Requisito                                                                                                                               |
-| ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| RF-07.1 | L'utente può avviare una sessione di spesa da qualsiasi lista, specificando il supermercato (opzionale)                                 |
-| RF-07.2 | L'avvio di una sessione crea un'**istanza** della lista, taggata con data/ora, utente e supermercato; la lista originale resta immutata |
-| RF-07.3 | Durante la sessione, l'utente può spuntare gli articoli acquistati                                                                      |
-| RF-07.4 | La sessione persiste tra un refresh e l'altro (lo stato non viene perso)                                                                |
-| RF-07.5 | L'utente può riaprire una sessione precedente per continuare la spesa (es. secondo supermercato)                                        |
-| RF-07.6 | L'utente può marcare una sessione come completata                                                                                       |
-| RF-07.7 | Le sessioni di lista di famiglia sono visibili e utilizzabili da tutti i membri della famiglia                                          |
-| RF-07.8 | Più sessioni della stessa lista possono coesistere (sessioni diverse, supermercati diversi)                                             |
+| ID       | Requisito                                                                                                                               |
+| -------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| RF-07.1  | L'utente può avviare una sessione di spesa da qualsiasi lista, specificando il supermercato (opzionale)                                 |
+| RF-07.2  | L'avvio di una sessione crea un'**istanza** della lista, taggata con data/ora, utente e supermercato; la lista originale resta immutata |
+| RF-07.3  | Durante la sessione, l'utente può spuntare gli articoli acquistati                                                                      |
+| RF-07.4  | La sessione persiste tra un refresh e l'altro (lo stato non viene perso)                                                                |
+| RF-07.5  | L'utente può riaprire una sessione precedente per continuare la spesa (es. secondo supermercato)                                        |
+| RF-07.6  | L'utente può marcare una sessione come completata                                                                                       |
+| RF-07.6a | Prima di concludere una sessione di spesa, il sistema richiede una conferma esplicita dell'utente                                       |
+| RF-07.7  | Le sessioni di lista di famiglia sono visibili e utilizzabili da tutti i membri della famiglia                                          |
+| RF-07.8  | Più sessioni della stessa lista possono coesistere (sessioni diverse, supermercati diversi)                                             |
 
 ---
 

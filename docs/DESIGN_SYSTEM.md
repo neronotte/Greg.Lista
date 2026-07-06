@@ -285,6 +285,7 @@ Stile: rapido, utilitaristico. Nessuna animazione decorativa.
 - Tab attivo: icona + label `brand-mid`, indicatore dot `brand-bright` sopra l'icona
 - Tab inattivo: icona `text-disabled`, nessuna label
 - Tap target: 44×44px minimo
+- Se esistono inviti pendenti, la tab Profilo mostra un badge numerico rosso
 
 ---
 
@@ -508,6 +509,12 @@ Usato per: aggiunta item, modifica item, selezione supermercato, conferme.
 - Sfondo: `semantic-error` (non letti) o `brand-bright` (completati)
 - Testo: `micro`, `text-on-brand`
 - Dimensione minima: 20×20px, `radius-full`
+
+### 10.14 Pagina Inviti In Attesa
+
+- Accesso: da Profilo tramite riga dedicata "Inviti in attesa"
+- Contenuto: elenco degli inviti pendenti con nome famiglia, data e navigazione al dettaglio invito
+- Stato vuoto: empty state dedicato, con messaggio che spiega dove appariranno i nuovi inviti
 
 ---
 

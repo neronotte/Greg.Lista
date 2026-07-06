@@ -7,6 +7,7 @@ interface ConfirmDialogProps {
   confirmLabel?: string;
   cancelLabel?: string;
   pending?: boolean;
+  pendingLabel?: string;
   destructive?: boolean;
   onCancel: () => void;
   onConfirm: () => void;
@@ -19,6 +20,7 @@ export default function ConfirmDialog({
   confirmLabel = "Conferma",
   cancelLabel = "Annulla",
   pending = false,
+  pendingLabel = "Confermo…",
   destructive = false,
   onCancel,
   onConfirm,
@@ -58,7 +60,7 @@ export default function ConfirmDialog({
             disabled={pending}
             className={`flex-1 py-3 rounded-lg text-white font-semibold text-base disabled:opacity-60 ${destructive ? "bg-error" : "bg-brand-bright"}`}
           >
-            {pending ? "Elimino…" : confirmLabel}
+            {pending ? pendingLabel : confirmLabel}
           </button>
         </div>
       </div>

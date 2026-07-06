@@ -12,6 +12,9 @@ node_modules
 
 # testing
 coverage
+test/.auth/
+test/playwright-report/
+test/test-results/
 
 # next.js
 .next/

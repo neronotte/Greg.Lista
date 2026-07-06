@@ -114,7 +114,8 @@ export default async function ListDetailPage({
 
       {/* Start shopping session button */}
       <div className="sticky bottom-16 px-4 pb-2 pt-2 bg-bg-app">
-        <form action={`/session/new?listId=${id}`}>
+        <form action="/session/new" method="GET">
+          <input type="hidden" name="listId" value={id} />
           <button
             type="submit"
             className="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-brand-bright text-white font-semibold text-base"
@@ -136,6 +137,7 @@ export default async function ListDetailPage({
       <BottomNav
         pendingInvites={navCounts.pendingInvites}
         activeSessions={navCounts.activeSessions}
+        latestActiveSessionId={navCounts.latestActiveSessionId}
       />
     </div>
   );
