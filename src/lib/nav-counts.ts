@@ -12,13 +12,11 @@ export async function getNavCounts() {
       latestActiveSessionId: null,
     };
   }
-  const normalizedEmail = user.email?.trim().toLowerCase() ?? "";
 
   const [invitesRes, sessionsRes, latestSessionRes] = await Promise.all([
     supabase
       .from("family_invites")
       .select("*", { count: "exact", head: true })
-      .eq("invited_email", normalizedEmail)
       .eq("status", "pending"),
     supabase
       .from("shopping_sessions")

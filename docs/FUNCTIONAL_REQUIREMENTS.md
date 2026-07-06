@@ -25,6 +25,7 @@
 | -------- | ------------------------------------------------------------------------------------------- |
 | RF-03.1  | L'utente può creare una famiglia, diventandone automaticamente owner                        |
 | RF-03.2  | L'owner può invitare altri utenti in una famiglia tramite indirizzo email                   |
+| RF-03.2a | Non è possibile inviare un nuovo invito a un utente che ha già un altro invito pendente     |
 | RF-03.3  | L'utente invitato riceve una notifica/link e può accettare o rifiutare l'invito             |
 | RF-03.3a | L'utente può consultare gli inviti pendenti in una pagina dedicata "Inviti in attesa"       |
 | RF-03.3b | L'app mostra un badge con il numero di inviti pendenti nelle aree di navigazione pertinenti |

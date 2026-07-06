@@ -15,7 +15,6 @@ export default async function ProfilePage() {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
-  const normalizedEmail = user.email?.trim().toLowerCase() ?? "";
 
   const [{ data: profile }, { data: families }, { data: invites }, navCounts] =
     await Promise.all([
@@ -27,7 +26,6 @@ export default async function ProfilePage() {
       supabase
         .from("family_invites")
         .select("*, family:families(name)")
-        .eq("invited_email", normalizedEmail)
         .eq("status", "pending"),
       getNavCounts(),
     ]);

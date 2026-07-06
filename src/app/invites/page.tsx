@@ -13,13 +13,11 @@ export default async function InvitesPage() {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
-  const normalizedEmail = user.email?.trim().toLowerCase() ?? "";
 
   const [{ data: invites }, navCounts] = await Promise.all([
     supabase
       .from("family_invites")
       .select("id, token, created_at, family:families(name)")
-      .eq("invited_email", normalizedEmail)
       .eq("status", "pending")
       .order("created_at", { ascending: false }),
     getNavCounts(),

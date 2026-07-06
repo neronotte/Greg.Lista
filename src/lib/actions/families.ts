@@ -90,6 +90,25 @@ export async function inviteMember(familyId: string, email: string) {
       "Utente non trovato. Assicurati che si sia già registrato a List@.",
     );
 
+  const { data: pendingInvite, error: pendingInviteError } = await supabase
+    .from("family_invites")
+    .select("id, family_id")
+    .eq("status", "pending")
+    .eq("invited_email", normalizedEmail)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  if (pendingInviteError) throw new Error(pendingInviteError.message);
+
+  if (pendingInvite) {
+    throw new Error(
+      pendingInvite.family_id === familyId
+        ? "Esiste gia un invito pendente per questa persona in questa famiglia"
+        : "Questa persona ha gia un altro invito pendente da gestire",
+    );
+  }
+
   // Check not already a member
   const { data: existing } = await supabase
     .from("family_members")
@@ -109,7 +128,14 @@ export async function inviteMember(familyId: string, email: string) {
     status: "pending",
   });
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    if (error.code === "23505") {
+      throw new Error(
+        "Questa persona ha gia un altro invito pendente da gestire",
+      );
+    }
+    throw new Error(error.message);
+  }
   revalidatePath(`/families/${familyId}`);
   return token;
 }

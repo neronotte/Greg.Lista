@@ -25,13 +25,14 @@
 
 ## RT-03 Autenticazione e Sicurezza
 
-| ID      | Requisito                                                                                                            |
-| ------- | -------------------------------------------------------------------------------------------------------------------- |
-| RT-03.1 | Autenticazione tramite **Supabase Auth** con provider OAuth Google                                                   |
-| RT-03.2 | Le regole di visibilità (private / family) sono applicate a livello di database tramite **Row Level Security (RLS)** |
-| RT-03.3 | Le variabili d'ambiente sensibili (`SUPABASE_SERVICE_ROLE_KEY`) non sono mai esposte al browser                      |
-| RT-03.4 | La sessione utente viene aggiornata a ogni request tramite il proxy Next.js                                          |
-| RT-03.5 | Tutte le route (eccetto `/login` e `/auth/callback`) richiedono autenticazione                                       |
+| ID      | Requisito                                                                                                                            |
+| ------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| RT-03.1 | Autenticazione tramite **Supabase Auth** con provider OAuth Google                                                                   |
+| RT-03.2 | Le regole di visibilità (private / family) sono applicate a livello di database tramite **Row Level Security (RLS)**                 |
+| RT-03.3 | Le variabili d'ambiente sensibili (`SUPABASE_SERVICE_ROLE_KEY`) non sono mai esposte al browser                                      |
+| RT-03.4 | La sessione utente viene aggiornata a ogni request tramite il proxy Next.js                                                          |
+| RT-03.5 | Tutte le route (eccetto `/login` e `/auth/callback`) richiedono autenticazione                                                       |
+| RT-03.6 | Gli inviti famiglia pendenti sono protetti anche a livello database contro duplicati, con vincoli coerenti con la logica applicativa |
 
 ---
 
