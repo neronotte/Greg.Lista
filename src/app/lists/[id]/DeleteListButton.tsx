@@ -1,33 +1,37 @@
-'use client'
+"use client";
 
-import { useState, useTransition } from 'react'
-import { useRouter } from 'next/navigation'
-import { Trash2 } from 'lucide-react'
-import { deleteList } from '@/lib/actions/lists'
-import ConfirmDialog from '@/components/ui/ConfirmDialog'
-import Toast from '@/components/ui/Toast'
+import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
+import { Trash2 } from "lucide-react";
+import { deleteList } from "@/lib/actions/lists";
+import ConfirmDialog from "@/components/ui/ConfirmDialog";
+import Toast from "@/components/ui/Toast";
 
 interface DeleteListButtonProps {
-  listId: string
+  listId: string;
 }
 
 export default function DeleteListButton({ listId }: DeleteListButtonProps) {
-  const [pending, startTransition] = useTransition()
-  const [confirmOpen, setConfirmOpen] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const router = useRouter()
+  const [pending, startTransition] = useTransition();
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   function handleDeleteConfirmed() {
     startTransition(async () => {
       try {
-        await deleteList(listId)
-        router.push('/')
+        await deleteList(listId);
+        router.push("/");
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Errore durante l\'eliminazione della lista.')
+        setError(
+          err instanceof Error
+            ? err.message
+            : "Errore durante l'eliminazione della lista.",
+        );
       } finally {
-        setConfirmOpen(false)
+        setConfirmOpen(false);
       }
-    })
+    });
   }
 
   return (
@@ -55,12 +59,7 @@ export default function DeleteListButton({ listId }: DeleteListButtonProps) {
         onConfirm={handleDeleteConfirmed}
       />
 
-      {error && (
-        <Toast
-          message={error}
-          onDismiss={() => setError(null)}
-        />
-      )}
+      {error && <Toast message={error} onDismiss={() => setError(null)} />}
     </>
-  )
+  );
 }

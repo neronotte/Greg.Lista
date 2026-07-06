@@ -6,13 +6,13 @@ Ispirazione: WhatsApp. Mobile-first (phone → tablet → desktop).
 
 ## 1. Principi di design
 
-| Principio | Applicazione |
-|---|---|
-| **Mobile-first** | Progettato per il telefono in mano al supermercato; tablet e desktop sono layout ampliati |
-| **Immediato** | Ogni azione chiave (spuntare un item) deve essere raggiungibile con un pollice, senza scroll |
-| **Familiare** | Il vocabolario visivo di WhatsApp abbassa la curva di apprendimento |
-| **Leggibile** | Contrasto elevato, font grande, densità bassa — lista della spesa = corsia illuminata |
-| **Persistente** | Lo stato sopravvive al refresh; nessuna perdita di dati visibile |
+| Principio        | Applicazione                                                                                 |
+| ---------------- | -------------------------------------------------------------------------------------------- |
+| **Mobile-first** | Progettato per il telefono in mano al supermercato; tablet e desktop sono layout ampliati    |
+| **Immediato**    | Ogni azione chiave (spuntare un item) deve essere raggiungibile con un pollice, senza scroll |
+| **Familiare**    | Il vocabolario visivo di WhatsApp abbassa la curva di apprendimento                          |
+| **Leggibile**    | Contrasto elevato, font grande, densità bassa — lista della spesa = corsia illuminata        |
+| **Persistente**  | Lo stato sopravvive al refresh; nessuna perdita di dati visibile                             |
 
 ---
 
@@ -20,46 +20,46 @@ Ispirazione: WhatsApp. Mobile-first (phone → tablet → desktop).
 
 ### Colori primari
 
-| Token | Hex | Uso |
-|---|---|---|
-| `brand-dark` | `#075E54` | AppBar, header pagine principali |
-| `brand-mid` | `#128C7E` | Bordi attivi, icone selezionate, testo link |
-| `brand-bright` | `#25D366` | FAB, badge online, stato completato |
-| `brand-accent` | `#34B7F1` | Tick letti, link secondari, highlight |
+| Token          | Hex       | Uso                                         |
+| -------------- | --------- | ------------------------------------------- |
+| `brand-dark`   | `#075E54` | AppBar, header pagine principali            |
+| `brand-mid`    | `#128C7E` | Bordi attivi, icone selezionate, testo link |
+| `brand-bright` | `#25D366` | FAB, badge online, stato completato         |
+| `brand-accent` | `#34B7F1` | Tick letti, link secondari, highlight       |
 
 ### Superficie e sfondo
 
-| Token | Hex | Uso |
-|---|---|---|
-| `bg-app` | `#ECE5DD` | Sfondo globale (il "carta da parati" di WhatsApp) |
-| `bg-surface` | `#FFFFFF` | Card, item non spuntati, form input |
-| `bg-checked` | `#DCF8C6` | Item spuntato (bolla verde WhatsApp) |
-| `bg-header` | `#F0F2F5` | Header sezioni, category divider |
+| Token        | Hex       | Uso                                               |
+| ------------ | --------- | ------------------------------------------------- |
+| `bg-app`     | `#ECE5DD` | Sfondo globale (il "carta da parati" di WhatsApp) |
+| `bg-surface` | `#FFFFFF` | Card, item non spuntati, form input               |
+| `bg-checked` | `#DCF8C6` | Item spuntato (bolla verde WhatsApp)              |
+| `bg-header`  | `#F0F2F5` | Header sezioni, category divider                  |
 
 ### Testo
 
-| Token | Hex | Uso |
-|---|---|---|
-| `text-primary` | `#111B21` | Titoli, nomi item, testo principale |
-| `text-secondary` | `#667781` | Sottotitoli, timestamp, quantità, note |
-| `text-disabled` | `#AEBAC1` | Placeholder, azioni non disponibili |
-| `text-on-brand` | `#FFFFFF` | Testo su sfondo `brand-dark` o `brand-bright` |
+| Token            | Hex       | Uso                                           |
+| ---------------- | --------- | --------------------------------------------- |
+| `text-primary`   | `#111B21` | Titoli, nomi item, testo principale           |
+| `text-secondary` | `#667781` | Sottotitoli, timestamp, quantità, note        |
+| `text-disabled`  | `#AEBAC1` | Placeholder, azioni non disponibili           |
+| `text-on-brand`  | `#FFFFFF` | Testo su sfondo `brand-dark` o `brand-bright` |
 
 ### Semantici
 
-| Token | Hex | Uso |
-|---|---|---|
-| `semantic-error` | `#FF3B30` | Errori, swipe-to-delete, avvisi distruttivi |
-| `semantic-warning` | `#FF9500` | Avvisi non distruttivi |
-| `semantic-success` | `#25D366` | Operazione completata (= `brand-bright`) |
-| `semantic-info` | `#34B7F1` | Informazioni (= `brand-accent`) |
+| Token              | Hex       | Uso                                         |
+| ------------------ | --------- | ------------------------------------------- |
+| `semantic-error`   | `#FF3B30` | Errori, swipe-to-delete, avvisi distruttivi |
+| `semantic-warning` | `#FF9500` | Avvisi non distruttivi                      |
+| `semantic-success` | `#25D366` | Operazione completata (= `brand-bright`)    |
+| `semantic-info`    | `#34B7F1` | Informazioni (= `brand-accent`)             |
 
 ### Divider e bordi
 
-| Token | Hex | Uso |
-|---|---|---|
+| Token            | Hex       | Uso                          |
+| ---------------- | --------- | ---------------------------- |
 | `border-default` | `#E9EDEF` | Separatori lista, bordi card |
-| `border-strong` | `#AEBAC1` | Input attivi, outline modale |
+| `border-strong`  | `#AEBAC1` | Input attivi, outline modale |
 
 ---
 
@@ -71,15 +71,15 @@ Font: **Inter** (Google Fonts) come fallback system — `-apple-system, 'Inter',
 
 ### Scale
 
-| Nome | Size | Weight | Line-height | Uso |
-|---|---|---|---|---|
-| `display` | 24px | 700 | 1.2 | Titolo app nella AppBar |
-| `title-lg` | 20px | 600 | 1.3 | Titolo pagina, nome lista |
-| `title-md` | 17px | 600 | 1.4 | Nome item, header sezione |
-| `body` | 16px | 400 | 1.5 | Testo principale, descrizioni |
-| `body-sm` | 14px | 400 | 1.5 | Sottotitoli, note item |
-| `caption` | 12px | 400 | 1.4 | Timestamp, categorie chip, badge |
-| `micro` | 11px | 500 | 1.2 | Tick di stato, etichette molto piccole |
+| Nome       | Size | Weight | Line-height | Uso                                    |
+| ---------- | ---- | ------ | ----------- | -------------------------------------- |
+| `display`  | 24px | 700    | 1.2         | Titolo app nella AppBar                |
+| `title-lg` | 20px | 600    | 1.3         | Titolo pagina, nome lista              |
+| `title-md` | 17px | 600    | 1.4         | Nome item, header sezione              |
+| `body`     | 16px | 400    | 1.5         | Testo principale, descrizioni          |
+| `body-sm`  | 14px | 400    | 1.5         | Sottotitoli, note item                 |
+| `caption`  | 12px | 400    | 1.4         | Timestamp, categorie chip, badge       |
+| `micro`    | 11px | 500    | 1.2         | Tick di stato, etichette molto piccole |
 
 ### Regole tipografiche
 
@@ -93,28 +93,28 @@ Font: **Inter** (Google Fonts) come fallback system — `-apple-system, 'Inter',
 
 Base unit: **4px**
 
-| Token | px | Uso tipico |
-|---|---|---|
-| `space-1` | 4 | Gap interno micro (icona ↔ testo) |
-| `space-2` | 8 | Padding chip, gap tra elementi inline |
-| `space-3` | 12 | Padding verticale item lista |
-| `space-4` | 16 | Padding orizzontale standard, gap tra card |
-| `space-5` | 20 | Padding pagina laterale su phone |
-| `space-6` | 24 | Spaziatura sezioni |
-| `space-8` | 32 | Gap tra blocchi principali |
-| `space-12` | 48 | Margine bottom nav (clearance) |
+| Token      | px  | Uso tipico                                 |
+| ---------- | --- | ------------------------------------------ |
+| `space-1`  | 4   | Gap interno micro (icona ↔ testo)          |
+| `space-2`  | 8   | Padding chip, gap tra elementi inline      |
+| `space-3`  | 12  | Padding verticale item lista               |
+| `space-4`  | 16  | Padding orizzontale standard, gap tra card |
+| `space-5`  | 20  | Padding pagina laterale su phone           |
+| `space-6`  | 24  | Spaziatura sezioni                         |
+| `space-8`  | 32  | Gap tra blocchi principali                 |
+| `space-12` | 48  | Margine bottom nav (clearance)             |
 
 ---
 
 ## 5. Border radius
 
-| Token | px | Uso |
-|---|---|---|
-| `radius-sm` | 4 | Badge, chip categoria |
-| `radius-md` | 8 | Input, bottoni secondari |
-| `radius-lg` | 12 | Card lista, modale |
-| `radius-xl` | 18 | Item spuntato (bolla), bottom sheet |
-| `radius-full` | 9999 | FAB, avatar, pill |
+| Token         | px   | Uso                                 |
+| ------------- | ---- | ----------------------------------- |
+| `radius-sm`   | 4    | Badge, chip categoria               |
+| `radius-md`   | 8    | Input, bottoni secondari            |
+| `radius-lg`   | 12   | Card lista, modale                  |
+| `radius-xl`   | 18   | Item spuntato (bolla), bottom sheet |
+| `radius-full` | 9999 | FAB, avatar, pill                   |
 
 ---
 
@@ -122,11 +122,11 @@ Base unit: **4px**
 
 Sistema a 3 livelli, ispirato a Material ma più sottile.
 
-| Livello | CSS | Uso |
-|---|---|---|
-| `shadow-sm` | `0 1px 2px rgba(0,0,0,0.08)` | Card lista a riposo |
-| `shadow-md` | `0 2px 8px rgba(0,0,0,0.12)` | AppBar, card in hover/focus |
-| `shadow-lg` | `0 8px 24px rgba(0,0,0,0.18)` | Bottom sheet, modale, FAB |
+| Livello      | CSS                               | Uso                               |
+| ------------ | --------------------------------- | --------------------------------- |
+| `shadow-sm`  | `0 1px 2px rgba(0,0,0,0.08)`      | Card lista a riposo               |
+| `shadow-md`  | `0 2px 8px rgba(0,0,0,0.12)`      | AppBar, card in hover/focus       |
+| `shadow-lg`  | `0 8px 24px rgba(0,0,0,0.18)`     | Bottom sheet, modale, FAB         |
 | `shadow-fab` | `0 4px 12px rgba(37,211,102,0.4)` | FAB (ombra colorata brand-bright) |
 
 ---
@@ -137,22 +137,22 @@ Libreria: **Lucide React** (`lucide-react`) — tratto sottile 1.5px, stile outl
 
 ### Icone chiave
 
-| Icona Lucide | Uso |
-|---|---|
-| `ShoppingCart` | Avvia sessione spesa |
+| Icona Lucide          | Uso                                                   |
+| --------------------- | ----------------------------------------------------- |
+| `ShoppingCart`        | Avvia sessione spesa                                  |
 | `Check`, `CheckCheck` | Item spuntato / tutti spuntati (come i tick WhatsApp) |
-| `Plus` | FAB crea lista / aggiunge item |
-| `Search` | Barra di ricerca |
-| `MoreVertical` | Menu contestuale (3 puntini verticali) |
-| `ChevronRight` | Navigazione nested |
-| `Trash2` | Elimina (swipe action) |
-| `Copy` | Duplica lista |
-| `Users` | Lista famiglia |
-| `Lock` | Lista privata |
-| `Store` | Supermercato in sessione spesa |
-| `ArrowLeft` | Back navigation |
-| `Bell` | Notifiche |
-| `User` | Profilo / avatar placeholder |
+| `Plus`                | FAB crea lista / aggiunge item                        |
+| `Search`              | Barra di ricerca                                      |
+| `MoreVertical`        | Menu contestuale (3 puntini verticali)                |
+| `ChevronRight`        | Navigazione nested                                    |
+| `Trash2`              | Elimina (swipe action)                                |
+| `Copy`                | Duplica lista                                         |
+| `Users`               | Lista famiglia                                        |
+| `Lock`                | Lista privata                                         |
+| `Store`               | Supermercato in sessione spesa                        |
+| `ArrowLeft`           | Back navigation                                       |
+| `Bell`                | Notifiche                                             |
+| `User`                | Profilo / avatar placeholder                          |
 
 Dimensioni standard: **24px** (azioni), **20px** (inline nel testo), **16px** (chip/badge).
 
@@ -162,13 +162,13 @@ Dimensioni standard: **24px** (azioni), **20px** (inline nel testo), **16px** (c
 
 Stile: rapido, utilitaristico. Nessuna animazione decorativa.
 
-| Tipo | Durata | Easing | Uso |
-|---|---|---|---|
-| Micro | 120ms | `ease-out` | Tap feedback, checkbox tick |
-| Standard | 200ms | `ease-in-out` | Slide in/out item, stato hover |
-| Entrante | 280ms | `cubic-bezier(0.34,1.56,0.64,1)` | FAB pop-in, bottom sheet open (spring leggero) |
-| Uscente | 200ms | `ease-in` | Dismissione modale, swipe-delete |
-| Skeleton | 1.2s loop | `ease-in-out` | Loading placeholder (shimmer) |
+| Tipo     | Durata    | Easing                           | Uso                                            |
+| -------- | --------- | -------------------------------- | ---------------------------------------------- |
+| Micro    | 120ms     | `ease-out`                       | Tap feedback, checkbox tick                    |
+| Standard | 200ms     | `ease-in-out`                    | Slide in/out item, stato hover                 |
+| Entrante | 280ms     | `cubic-bezier(0.34,1.56,0.64,1)` | FAB pop-in, bottom sheet open (spring leggero) |
+| Uscente  | 200ms     | `ease-in`                        | Dismissione modale, swipe-delete               |
+| Skeleton | 1.2s loop | `ease-in-out`                    | Loading placeholder (shimmer)                  |
 
 **Regola**: nessuna animazione > 300ms. Su `prefers-reduced-motion: reduce` → tutte a 0ms.
 
@@ -178,17 +178,18 @@ Stile: rapido, utilitaristico. Nessuna animazione decorativa.
 
 ### Breakpoint
 
-| Nome | min-width | Dispositivo target |
-|---|---|---|
-| `xs` (base) | 0 | Phone portrait |
-| `sm` | 480px | Phone landscape / piccolo |
-| `md` | 768px | Tablet portrait |
-| `lg` | 1024px | Tablet landscape / desktop small |
-| `xl` | 1280px | Desktop |
+| Nome        | min-width | Dispositivo target               |
+| ----------- | --------- | -------------------------------- |
+| `xs` (base) | 0         | Phone portrait                   |
+| `sm`        | 480px     | Phone landscape / piccolo        |
+| `md`        | 768px     | Tablet portrait                  |
+| `lg`        | 1024px    | Tablet landscape / desktop small |
+| `xl`        | 1280px    | Desktop                          |
 
 ### Struttura per breakpoint
 
 #### Phone (`xs`–`sm`) — layout primario
+
 ```
 ┌─────────────────────┐
 │  AppBar             │  h-14, bg-brand-dark, sticky top
@@ -201,11 +202,13 @@ Stile: rapido, utilitaristico. Nessuna animazione decorativa.
 │  Bottom Nav         │  h-16, bg-surface, sticky bottom
 └─────────────────────┘
 ```
+
 - Larghezza max contenuto: 100%
 - Padding laterale: `space-4` (16px)
 - FAB: posizione fixed bottom-right, `mb-20` (sopra bottom nav)
 
 #### Tablet (`md`) — layout a due colonne opzionale
+
 ```
 ┌─────────────────────────────────────────┐
 │  AppBar                                 │
@@ -217,10 +220,12 @@ Stile: rapido, utilitaristico. Nessuna animazione decorativa.
 │              │                          │
 └──────────────┴──────────────────────────┘
 ```
+
 - Bottom Nav sostituito da sidebar left (stile WhatsApp Web)
 - Nessun FAB — azione "nuova lista" nel header sidebar
 
 #### Desktop (`lg`+) — layout tre colonne
+
 ```
 ┌────────────────────────────────────────────────────┐
 │  AppBar                                            │
@@ -232,6 +237,7 @@ Stile: rapido, utilitaristico. Nessuna animazione decorativa.
 │          │                  │                      │
 └──────────┴──────────────────┴──────────────────────┘
 ```
+
 - Contenuto centrato, max-width: 1440px
 - Tre pannelli sempre visibili
 
@@ -312,6 +318,7 @@ Stile: rapido, utilitaristico. Nessuna animazione decorativa.
 ### 10.5 Item Lista
 
 **Stato normale:**
+
 ```
 ┌─────────────────────────────────────────┐
 │ ○  Parmigiano Reggiano    500g    › ⋮   │
@@ -321,12 +328,14 @@ Stile: rapido, utilitaristico. Nessuna animazione decorativa.
 ### 10.6 Confirm Dialog (azioni distruttive)
 
 ```
+
 ┌─────────────────────────────────────────┐
-│ Elimina lista                           │
+│ Elimina lista │
 │ Vuoi davvero eliminare questa lista?... │
-│                                         │
-│ [Annulla]                 [Elimina]     │
+│ │
+│ [Annulla] [Elimina] │
 └─────────────────────────────────────────┘
+
 ```
 
 - Uso: conferma esplicita per azioni distruttive (es. eliminazione lista)
@@ -338,6 +347,7 @@ Stile: rapido, utilitaristico. Nessuna animazione decorativa.
 ```
 
 **Stato spuntato (shopping mode):**
+
 ```
 ┌─────────────────────────────────────────┐
 │ ✓  ~~Parmigiano Reggiano~~  500g        │  bg-checked
@@ -345,6 +355,7 @@ Stile: rapido, utilitaristico. Nessuna animazione decorativa.
 ```
 
 Specifiche:
+
 - Altezza minima: 60px
 - Checkbox: cerchio 24×24px, bordo `border-strong`; se spuntato: sfondo `brand-mid`, tick bianco (`Check` 16px)
 - Nome item: `body`, `text-primary` → se spuntato: `line-through text-secondary`
@@ -401,6 +412,7 @@ Stile **outlined**, ispirato ai form WhatsApp Business:
 ```
 
 Specifiche:
+
 - Label: `caption`, `text-secondary`, sale sopra con animazione su focus (label float)
 - Testo inserito: `body`, `text-primary`
 - Bordo: solo bottom, 1px `border-default`; focus: 2px `brand-mid`
@@ -478,12 +490,14 @@ Usato per: aggiunta item, modifica item, selezione supermercato, conferme.
 ```
 [ Frutta e verdura ]
 ```
+
 - Sfondo: `bg-header`, bordo 1px `border-default`
 - Testo: `caption`, `text-secondary`
 - Radius: `radius-sm`
 - Padding: `space-1` verticale, `space-2` orizzontale
 
 **Badge contatore:**
+
 - Sfondo: `semantic-error` (non letti) o `brand-bright` (completati)
 - Testo: `micro`, `text-on-brand`
 - Dimensione minima: 20×20px, `radius-full`
@@ -552,12 +566,12 @@ Appare quando una lista è vuota o nessuna lista esiste.
 
 ### Swipe actions (solo phone)
 
-| Direzione | Azione | Colore | Icona |
-|---|---|---|---|
-| ← su List Card | Elimina | `semantic-error` | `Trash2` |
-| → su List Card | Copia lista | `brand-mid` | `Copy` |
-| ← su Item | Elimina item | `semantic-error` | `Trash2` |
-| → su Item (shopping mode) | Spunta/de-spunta | `brand-bright` | `Check` |
+| Direzione                 | Azione           | Colore           | Icona    |
+| ------------------------- | ---------------- | ---------------- | -------- |
+| ← su List Card            | Elimina          | `semantic-error` | `Trash2` |
+| → su List Card            | Copia lista      | `brand-mid`      | `Copy`   |
+| ← su Item                 | Elimina item     | `semantic-error` | `Trash2` |
+| → su Item (shopping mode) | Spunta/de-spunta | `brand-bright`   | `Check`  |
 
 Soglia attivazione: 80px. Azione completa a 160px (oltre metà larghezza).
 
@@ -578,6 +592,7 @@ Soglia attivazione: 80px. Azione completa a 160px (oltre metà larghezza).
 ## 12. Schermata per schermata
 
 ### Login
+
 - Sfondo: `brand-dark`
 - Logo "List@" centrato, grande, bianco
 - Sottotitolo: "La tua lista della spesa", `body`, `rgba(255,255,255,0.7)`
@@ -585,6 +600,7 @@ Soglia attivazione: 80px. Azione completa a 160px (oltre metà larghezza).
 - Nessun bottom nav, nessun AppBar
 
 ### Home — Le mie liste
+
 - AppBar: "List@", icone Search + More
 - Search bar collassabile sotto AppBar
 - Lista di List Card, raggruppate per visibilità (Le mie / Famiglia)
@@ -592,12 +608,14 @@ Soglia attivazione: 80px. Azione completa a 160px (oltre metà larghezza).
 - FAB: crea nuova lista
 
 ### Dettaglio lista
+
 - AppBar: nome lista + icona visibilità, icone Edit + More + ShoppingCart (avvia spesa)
 - Items raggruppati per categoria (category header sticky)
 - FAB: aggiungi item
 - Bottone prominente "Avvia Spesa" se nessuna sessione attiva — anchored bottom, sopra nav
 
 ### Shopping Session
+
 - AppBar variante verde: nome supermercato + data
 - Session header con progress bar
 - Items: due sezioni — "Da prendere" / "Nel carrello"
@@ -605,6 +623,7 @@ Soglia attivazione: 80px. Azione completa a 160px (oltre metà larghezza).
 - Bottone "Concludi spesa" anchored bottom
 
 ### Profilo
+
 - AppBar: "Profilo"
 - Avatar grande (80px) + nome + email
 - Sezioni: Famiglia, Impostazioni, Esci
@@ -615,16 +634,16 @@ Soglia attivazione: 80px. Azione completa a 160px (oltre metà larghezza).
 
 Supportato tramite `prefers-color-scheme: dark` + toggle manuale.
 
-| Token Light | Token Dark |
-|---|---|
-| `bg-app` #ECE5DD | `#0D1418` |
-| `bg-surface` #FFFFFF | `#1F2C34` |
-| `bg-header` #F0F2F5 | `#182229` |
-| `bg-checked` #DCF8C6 | `#0D3B26` |
-| `text-primary` #111B21 | `#E9EDEF` |
-| `text-secondary` #667781 | `#8696A0` |
-| `border-default` #E9EDEF | `#2A3942` |
-| `brand-dark` #075E54 | `#00A884` (lightened per contrasto) |
+| Token Light              | Token Dark                          |
+| ------------------------ | ----------------------------------- |
+| `bg-app` #ECE5DD         | `#0D1418`                           |
+| `bg-surface` #FFFFFF     | `#1F2C34`                           |
+| `bg-header` #F0F2F5      | `#182229`                           |
+| `bg-checked` #DCF8C6     | `#0D3B26`                           |
+| `text-primary` #111B21   | `#E9EDEF`                           |
+| `text-secondary` #667781 | `#8696A0`                           |
+| `border-default` #E9EDEF | `#2A3942`                           |
+| `brand-dark` #075E54     | `#00A884` (lightened per contrasto) |
 
 AppBar in dark mode: `#1F2C34` (non il verde scuro).
 
@@ -647,29 +666,29 @@ AppBar in dark mode: `#1F2C34` (non il verde scuro).
 ```css
 @theme {
   /* Brand */
-  --color-brand-dark:   #075E54;
-  --color-brand-mid:    #128C7E;
-  --color-brand-bright: #25D366;
-  --color-brand-accent: #34B7F1;
+  --color-brand-dark: #075e54;
+  --color-brand-mid: #128c7e;
+  --color-brand-bright: #25d366;
+  --color-brand-accent: #34b7f1;
 
   /* Background */
-  --color-bg-app:       #ECE5DD;
-  --color-bg-surface:   #FFFFFF;
-  --color-bg-checked:   #DCF8C6;
-  --color-bg-header:    #F0F2F5;
+  --color-bg-app: #ece5dd;
+  --color-bg-surface: #ffffff;
+  --color-bg-checked: #dcf8c6;
+  --color-bg-header: #f0f2f5;
 
   /* Text */
-  --color-text-primary:   #111B21;
+  --color-text-primary: #111b21;
   --color-text-secondary: #667781;
-  --color-text-disabled:  #AEBAC1;
+  --color-text-disabled: #aebac1;
 
   /* Semantic */
-  --color-error:   #FF3B30;
-  --color-warning: #FF9500;
+  --color-error: #ff3b30;
+  --color-warning: #ff9500;
 
   /* Border */
-  --color-border:        #E9EDEF;
-  --color-border-strong: #AEBAC1;
+  --color-border: #e9edef;
+  --color-border-strong: #aebac1;
 
   /* Radius */
   --radius-sm: 4px;
@@ -678,6 +697,6 @@ AppBar in dark mode: `#1F2C34` (non il verde scuro).
   --radius-xl: 18px;
 
   /* Font */
-  --font-sans: 'Inter', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-sans: "Inter", -apple-system, "Helvetica Neue", Arial, sans-serif;
 }
 ```
