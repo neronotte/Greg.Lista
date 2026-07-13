@@ -395,7 +395,8 @@ export const translations = {
       namePlaceholder: "es. Frutta e Verdura",
       emojiLabel: "Emoji",
       nameRequired: "Il nome è obbligatorio",
-      deleteConfirm: "Eliminare questa categoria? Gli articoli diventeranno senza categoria.",
+      deleteConfirm:
+        "Eliminare questa categoria? Gli articoli diventeranno senza categoria.",
       reorderHint: "Trascina per riordinare",
       initializeButton: "Inizializza le Mie Categorie",
       initializeHint: "Copia le categorie predefinite per personalizzarle",

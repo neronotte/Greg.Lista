@@ -6,7 +6,9 @@ import type { Category } from "@/lib/types";
 
 export async function getCategories(): Promise<Category[]> {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   if (!user) throw new Error("Not authenticated");
 
   // Get user's custom categories OR global defaults
@@ -19,15 +21,17 @@ export async function getCategories(): Promise<Category[]> {
   if (error) throw error;
 
   // If user has custom categories, prefer those; otherwise use globals
-  const userCats = data?.filter(c => c.owner_id === user.id) ?? [];
-  const globalCats = data?.filter(c => c.owner_id === null) ?? [];
+  const userCats = data?.filter((c) => c.owner_id === user.id) ?? [];
+  const globalCats = data?.filter((c) => c.owner_id === null) ?? [];
 
   return userCats.length > 0 ? userCats : globalCats;
 }
 
 export async function getUserCategories(): Promise<Category[]> {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   if (!user) throw new Error("Not authenticated");
 
   const { data, error } = await supabase
@@ -42,7 +46,9 @@ export async function getUserCategories(): Promise<Category[]> {
 
 export async function initUserCategories(): Promise<Category[]> {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   if (!user) throw new Error("Not authenticated");
 
   // Check if user already has custom categories
@@ -54,7 +60,9 @@ export async function initUserCategories(): Promise<Category[]> {
 
   if (existingError) {
     console.error("Error checking existing categories:", existingError);
-    throw new Error(`Database error: ${existingError.message}. Make sure the 'owner_id' column exists.`);
+    throw new Error(
+      `Database error: ${existingError.message}. Make sure the 'owner_id' column exists.`,
+    );
   }
 
   if (existing && existing.length > 0) {
@@ -75,7 +83,7 @@ export async function initUserCategories(): Promise<Category[]> {
 
   if (!globals || globals.length === 0) return [];
 
-  const userCats = globals.map(g => ({
+  const userCats = globals.map((g) => ({
     name: g.name,
     emoji: g.emoji || "📦",
     sort_order: g.sort_order,
@@ -96,9 +104,14 @@ export async function initUserCategories(): Promise<Category[]> {
   return inserted ?? [];
 }
 
-export async function addCategory(data: { name: string; emoji: string }): Promise<Category> {
+export async function addCategory(data: {
+  name: string;
+  emoji: string;
+}): Promise<Category> {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   if (!user) throw new Error("Not authenticated");
 
   // Get max sort_order for user's categories
@@ -132,10 +145,12 @@ export async function addCategory(data: { name: string; emoji: string }): Promis
 
 export async function updateCategory(
   id: number,
-  data: { name?: string; emoji?: string }
+  data: { name?: string; emoji?: string },
 ): Promise<Category> {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   if (!user) throw new Error("Not authenticated");
 
   const updates: Record<string, unknown> = {};
@@ -159,7 +174,9 @@ export async function updateCategory(
 
 export async function deleteCategory(id: number): Promise<void> {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   if (!user) throw new Error("Not authenticated");
 
   const { error } = await supabase
@@ -176,7 +193,9 @@ export async function deleteCategory(id: number): Promise<void> {
 
 export async function reorderCategories(orderedIds: number[]): Promise<void> {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   if (!user) throw new Error("Not authenticated");
 
   // Update each category with new sort_order
@@ -185,7 +204,7 @@ export async function reorderCategories(orderedIds: number[]): Promise<void> {
       .from("categories")
       .update({ sort_order: (index + 1) * 10 })
       .eq("id", id)
-      .eq("owner_id", user.id)
+      .eq("owner_id", user.id),
   );
 
   await Promise.all(updates);

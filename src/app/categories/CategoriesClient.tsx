@@ -16,7 +16,14 @@ import FAB from "@/components/ui/FAB";
 import EmptyState from "@/components/ui/EmptyState";
 import CategoryForm from "./CategoryForm";
 import type { Category } from "@/lib/types";
-import { GripVertical, Pencil, Plus, Sparkles, Tags, Trash2 } from "lucide-react";
+import {
+  GripVertical,
+  Pencil,
+  Plus,
+  Sparkles,
+  Tags,
+  Trash2,
+} from "lucide-react";
 
 interface CategoriesClientProps {
   categories: Category[];
@@ -142,9 +149,7 @@ export default function CategoriesClient({
 
           {/* Preview of default categories */}
           <section>
-            <p className="section-caption mb-3">
-              {t("categories.subtitle")}
-            </p>
+            <p className="section-caption mb-3">{t("categories.subtitle")}</p>
             <div className="bg-bg-surface rounded-2xl border border-border overflow-hidden">
               {defaultCategories.map((cat, i) => (
                 <div

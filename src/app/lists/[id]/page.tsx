@@ -132,7 +132,11 @@ export default async function ListDetailPage({
           <div className="page-stack">
             {grouped.map((g) => (
               <section key={g.category.id}>
-                <CategoryHeader name={g.category.name} emoji={g.category.emoji} count={g.items.length} />
+                <CategoryHeader
+                  name={g.category.name}
+                  emoji={g.category.emoji}
+                  count={g.items.length}
+                />
                 <ListDetailActions
                   key={`${id}:${g.category.id}:${g.items.map((item) => item.id).join(",")}`}
                   listId={id}
