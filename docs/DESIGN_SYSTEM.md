@@ -1,6 +1,6 @@
 # List@ — Design System
 
-Ispirazione: WhatsApp. Mobile-first (phone → tablet → desktop).
+Ispirazione: mockup Figma condiviso dal cliente. Mobile-first (phone → tablet → desktop), con card morbide, fondo caldo e accento verde.
 
 ---
 
@@ -10,7 +10,7 @@ Ispirazione: WhatsApp. Mobile-first (phone → tablet → desktop).
 | ---------------- | -------------------------------------------------------------------------------------------- |
 | **Mobile-first** | Progettato per il telefono in mano al supermercato; tablet e desktop sono layout ampliati    |
 | **Immediato**    | Ogni azione chiave (spuntare un item) deve essere raggiungibile con un pollice, senza scroll |
-| **Familiare**    | Il vocabolario visivo di WhatsApp abbassa la curva di apprendimento                          |
+| **Familiare**    | Il vocabolario visivo e' da grocery app: card morbide, badge chiari, CTA grandi             |
 | **Leggibile**    | Contrasto elevato, font grande, densità bassa — lista della spesa = corsia illuminata        |
 | **Persistente**  | Lo stato sopravvive al refresh; nessuna perdita di dati visibile                             |
 

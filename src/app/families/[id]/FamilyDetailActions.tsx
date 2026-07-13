@@ -9,7 +9,6 @@ import { UserPlus, LogOut, Edit } from 'lucide-react'
 interface FamilyDetailActionsProps {
   familyId: string
   isOwner?: boolean
-  currentUserId?: string
   familyName?: string
   memberId?: string
   action?: 'remove'
@@ -17,7 +16,7 @@ interface FamilyDetailActionsProps {
 }
 
 export default function FamilyDetailActions({
-  familyId, isOwner, currentUserId, familyName, memberId, action, fab
+  familyId, isOwner, familyName, memberId, action, fab
 }: FamilyDetailActionsProps) {
   const [inviteOpen, setInviteOpen] = useState(false)
   const [renameOpen, setRenameOpen] = useState(false)
@@ -34,7 +33,7 @@ export default function FamilyDetailActions({
       <button
         onClick={() => startTransition(() => removeMember(familyId, memberId))}
         disabled={pending}
-        className="text-xs text-error px-2 py-1 border border-error rounded"
+        className="rounded-full border border-error/20 bg-error/8 px-3 py-1 text-xs font-bold text-error"
       >
         Rimuovi
       </button>
@@ -45,37 +44,37 @@ export default function FamilyDetailActions({
 
   return (
     <>
-      {/* Action bar */}
-      <div className="sticky bottom-16 bg-bg-surface border-t border-border px-4 py-3 flex gap-2">
-        {isOwner && (
-          <>
-            <button
-              onClick={() => { setError(null); setSuccess(null); setInviteOpen(true) }}
-              className="flex-1 flex items-center justify-center gap-2 py-2 rounded-lg border border-brand-mid text-brand-mid text-sm font-semibold"
-            >
-              <UserPlus size={16} />Invita
-            </button>
-            <button
-              onClick={() => { setNewName(familyName ?? ''); setRenameOpen(true) }}
-              className="flex items-center justify-center gap-2 py-2 px-3 rounded-lg border border-border text-text-secondary text-sm"
-            >
-              <Edit size={16} />
-            </button>
-          </>
-        )}
-        <button
-          onClick={() => startTransition(async () => {
-            try { await leaveFamily(familyId); router.push('/families') }
-            catch (err) { alert(err instanceof Error ? err.message : 'Errore') }
-          })}
-          disabled={pending}
-          className="flex items-center justify-center gap-2 py-2 px-3 rounded-lg border border-error text-error text-sm"
-        >
-          <LogOut size={16} />
-        </button>
+      <div className="fixed inset-x-0 bottom-24 z-20 px-4">
+        <div className="mx-auto flex w-full max-w-3xl gap-2 rounded-[24px] border border-border bg-bg-surface p-3 shadow-[var(--shadow-md)]">
+          {isOwner && (
+            <>
+              <button
+                onClick={() => { setError(null); setSuccess(null); setInviteOpen(true) }}
+                className="soft-button-secondary flex-1"
+              >
+                <UserPlus size={16} />Invita
+              </button>
+              <button
+                onClick={() => { setNewName(familyName ?? ''); setRenameOpen(true) }}
+                className="soft-button-secondary px-4"
+              >
+                <Edit size={16} />
+              </button>
+            </>
+          )}
+          <button
+            onClick={() => startTransition(async () => {
+              try { await leaveFamily(familyId); router.push('/families') }
+              catch (err) { alert(err instanceof Error ? err.message : 'Errore') }
+            })}
+            disabled={pending}
+            className="soft-button-danger px-4"
+          >
+            <LogOut size={16} />
+          </button>
+        </div>
       </div>
 
-      {/* Invite sheet */}
       <BottomSheet open={inviteOpen} onClose={() => setInviteOpen(false)} title="Invita membro">
         <form
           onSubmit={e => {
@@ -96,26 +95,25 @@ export default function FamilyDetailActions({
           className="flex flex-col gap-4"
         >
           <div>
-            <label className="block text-xs text-text-secondary mb-1">Email utente</label>
+            <label className="mb-1.5 block text-xs font-bold uppercase tracking-[0.18em] text-text-secondary">Email utente</label>
             <input
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
               placeholder="email@esempio.com"
               autoFocus
-              className="w-full border-b border-border focus:border-brand-mid outline-none py-2 text-base text-text-primary bg-transparent"
+              className="soft-input"
             />
           </div>
           {error && <p className="text-sm text-error">{error}</p>}
           {success && <p className="text-sm text-brand-mid">{success}</p>}
           <div className="flex gap-2 mt-2">
-            <button type="button" onClick={() => setInviteOpen(false)} className="flex-1 py-3 rounded-lg border border-brand-mid text-brand-mid font-semibold">Chiudi</button>
-            <button type="submit" disabled={pending} className="flex-1 py-3 rounded-lg bg-brand-bright text-white font-semibold disabled:opacity-60">{pending ? '…' : 'Invita'}</button>
+            <button type="button" onClick={() => setInviteOpen(false)} className="soft-button-secondary flex-1">Chiudi</button>
+            <button type="submit" disabled={pending} className="soft-button-primary flex-1">{pending ? '…' : 'Invita'}</button>
           </div>
         </form>
       </BottomSheet>
 
-      {/* Rename sheet */}
       <BottomSheet open={renameOpen} onClose={() => setRenameOpen(false)} title="Rinomina famiglia">
         <form
           onSubmit={e => {
@@ -132,11 +130,11 @@ export default function FamilyDetailActions({
             value={newName}
             onChange={e => setNewName(e.target.value)}
             autoFocus
-            className="w-full border-b border-border focus:border-brand-mid outline-none py-2 text-base text-text-primary bg-transparent"
+            className="soft-input"
           />
           <div className="flex gap-2 mt-2">
-            <button type="button" onClick={() => setRenameOpen(false)} className="flex-1 py-3 rounded-lg border border-brand-mid text-brand-mid font-semibold">Annulla</button>
-            <button type="submit" disabled={pending} className="flex-1 py-3 rounded-lg bg-brand-bright text-white font-semibold disabled:opacity-60">Salva</button>
+            <button type="button" onClick={() => setRenameOpen(false)} className="soft-button-secondary flex-1">Annulla</button>
+            <button type="submit" disabled={pending} className="soft-button-primary flex-1">Salva</button>
           </div>
         </form>
       </BottomSheet>

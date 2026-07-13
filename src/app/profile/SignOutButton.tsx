@@ -15,9 +15,9 @@ export default function SignOutButton() {
   return (
     <button
       onClick={signOut}
-      className="w-full py-3 bg-bg-surface text-error font-semibold text-base border-y border-border"
+      className="w-full py-4 border-2 border-error/30 text-error rounded-2xl font-extrabold text-sm active:bg-red-50 transition-colors"
     >
-      Esci
+      Sign Out
     </button>
   )
 }

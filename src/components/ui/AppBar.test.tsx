@@ -20,7 +20,7 @@ describe('AppBar', () => {
 
   it('applies shopping variant class', () => {
     const { container } = render(<AppBar title="Spesa" variant="shopping" />)
-    expect(container.firstChild).toHaveClass('bg-brand-bright')
+    expect(container.firstChild).toHaveClass('bg-brand-mid')
   })
 
   it('renders actions slot', () => {

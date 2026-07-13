@@ -1,13 +1,20 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { getNavCounts } from "@/lib/nav-counts";
-import AppBar from "@/components/ui/AppBar";
 import BottomNav from "@/components/ui/BottomNav";
 import EmptyState from "@/components/ui/EmptyState";
-import CategoryHeader from "@/components/ui/CategoryHeader";
 import ListCard from "@/components/ui/ListCard";
 import HomeActions from "./HomeActions";
-import { Search, ShoppingCart } from "lucide-react";
+import Avatar from "@/components/ui/Avatar";
+import Link from "next/link";
+import { Lock, ShoppingCart, Users } from "lucide-react";
+
+type FamilyOptionRow = {
+  families:
+    | { id: string; name: string }[]
+    | { id: string; name: string }
+    | null;
+};
 
 export const dynamic = "force-dynamic";
 
@@ -25,7 +32,8 @@ export default async function Home() {
         `
         *,
         family:families(id, name),
-        item_count:list_items(count)
+        item_count:list_items(count),
+        items:list_items(category_id)
       `,
       )
       .order("updated_at", { ascending: false }),
@@ -40,73 +48,117 @@ export default async function Home() {
     (l) => l.owner_id === user.id && l.visibility === "private",
   );
   const familyLists = (lists ?? []).filter((l) => l.visibility === "family");
+  const firstName =
+    user.user_metadata?.full_name?.split(" ")[0] ??
+    user.email?.split("@")[0] ??
+    "there";
+
+  const fullName = user.user_metadata?.full_name ?? firstName;
 
   const familyOptions = (families ?? [])
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    .map(
-      (m: any) =>
-        (Array.isArray(m.families) ? m.families[0] : m.families) as {
-          id: string;
-          name: string;
-        } | null,
-    )
+    .map((membership) => {
+      const row = membership as FamilyOptionRow;
+      return Array.isArray(row.families) ? row.families[0] : row.families;
+    })
     .filter(Boolean) as { id: string; name: string }[];
 
   return (
-    <div className="min-h-screen flex flex-col bg-bg-app">
-      <AppBar
-        title="List@"
-        actions={
-          <button
-            aria-label="Cerca"
-            className="w-10 h-10 flex items-center justify-center text-white rounded-full active:bg-white/10"
-          >
-            <Search size={24} />
-          </button>
-        }
-      />
+    <div className="app-shell relative">
+      {/* Header */}
+      <div className="shrink-0 px-5 pt-2 pb-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-[26px] font-black text-text-primary leading-tight">
+              My Lists
+            </h1>
+            <p className="text-sm font-medium text-text-secondary">
+              Hello, {firstName} 👋
+            </p>
+          </div>
+          <Link href="/profile" className="block">
+            <Avatar
+              name={fullName}
+              email={user.email ?? `${firstName}@example.com`}
+              avatarUrl={user.user_metadata?.avatar_url}
+              size={40}
+            />
+          </Link>
+        </div>
+      </div>
 
-      <main className="flex-1 overflow-y-auto pb-4">
+      <main className="page-body">
         {myLists.length === 0 && familyLists.length === 0 ? (
           <EmptyState
-            icon={<ShoppingCart size={64} />}
-            title="Nessuna lista"
-            subtitle="Aggiungi la tua prima lista della spesa"
+            icon={<ShoppingCart size={48} />}
+            title="No lists yet"
+            subtitle="Tap + to create your first shopping list"
           />
         ) : (
-          <>
-            {myLists.length > 0 && (
-              <section>
-                <CategoryHeader name="Le mie liste" />
-                {myLists.map((l) => (
-                  <ListCard
-                    key={l.id}
-                    id={l.id}
-                    name={l.name}
-                    visibility="private"
-                    itemCount={l.item_count?.[0]?.count ?? 0}
-                    updatedAt={l.updated_at}
-                  />
-                ))}
-              </section>
-            )}
+          <div className="page-stack">
             {familyLists.length > 0 && (
               <section>
-                <CategoryHeader name="Famiglia" />
-                {familyLists.map((l) => (
-                  <ListCard
-                    key={l.id}
-                    id={l.id}
-                    name={l.name}
-                    visibility="family"
-                    itemCount={l.item_count?.[0]?.count ?? 0}
-                    updatedAt={l.updated_at}
-                    familyName={l.family?.name}
-                  />
-                ))}
+                <div className="section-caption">
+                  <Users size={12} />
+                  Family
+                </div>
+                <div className="space-y-3">
+                  {familyLists.map((l) => (
+                    <ListCard
+                      key={l.id}
+                      id={l.id}
+                      name={l.name}
+                      visibility="family"
+                      itemCount={l.item_count?.[0]?.count ?? 0}
+                      updatedAt={l.updated_at}
+                      familyName={l.family?.name}
+                      categoryCount={
+                        new Set(
+                          (l.items ?? [])
+                            .map(
+                              (item: { category_id: number | null }) =>
+                                item.category_id,
+                            )
+                            .filter(Boolean),
+                        ).size
+                      }
+                      icon={l.icon}
+                    />
+                  ))}
+                </div>
               </section>
             )}
-          </>
+            {myLists.length > 0 && (
+              <section>
+                <div className="section-caption">
+                  <Lock size={12} />
+                  Personal
+                </div>
+                <div className="space-y-3">
+                  {myLists.map((l) => (
+                    <ListCard
+                      key={l.id}
+                      id={l.id}
+                      name={l.name}
+                      visibility="private"
+                      itemCount={l.item_count?.[0]?.count ?? 0}
+                      updatedAt={l.updated_at}
+                      categoryCount={
+                        new Set(
+                          (l.items ?? [])
+                            .map(
+                              (item: { category_id: number | null }) =>
+                                item.category_id,
+                            )
+                            .filter(Boolean),
+                        ).size
+                      }
+                      icon={l.icon}
+                    />
+                  ))}
+                </div>
+              </section>
+            )}
+          </div>
         )}
       </main>
 

@@ -1,13 +1,12 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound, redirect } from "next/navigation";
 import { getNavCounts } from "@/lib/nav-counts";
-import AppBar from "@/components/ui/AppBar";
-import BottomNav from "@/components/ui/BottomNav";
 import CategoryHeader from "@/components/ui/CategoryHeader";
 import EmptyState from "@/components/ui/EmptyState";
 import ListDetailActions from "./ListDetailActions";
 import DeleteListButton from "./DeleteListButton";
-import { ShoppingBag, ShoppingCart } from "lucide-react";
+import { ChevronLeft, Lock, ShoppingBag, ShoppingCart, Users } from "lucide-react";
+import Link from "next/link";
 import type { ListItem, Category } from "@/lib/types";
 
 interface GroupedItems {
@@ -67,29 +66,49 @@ export default async function ListDetailPage({
   }
   grouped.sort((a, b) => a.category.sort_order - b.category.sort_order);
 
-  const title = `${list.name}${list.visibility === "family" && list.family ? ` · ${list.family.name}` : ""}`;
-
   return (
-    <div className="min-h-screen flex flex-col bg-bg-app">
-      <AppBar
-        title={title}
-        backHref="/"
-        actions={<DeleteListButton listId={id} />}
-      />
+    <div className="app-shell relative">
+      {/* Header */}
+      <div className="shrink-0 px-5 pt-2 pb-3 flex items-center gap-3 border-b border-border">
+        <Link
+          href="/"
+          aria-label="Back"
+          className="p-2 -ml-2 text-text-secondary rounded-xl active:bg-bg-header transition-colors"
+        >
+          <ChevronLeft size={22} />
+        </Link>
+        <div className="flex-1 min-w-0">
+          <h1 className="font-black text-text-primary text-lg leading-tight truncate">{list.name}</h1>
+          <div className="flex items-center gap-2 mt-0.5">
+            <span
+              className={`inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
+                list.visibility === "family"
+                  ? "bg-brand-mid/10 text-brand-mid"
+                  : "bg-bg-header text-text-secondary"
+              }`}
+            >
+              {list.visibility === "family" ? <><Users size={9} /> Family</> : <><Lock size={9} /> Personal</>}
+            </span>
+            <span className="text-xs text-text-secondary">{items.length} items</span>
+          </div>
+        </div>
+        <DeleteListButton listId={id} />
+      </div>
 
-      <main className="flex-1 overflow-y-auto pb-4">
+      <main className="page-body">
         {items.length === 0 ? (
           <EmptyState
-            icon={<ShoppingBag size={64} />}
-            title="Lista vuota"
-            subtitle="Aggiungi il primo articolo"
+            icon={<ShoppingBag size={48} />}
+            title="Empty list"
+            subtitle='Tap "Add Item" to get started'
           />
         ) : (
-          <>
+          <div className="page-stack">
             {grouped.map((g) => (
               <section key={g.category.id}>
-                <CategoryHeader name={g.category.name} />
+                <CategoryHeader name={g.category.name} count={g.items.length} />
                 <ListDetailActions
+                  key={`${id}:${g.category.id}:${g.items.map((item) => item.id).join(",")}`}
                   listId={id}
                   categories={cats}
                   items={g.items}
@@ -99,8 +118,9 @@ export default async function ListDetailPage({
             ))}
             {uncategorized.length > 0 && (
               <section>
-                <CategoryHeader name="Varie" />
+                <CategoryHeader name="Varie" count={uncategorized.length} />
                 <ListDetailActions
+                  key={`${id}:misc:${uncategorized.map((item) => item.id).join(",")}`}
                   listId={id}
                   categories={cats}
                   items={uncategorized}
@@ -108,37 +128,29 @@ export default async function ListDetailPage({
                 />
               </section>
             )}
-          </>
+          </div>
         )}
       </main>
 
-      {/* Start shopping session button */}
-      <div className="sticky bottom-16 px-4 pb-2 pt-2 bg-bg-app">
-        <form action="/session/new" method="GET">
+      {/* Bottom actions */}
+      <div className="shrink-0 px-5 pb-5 pt-3 border-t border-border flex gap-3">
+        <ListDetailActions
+          listId={id}
+          categories={cats}
+          items={items}
+          inlineButton
+        />
+        <form action="/session/new" method="GET" className="flex-1">
           <input type="hidden" name="listId" value={id} />
           <button
             type="submit"
-            className="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-brand-bright text-white font-semibold text-base"
-            style={{ boxShadow: "0 1px 2px rgba(0,0,0,0.08)" }}
+            className="w-full py-3.5 bg-brand-mid text-white rounded-2xl font-extrabold text-sm flex items-center justify-center gap-2 active:scale-[0.97] transition-transform"
+            style={{ boxShadow: "0 4px 16px rgba(61,122,86,0.35)" }}
           >
-            <ShoppingCart size={20} />
-            Avvia spesa
+            <ShoppingCart size={17} /> Start Shopping
           </button>
         </form>
       </div>
-
-      <ListDetailActions
-        listId={id}
-        categories={cats}
-        items={items}
-        fab
-        fabClassName="bottom-36"
-      />
-      <BottomNav
-        pendingInvites={navCounts.pendingInvites}
-        activeSessions={navCounts.activeSessions}
-        latestActiveSessionId={navCounts.latestActiveSessionId}
-      />
     </div>
   );
 }

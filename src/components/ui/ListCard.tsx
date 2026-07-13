@@ -1,50 +1,97 @@
-import Link from 'next/link'
-import { Lock, Users, ChevronRight } from 'lucide-react'
+import Link from "next/link";
+import { Lock, Users } from "lucide-react";
 
 interface ListCardProps {
-  id: string
-  name: string
-  visibility: 'private' | 'family'
-  itemCount: number
-  updatedAt: string
-  familyName?: string
+  id: string;
+  name: string;
+  visibility: "private" | "family";
+  itemCount: number;
+  updatedAt: string;
+  familyName?: string;
+  categoryCount?: number;
+  color?: string;
+  icon?: string | null;
 }
 
-export default function ListCard({ id, name, visibility, itemCount, updatedAt, familyName }: ListCardProps) {
-  const ago = formatRelative(updatedAt)
+export default function ListCard({
+  id,
+  name,
+  visibility,
+  itemCount,
+  familyName,
+  categoryCount,
+  color = "#3D7A56",
+  icon,
+}: ListCardProps) {
+  const emoji = icon || listEmoji(name);
 
   return (
     <Link
       href={`/lists/${id}`}
-      className="flex items-center gap-3 bg-bg-surface px-4 py-3 border-b border-border active:bg-bg-header transition-colors"
+      className="block bg-bg-surface rounded-2xl p-4 border border-border shadow-[0_10px_30px_rgba(44,36,32,0.06)] active:scale-[0.98] transition-transform"
     >
-      <span className="text-text-secondary shrink-0">
-        {visibility === 'private'
-          ? <Lock size={20} aria-label="Lista privata" />
-          : <Users size={20} aria-label={`Lista famiglia${familyName ? ` — ${familyName}` : ''}`} />
-        }
-      </span>
-      <div className="flex-1 min-w-0">
-        <p className="text-[17px] font-semibold text-text-primary truncate">{name}</p>
-        <p className="text-sm text-text-secondary mt-0.5">{ago}</p>
-      </div>
-      <div className="flex items-center gap-2 shrink-0">
-        <span className="text-sm text-text-secondary">{itemCount} {itemCount === 1 ? 'articolo' : 'articoli'}</span>
-        <ChevronRight size={16} className="text-text-disabled" />
+      <div className="flex items-start gap-3">
+        <div
+          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-2xl"
+          style={{ backgroundColor: color + "20" }}
+        >
+          {emoji}
+        </div>
+        <div className="min-w-0 flex-1">
+          <h3 className="truncate text-[15px] font-bold text-text-primary">
+            {name}
+          </h3>
+          <div className="mt-1 flex flex-wrap items-center gap-2">
+            <span
+              className={`inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
+                visibility === "family"
+                  ? "bg-brand-mid/10 text-brand-mid"
+                  : "bg-bg-header text-text-secondary"
+              }`}
+            >
+              {visibility === "family" ? (
+                <>
+                  <Users size={9} /> Family
+                </>
+              ) : (
+                <>
+                  <Lock size={9} /> Personal
+                </>
+              )}
+            </span>
+            <span className="text-xs text-text-secondary">
+              {itemCount === 0
+                ? "Empty"
+                : `${itemCount} item${itemCount === 1 ? "" : "s"}${categoryCount ? ` · ${categoryCount} categories` : ""}`}
+            </span>
+          </div>
+          {familyName && (
+            <p className="mt-1.5 text-xs font-medium text-text-secondary">
+              {familyName}
+            </p>
+          )}
+        </div>
       </div>
     </Link>
-  )
+  );
 }
 
-function formatRelative(iso: string): string {
-  const diff = Date.now() - new Date(iso).getTime()
-  const mins = Math.floor(diff / 60000)
-  if (mins < 1) return 'ora'
-  if (mins < 60) return `${mins} min fa`
-  const hours = Math.floor(mins / 60)
-  if (hours < 24) return `${hours} ore fa`
-  const days = Math.floor(hours / 24)
-  if (days === 1) return 'ieri'
-  if (days < 7) return `${days} giorni fa`
-  return new Date(iso).toLocaleDateString('it-IT', { day: 'numeric', month: 'short' })
+function listEmoji(name: string): string {
+  const value = name.toLowerCase();
+  if (value.includes("bbq") || value.includes("grill")) return "🔥";
+  if (
+    value.includes("fruit") ||
+    value.includes("apple") ||
+    value.includes("snack")
+  )
+    return "🍎";
+  if (value.includes("office")) return "🧑‍💻";
+  if (
+    value.includes("weekly") ||
+    value.includes("spesa") ||
+    value.includes("groc")
+  )
+    return "🛒";
+  if (value.includes("party") || value.includes("festa")) return "🎉";
+  return "🧺";
 }

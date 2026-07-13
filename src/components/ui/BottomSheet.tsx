@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 
 interface BottomSheetProps {
   open: boolean
@@ -10,8 +10,6 @@ interface BottomSheetProps {
 }
 
 export default function BottomSheet({ open, onClose, title, children }: BottomSheetProps) {
-  const ref = useRef<HTMLDivElement>(null)
-
   useEffect(() => {
     if (!open) return
     const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose() }
@@ -22,36 +20,28 @@ export default function BottomSheet({ open, onClose, title, children }: BottomSh
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end md:items-center md:justify-center">
-      {/* Overlay */}
+    <div className="absolute inset-0 z-50 flex items-end">
       <div
-        className="absolute inset-0 bg-[rgba(17,27,33,0.5)]"
+        className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"
         onClick={onClose}
         aria-hidden="true"
       />
-
-      {/* Sheet */}
       <div
-        ref={ref}
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        className="relative w-full md:max-w-[480px] bg-bg-surface rounded-t-[18px] md:rounded-[12px] max-h-[90vh] overflow-y-auto"
-        style={{ boxShadow: '0 8px 24px rgba(0,0,0,0.18)' }}
+        className="relative w-full bg-bg-surface rounded-t-3xl shadow-2xl overflow-hidden"
+        style={{ maxHeight: '88%' }}
+        onClick={(e) => e.stopPropagation()}
       >
-        {/* Drag handle (phone only) */}
-        <div className="flex justify-center pt-3 pb-1 md:hidden">
-          <div className="w-8 h-1 rounded-full bg-border" />
-        </div>
-
-        {title && (
-          <div className="px-4 pt-2 pb-4 border-b border-border">
-            <h2 className="text-[17px] font-semibold text-text-primary">{title}</h2>
+        <div className="w-10 h-1 rounded-full bg-border mx-auto mt-3 mb-1" />
+        <div className="overflow-y-auto" style={{ maxHeight: 'calc(88vh - 28px)' }}>
+          <div className="p-6 pt-3">
+            {title && (
+              <h2 className="text-xl font-black text-text-primary mb-5">{title}</h2>
+            )}
+            {children}
           </div>
-        )}
-
-        <div className="p-4">
-          {children}
         </div>
       </div>
     </div>

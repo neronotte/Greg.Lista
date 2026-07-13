@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { acceptInvite, rejectInvite } from '@/lib/actions/families'
 import AppBar from '@/components/ui/AppBar'
+import EmptyState from '@/components/ui/EmptyState'
 import { Users } from 'lucide-react'
 
 export default async function InvitePage({ params }: { params: Promise<{ token: string }> }) {
@@ -19,41 +20,46 @@ export default async function InvitePage({ params }: { params: Promise<{ token: 
 
   if (!invite) {
     return (
-      <div className="min-h-screen flex flex-col bg-bg-app">
+      <div className="app-shell">
         <AppBar title="Invito" backHref="/profile" />
-        <div className="flex-1 flex flex-col items-center justify-center px-5 text-center">
-          <p className="text-[17px] font-semibold text-text-secondary">Invito non valido</p>
-          <p className="mt-1 text-sm text-text-disabled">L&apos;invito è già stato usato o è scaduto.</p>
+        <div className="page-body">
+          <EmptyState
+            icon={<Users size={56} />}
+            title="Invito non valido"
+            subtitle="L&apos;invito è gia' stato usato o e' scaduto."
+          />
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-bg-app">
+    <div className="app-shell">
       <AppBar title="Invito famiglia" backHref="/profile" />
-      <div className="flex-1 flex flex-col items-center justify-center px-5 gap-6">
-        <div className="w-16 h-16 rounded-full bg-brand-mid/20 flex items-center justify-center">
-          <Users size={32} className="text-brand-mid" />
-        </div>
-        <div className="text-center">
-          <p className="text-[17px] font-semibold text-text-primary">
-            Sei stato invitato a unirsi a
-          </p>
-          <p className="text-2xl font-bold text-brand-dark mt-1">{invite.family?.name}</p>
-        </div>
+      <div className="page-body flex items-center justify-center">
+        <div className="surface-card flex w-full max-w-md flex-col items-center gap-6 px-5 py-8 text-center">
+          <div className="surface-icon h-16 w-16 rounded-[20px]">
+            <Users size={28} className="text-brand-mid" />
+          </div>
+          <div>
+            <p className="text-[17px] font-semibold text-text-primary">
+              Sei stato invitato a unirsi a
+            </p>
+            <p className="mt-1 text-2xl font-extrabold text-brand-dark">{invite.family?.name}</p>
+          </div>
 
-        <div className="w-full flex flex-col gap-3">
-          <form action={async () => { 'use server'; await acceptInvite(token); redirect('/families') }}>
-            <button type="submit" className="w-full py-3 rounded-lg bg-brand-bright text-white font-semibold text-base">
-              Accetta invito
-            </button>
-          </form>
-          <form action={async () => { 'use server'; await rejectInvite(token); redirect('/profile') }}>
-            <button type="submit" className="w-full py-3 rounded-lg border border-border text-text-secondary font-semibold text-base">
-              Rifiuta
-            </button>
-          </form>
+          <div className="w-full flex flex-col gap-3">
+            <form action={async () => { 'use server'; await acceptInvite(token); redirect('/families') }}>
+              <button type="submit" className="soft-button-primary w-full">
+                Accetta invito
+              </button>
+            </form>
+            <form action={async () => { 'use server'; await rejectInvite(token); redirect('/profile') }}>
+              <button type="submit" className="soft-button-secondary w-full">
+                Rifiuta
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

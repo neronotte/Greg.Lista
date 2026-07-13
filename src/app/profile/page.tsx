@@ -1,13 +1,21 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { getNavCounts } from "@/lib/nav-counts";
-import AppBar from "@/components/ui/AppBar";
 import BottomNav from "@/components/ui/BottomNav";
 import Avatar from "@/components/ui/Avatar";
 import ProfileEditForm from "./ProfileEditForm";
 import SignOutButton from "./SignOutButton";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 import Link from "next/link";
-import { Bell, ChevronRight, Users } from "lucide-react";
+import { Bell, ChevronLeft, Crown, Users } from "lucide-react";
+
+type FamilyMembershipRow = {
+  role: string;
+  families:
+    | { id: string; name: string }[]
+    | { id: string; name: string }
+    | null;
+};
 
 export default async function ProfilePage() {
   const supabase = await createClient();
@@ -31,98 +39,156 @@ export default async function ProfilePage() {
     ]);
 
   const displayName =
-    profile?.display_name ?? user.email?.split("@")[0] ?? "Utente";
+    profile?.display_name ?? user.email?.split("@")[0] ?? "User";
   const email = user.email ?? "";
+  const profileFamilies = (families ?? []).flatMap((membership) => {
+    const row = membership as FamilyMembershipRow;
+    const family = Array.isArray(row.families) ? row.families[0] : row.families;
+    return family ? [{ role: row.role, family }] : [];
+  });
 
   return (
-    <div className="min-h-screen flex flex-col bg-bg-app">
-      <AppBar title="Profilo" />
+    <div className="app-shell">
+      {/* Header */}
+      <div className="shrink-0 px-5 pt-2 pb-4">
+        <h1 className="text-[26px] font-black text-text-primary leading-tight">
+          Profile
+        </h1>
+      </div>
 
-      <main className="flex-1 overflow-y-auto">
-        {/* Avatar + info */}
-        <div className="bg-bg-surface px-4 py-6 flex flex-col items-center gap-3 border-b border-border">
-          <Avatar
-            name={displayName}
-            email={email}
-            avatarUrl={profile?.avatar_url}
-            size={80}
-          />
-          <div className="text-center">
-            <p className="text-[17px] font-semibold text-text-primary">
-              {displayName}
-            </p>
-            <p className="text-sm text-text-secondary">{email}</p>
-          </div>
-          <ProfileEditForm currentName={displayName} />
-        </div>
-
-        <section className="mt-4">
-          <p className="px-4 pb-2 text-xs uppercase text-text-secondary tracking-[0.08em]">
-            Inviti
-          </p>
-          <Link
-            href="/invites"
-            className="flex items-center gap-3 bg-bg-surface px-4 py-3 border-b border-border"
-          >
-            <Bell size={20} className="text-text-secondary shrink-0" />
-            <div className="flex-1 min-w-0">
-              <p className="text-base text-text-primary">Inviti in attesa</p>
-              <p className="text-sm text-text-secondary">
-                {(invites ?? []).length > 0
-                  ? `${(invites ?? []).length} inviti da controllare`
-                  : "Nessun invito in attesa"}
-              </p>
+      <main className="page-body">
+        <div className="page-stack">
+          {/* Profile card */}
+          <div className="flex items-center gap-4 bg-bg-surface rounded-2xl p-4 border border-border">
+            <Avatar
+              name={displayName}
+              email={email}
+              avatarUrl={profile?.avatar_url}
+              size={64}
+            />
+            <div className="min-w-0 flex-1">
+              <h2 className="font-black text-lg text-text-primary leading-tight">
+                {displayName}
+              </h2>
+              <p className="text-sm text-text-secondary">{email}</p>
+              {profileFamilies[0] && (
+                <div className="flex items-center gap-1 mt-1 text-xs font-bold text-brand-mid">
+                  <Crown size={11} /> Admin · {profileFamilies[0].family.name}
+                </div>
+              )}
             </div>
-            {(invites ?? []).length > 0 && (
-              <span className="min-w-5 h-5 rounded-full bg-error text-white text-[11px] font-medium flex items-center justify-center px-1 shrink-0">
-                {(invites ?? []).length}
-              </span>
-            )}
-            <ChevronRight size={16} className="text-text-disabled" />
-          </Link>
-        </section>
+          </div>
 
-        {/* Families */}
-        <section className="mt-4">
-          <p className="px-4 pb-2 text-xs uppercase text-text-secondary tracking-[0.08em]">
-            Le mie famiglie
-          </p>
-          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-          {(families ?? []).map((m: any) => {
-            const fam = (
-              Array.isArray(m.families) ? m.families[0] : m.families
-            ) as { id: string; name: string } | null;
-            return (
-              fam && (
+          {/* Account section */}
+          <section>
+            <p className="section-caption">Account</p>
+            <div className="bg-bg-surface rounded-2xl border border-border overflow-hidden">
+              <div className="px-4 py-3.5 border-b border-border">
+                <ProfileEditForm currentName={displayName} />
+              </div>
+              {(invites ?? []).length > 0 && (
                 <Link
-                  key={fam.id}
-                  href={`/families/${fam.id}`}
-                  className="flex items-center gap-3 bg-bg-surface px-4 py-3 border-b border-border"
+                  href="/invites"
+                  className="flex items-center justify-between px-4 py-3.5 active:bg-bg-header border-b border-border"
                 >
-                  <Users size={20} className="text-text-secondary shrink-0" />
-                  <div className="flex-1">
-                    <p className="text-base text-text-primary">{fam.name}</p>
-                    <p className="text-sm text-text-secondary capitalize">
-                      {m.role}
-                    </p>
+                  <div className="flex items-center gap-3">
+                    <Bell size={16} className="text-text-secondary" />
+                    <div>
+                      <p className="text-sm font-semibold text-text-primary">
+                        Pending Invites
+                      </p>
+                      <p className="text-xs text-text-secondary">
+                        {(invites ?? []).length} to review
+                      </p>
+                    </div>
                   </div>
-                  <ChevronRight size={16} className="text-text-disabled" />
+                  <div className="flex items-center gap-2">
+                    <span className="flex h-5 min-w-5 items-center justify-center rounded-full bg-brand-accent px-1 text-[11px] font-bold text-white">
+                      {(invites ?? []).length}
+                    </span>
+                    <ChevronLeft
+                      size={16}
+                      className="rotate-180 text-text-secondary"
+                    />
+                  </div>
                 </Link>
-              )
-            );
-          })}
-          <Link
-            href="/families"
-            className="flex items-center justify-center py-3 bg-bg-surface border-b border-border text-brand-mid text-base"
-          >
-            Gestisci famiglie
-          </Link>
-        </section>
+              )}
+            </div>
+          </section>
 
-        {/* Sign out */}
-        <section className="mt-4 mb-8">
+          {/* Families section */}
+          {profileFamilies.length > 0 && (
+            <section>
+              <p className="section-caption">My Families</p>
+              <div className="bg-bg-surface rounded-2xl border border-border overflow-hidden">
+                {profileFamilies.map(({ role, family }, i) => (
+                  <Link
+                    key={family.id}
+                    href={`/families/${family.id}`}
+                    className={`flex items-center justify-between px-4 py-3.5 active:bg-bg-header ${i > 0 ? "border-t border-border" : ""}`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <Users size={16} className="text-text-secondary" />
+                      <div>
+                        <p className="text-sm font-semibold text-text-primary">
+                          {family.name}
+                        </p>
+                        {role === "owner" && (
+                          <span className="inline-flex items-center gap-0.5 text-[10px] font-extrabold text-brand-mid">
+                            <Crown size={9} /> Admin
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <ChevronLeft
+                      size={16}
+                      className="rotate-180 text-text-secondary"
+                    />
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* App section */}
+          <section>
+            <p className="section-caption">Settings</p>
+            <div className="bg-bg-surface rounded-2xl border border-border overflow-hidden">
+              <div className="flex items-center justify-between px-4 py-3.5 border-b border-border">
+                <span className="text-sm font-semibold text-text-primary">
+                  Theme
+                </span>
+                <ThemeToggle />
+              </div>
+              <Link
+                href="/families"
+                className="flex items-center justify-between px-4 py-3.5 active:bg-bg-header border-b border-border"
+              >
+                <span className="text-sm font-semibold text-text-primary">
+                  Manage Families
+                </span>
+                <ChevronLeft
+                  size={16}
+                  className="rotate-180 text-text-secondary"
+                />
+              </Link>
+              <Link
+                href="/invites"
+                className="flex items-center justify-between px-4 py-3.5 active:bg-bg-header"
+              >
+                <span className="text-sm font-semibold text-text-primary">
+                  Invitations
+                </span>
+                <ChevronLeft
+                  size={16}
+                  className="rotate-180 text-text-secondary"
+                />
+              </Link>
+            </div>
+          </section>
+
           <SignOutButton />
-        </section>
+        </div>
       </main>
 
       <BottomNav

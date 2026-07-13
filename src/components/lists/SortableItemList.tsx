@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import {
   DndContext,
   closestCenter,
@@ -34,16 +34,7 @@ export default function SortableItemList({
   onDelete,
 }: SortableItemListProps) {
   const [items, setItems] = useState(initialItems);
-  const [mounted, setMounted] = useState(false);
   const [, startTransition] = useTransition();
-
-  useEffect(() => {
-    setItems(initialItems);
-  }, [initialItems]);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
@@ -65,21 +56,6 @@ export default function SortableItemList({
     );
   }
 
-  if (!mounted) {
-    return (
-      <>
-        {items.map((item) => (
-          <PlainRow
-            key={item.id}
-            item={item}
-            onEdit={onEdit}
-            onDelete={onDelete}
-          />
-        ))}
-      </>
-    );
-  }
-
   return (
     <DndContext
       sensors={sensors}
@@ -90,80 +66,18 @@ export default function SortableItemList({
         items={items.map((i) => i.id)}
         strategy={verticalListSortingStrategy}
       >
-        {items.map((item) => (
-          <SortableRow
-            key={item.id}
-            item={item}
-            onEdit={onEdit}
-            onDelete={onDelete}
-          />
-        ))}
+        <div className="space-y-2">
+          {items.map((item) => (
+            <SortableRow
+              key={item.id}
+              item={item}
+              onEdit={onEdit}
+              onDelete={onDelete}
+            />
+          ))}
+        </div>
       </SortableContext>
     </DndContext>
-  );
-}
-
-function PlainRow({
-  item,
-  onEdit,
-  onDelete,
-}: {
-  item: ListItem;
-  onEdit: (i: ListItem) => void;
-  onDelete: (i: ListItem) => void;
-}) {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  return (
-    <div className="flex items-center gap-2 bg-bg-surface px-4 min-h-[60px] border-b border-border">
-      <span className="text-text-disabled shrink-0" aria-hidden="true">
-        <GripVertical size={20} />
-      </span>
-
-      <div className="flex-1 min-w-0">
-        <p className="text-base text-text-primary truncate">{item.name}</p>
-        {(item.quantity || item.unit) && (
-          <p className="text-sm text-text-secondary">
-            {[item.quantity, item.unit].filter(Boolean).join(" ")}
-          </p>
-        )}
-      </div>
-
-      <div className="relative shrink-0">
-        <button
-          onClick={() => setMenuOpen((v) => !v)}
-          aria-label="Opzioni articolo"
-          className="w-8 h-8 flex items-center justify-center text-text-secondary"
-        >
-          <MoreVertical size={20} />
-        </button>
-        {menuOpen && (
-          <div
-            className="absolute right-0 top-8 z-20 bg-bg-surface rounded-lg border border-border min-w-[140px]"
-            style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.12)" }}
-          >
-            <button
-              className="w-full text-left px-4 py-3 text-sm text-text-primary hover:bg-bg-header"
-              onClick={() => {
-                onEdit(item);
-                setMenuOpen(false);
-              }}
-            >
-              Modifica
-            </button>
-            <button
-              className="w-full text-left px-4 py-3 text-sm text-error hover:bg-bg-header"
-              onClick={() => {
-                onDelete(item);
-                setMenuOpen(false);
-              }}
-            >
-              Elimina
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
   );
 }
 
@@ -196,56 +110,59 @@ function SortableRow({
     <div
       ref={setNodeRef}
       style={style}
-      className="flex items-center gap-2 bg-bg-surface px-4 min-h-[60px] border-b border-border"
+      className="flex items-center gap-3 bg-bg-surface rounded-xl px-3 py-2.5 border border-border"
     >
       <span
         {...attributes}
         {...listeners}
-        className="text-text-disabled cursor-grab active:cursor-grabbing touch-none shrink-0"
-        aria-label="Trascina per riordinare"
+        className="cursor-grab shrink-0 touch-none text-text-disabled active:cursor-grabbing"
+        aria-label="Drag to reorder"
       >
-        <GripVertical size={20} />
+        <GripVertical size={18} />
       </span>
 
       <div className="flex-1 min-w-0">
-        <p className="text-base text-text-primary truncate">{item.name}</p>
-        {(item.quantity || item.unit) && (
-          <p className="text-sm text-text-secondary">
-            {[item.quantity, item.unit].filter(Boolean).join(" ")}
-          </p>
+        <p className="text-sm font-semibold text-text-primary leading-tight">{item.name}</p>
+        {item.notes && (
+          <p className="text-xs text-text-secondary mt-0.5">{item.notes}</p>
         )}
       </div>
+
+      {(item.quantity || item.unit) && (
+        <span className="text-xs font-bold text-text-secondary whitespace-nowrap">
+          {[item.quantity, item.unit].filter(Boolean).join(" ")}
+        </span>
+      )}
 
       <div className="relative shrink-0">
         <button
           onClick={() => setMenuOpen((v) => !v)}
-          aria-label="Opzioni articolo"
-          className="w-8 h-8 flex items-center justify-center text-text-secondary"
+          aria-label="Item options"
+          className="flex h-8 w-8 items-center justify-center rounded-lg text-text-secondary active:text-text-primary"
         >
-          <MoreVertical size={20} />
+          <MoreVertical size={16} />
         </button>
         {menuOpen && (
           <div
-            className="absolute right-0 top-8 z-20 bg-bg-surface rounded-lg border border-border min-w-[140px]"
-            style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.12)" }}
+            className="absolute right-0 top-9 z-20 min-w-[140px] overflow-hidden rounded-2xl border border-border bg-bg-surface shadow-xl"
           >
             <button
-              className="w-full text-left px-4 py-3 text-sm text-text-primary hover:bg-bg-header"
+              className="w-full px-4 py-3 text-left text-sm font-semibold text-text-primary hover:bg-bg-header"
               onClick={() => {
                 onEdit(item);
                 setMenuOpen(false);
               }}
             >
-              Modifica
+              Edit
             </button>
             <button
-              className="w-full text-left px-4 py-3 text-sm text-error hover:bg-bg-header"
+              className="w-full px-4 py-3 text-left text-sm font-semibold text-error hover:bg-bg-header"
               onClick={() => {
                 onDelete(item);
                 setMenuOpen(false);
               }}
             >
-              Elimina
+              Delete
             </button>
           </div>
         )}

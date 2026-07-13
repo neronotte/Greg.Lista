@@ -13,8 +13,8 @@ export default function HomeActions({ families }: HomeActionsProps) {
   const [open, setOpen] = useState(false)
   return (
     <>
-      <FAB onClick={() => setOpen(true)} ariaLabel="Nuova lista" />
-      <BottomSheet open={open} onClose={() => setOpen(false)} title="Nuova lista">
+      <FAB onClick={() => setOpen(true)} ariaLabel="New list" />
+      <BottomSheet open={open} onClose={() => setOpen(false)} title="New Shopping List">
         <ListForm families={families} onDone={() => setOpen(false)} />
       </BottomSheet>
     </>

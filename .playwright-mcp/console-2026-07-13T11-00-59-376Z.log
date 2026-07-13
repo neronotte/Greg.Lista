@@ -1,0 +1,52 @@
+[    3875ms] [ERROR] Manifest: Line: 1, column: 1, Syntax error. @ http://localhost:3000/manifest.json:0
+[    3899ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[    4593ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[    4656ms] [ERROR] Manifest: Line: 1, column: 1, Syntax error. @ http://localhost:3000/manifest.json:0
+[    9033ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) %o @ https://accounts.google.com/v3/signin/identifier?opparams=%253Fredirect_to%253Dhttp%25253A%25252F%25252Flocalhost%25253A3000%25252Fauth%25252Fcallback&dsh=S-1006213944%3A1783940469528161&client_id=223454403978-lmfkmtdmlcrl0r9cmj2mis1uhf49g1eb.apps.googleusercontent.com&o2v=2&redirect_uri=https%3A%2F%2Fawebxqoekucdnzoprvbe.supabase.co%2Fauth%2Fv1%2Fcallback&response_type=code&scope=email+profile&service=lso&state=72cb7844-de5c-4aed-a5c0-124ca3226059&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMJWZV5-NmzzldW-Vp7Vdt6S7z66rvSbd55U4BwMWIV-Zf3rudeivxMhvOy5DZWN-WJXLdKpI9GubHESnzD0DrtWSm2G2MmT81dE6LFvIsm2PkxKHREAsiD2b80ohUt65uWMmXBFCS0oQ6X5LqszJ-1JlXWsnLOQmQKHTQL-UCY_eVbbUf8IA4hKzHYjRn6uf2So42cTdkIK62RtexpmR8TOIMpOvhwL8j_NiH8VESvG-jcxL8HyfqX3BSkgA3Hi6d2S3YzvUvI54wkTCTXHbLyEed2JGl-Wd6N-vOdUeb8JpbzU9bWmzvt4DD9C3hg4er-1u3JMIOuVO8CmoFK3aF0QVQf4xEgNPIwiXufDwJf6nme2KydSvMukQYn3KHK1QSLvZu9Bg2i7wjNs-GtJUGr49ZeECfIcF1vQrqdOLkkrgYttDGyfRwgWsNpTrNYEVN_tT5lII8ewiKIvoxeg2kftDWDYtXPf7SO4OTpzs2qTLORGSY%26flowName%3DGeneralOAuthFlow%26as%3DS-1006213944%253A1783940469528161%26client_id%3D223454403978-lmfkmtdmlcrl0r9cmj2mis1uhf49g1eb.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fawebxqoekucdnzoprvbe.supabase.co&rart=ANgoxceZ5Ci7H57hAaYf5SqO89ASFa6Kjva4HWtbbpuHj3vV4eVS2umQzU5fKu1yvJ-wH085EMPeQ3xS56Nk5afSuzlfFdcaqzJ22WgHTzF8izbEgji2dvs:0
+[    9041ms] [LOG] %c%s color: red; background: yellow; font-size: 24px; WARNING! @ https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.AccountsSignInUi.en_US.C2UeKe245MY.es5.O/am=EQUAAAADRSECgPH_fwMAEECQ7YDvWQBNgJABAAAAAAAAAAAWAACgEQ/d=1/excm=_b,_tp,identifierview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlHr3FRHVMaWWH8bt_r7LFzpOASQJQ/dti=1/m=_b,_tp:550
+[    9041ms] [LOG] %c%s font-size: 18px; Using this console may allow attackers to impersonate you and steal your information using an attack called Self-XSS.
+Do not enter or paste code that you do not understand. @ https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.AccountsSignInUi.en_US.C2UeKe245MY.es5.O/am=EQUAAAADRSECgPH_fwMAEECQ7YDvWQBNgJABAAAAAAAAAAAWAACgEQ/d=1/excm=_b,_tp,identifierview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlHr3FRHVMaWWH8bt_r7LFzpOASQJQ/dti=1/m=_b,_tp:550
+[   18137ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) %o @ https://accounts.google.com/v3/signin/challenge/pwd?TL=AE6FvyZ-kExhLKoexsgH_ju1lay1KB2z9QCTo1K18QfzrVG5bESIJNDaJYkLEZJ2&app_domain=https%3A%2F%2Fawebxqoekucdnzoprvbe.supabase.co&checkConnection=youtube%3A3293&checkedDomains=youtube&cid=2&client_id=223454403978-lmfkmtdmlcrl0r9cmj2mis1uhf49g1eb.apps.googleusercontent.com&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAMJWZV5-NmzzldW-Vp7Vdt6S7z66rvSbd55U4BwMWIV-Zf3rudeivxMhvOy5DZWN-WJXLdKpI9GubHESnzD0DrtWSm2G2MmT81dE6LFvIsm2PkxKHREAsiD2b80ohUt65uWMmXBFCS0oQ6X5LqszJ-1JlXWsnLOQmQKHTQL-UCY_eVbbUf8IA4hKzHYjRn6uf2So42cTdkIK62RtexpmR8TOIMpOvhwL8j_NiH8VESvG-jcxL8HyfqX3BSkgA3Hi6d2S3YzvUvI54wkTCTXHbLyEed2JGl-Wd6N-vOdUeb8JpbzU9bWmzvt4DD9C3hg4er-1u3JMIOuVO8CmoFK3aF0QVQf4xEgNPIwiXufDwJf6nme2KydSvMukQYn3KHK1QSLvZu9Bg2i7wjNs-GtJUGr49ZeECfIcF1vQrqdOLkkrgYttDGyfRwgWsNpTrNYEVN_tT5lII8ewiKIvoxeg2kftDWDYtXPf7SO4OTpzs2qTLORGSY%26flowName%3DGeneralOAuthFlow%26as%3DS-1006213944%253A1783940469528161%26client_id%3D223454403978-lmfkmtdmlcrl0r9cmj2mis1uhf49g1eb.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&dsh=S-1006213944%3A1783940469528161&flowName=GeneralOAuthFlow&o2v=2&opparams=%253Fredirect_to%253Dhttp%25253A%25252F%25252Flocalhost%25253A3000%25252Fauth%25252Fcallback&pstMsg=1&rart=ANgoxceZ5Ci7H57hAaYf5SqO89ASFa6Kjva4HWtbbpuHj3vV4eVS2umQzU5fKu1yvJ-wH085EMPeQ3xS56Nk5afSuzlfFdcaqzJ22WgHTzF8izbEgji2dvs&redirect_uri=https%3A%2F%2Fawebxqoekucdnzoprvbe.supabase.co%2Fauth%2Fv1%2Fcallback&response_type=code&scope=email%20profile&service=lso&state=72cb7844-de5c-4aed-a5c0-124ca3226059:0
+[   44555ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[   44648ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[   45138ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[   45234ms] [LOG] [Fast Refresh] done in 205ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[   45300ms] [ERROR] Manifest: Line: 1, column: 1, Syntax error. @ http://localhost:3000/manifest.json:0
+[   45771ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[   46051ms] [LOG] [Fast Refresh] done in 393ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[   46216ms] [ERROR] Manifest: Line: 1, column: 1, Syntax error. @ http://localhost:3000/manifest.json:0
+[   96640ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[   99597ms] [LOG] [Fast Refresh] done in 3032ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[   99892ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  101083ms] [LOG] [Fast Refresh] done in 1295ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  102025ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  102213ms] [LOG] [Fast Refresh] done in 292ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  102859ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  102905ms] [LOG] [Fast Refresh] done in 154ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  103045ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  103079ms] [LOG] [Fast Refresh] done in 135ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  103439ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  103471ms] [LOG] [Fast Refresh] done in 133ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  103641ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  103671ms] [LOG] [Fast Refresh] done in 133ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  103926ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  104069ms] [LOG] [Fast Refresh] done in 246ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  104342ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  104756ms] [LOG] [Fast Refresh] done in 523ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  104909ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  104977ms] [LOG] [Fast Refresh] done in 169ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  105092ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  105413ms] [LOG] [Fast Refresh] done in 434ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  105886ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  106316ms] [LOG] [Fast Refresh] done in 535ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  107893ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  108050ms] [LOG] [Fast Refresh] done in 259ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  108158ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  108304ms] [LOG] [Fast Refresh] done in 253ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  110476ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  111737ms] [LOG] [Fast Refresh] done in 1364ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  112576ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  115518ms] [LOG] [Fast Refresh] done in 3057ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  116642ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  118400ms] [LOG] [Fast Refresh] done in 1860ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  118568ms] [ERROR] Manifest: Line: 1, column: 1, Syntax error. @ http://localhost:3000/manifest.json:0

@@ -68,56 +68,56 @@ export default function ItemForm({
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <div>
-        <label className="block text-xs text-text-secondary mb-1">
-          Nome articolo *
+        <label className="mb-1.5 block text-[11px] font-extrabold uppercase tracking-widest text-text-secondary">
+          Item name *
         </label>
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="es. Parmigiano Reggiano"
+          placeholder="e.g. Organic Apples"
           autoFocus
-          className="w-full border-b border-border focus:border-brand-mid outline-none py-2 text-base text-text-primary bg-transparent"
+          className="w-full bg-bg-header rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-brand-mid font-medium placeholder:font-normal"
         />
       </div>
 
       <div className="flex gap-3">
         <div className="flex-1">
-          <label className="block text-xs text-text-secondary mb-1">
-            Quantità
+          <label className="mb-1.5 block text-[11px] font-extrabold uppercase tracking-widest text-text-secondary">
+            Quantity
           </label>
           <input
             type="text"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
             placeholder="500"
-            className="w-full border-b border-border focus:border-brand-mid outline-none py-2 text-base text-text-primary bg-transparent"
+            className="w-full bg-bg-header rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-brand-mid font-medium"
           />
         </div>
         <div className="w-24">
-          <label className="block text-xs text-text-secondary mb-1">
-            Unità
+          <label className="mb-1.5 block text-[11px] font-extrabold uppercase tracking-widest text-text-secondary">
+            Unit
           </label>
           <input
             type="text"
             value={unit}
             onChange={(e) => setUnit(e.target.value)}
-            placeholder="g, L, pz"
-            className="w-full border-b border-border focus:border-brand-mid outline-none py-2 text-base text-text-primary bg-transparent"
+            placeholder="g, L, pcs"
+            className="w-full bg-bg-header rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-brand-mid font-medium"
           />
         </div>
       </div>
 
       <div>
-        <label className="block text-xs text-text-secondary mb-1">
-          Categoria
+        <label className="mb-1.5 block text-[11px] font-extrabold uppercase tracking-widest text-text-secondary">
+          Category
         </label>
         <select
           value={categoryName}
           onChange={(e) => setCategoryName(e.target.value)}
-          className="w-full border-b border-border focus:border-brand-mid outline-none py-2 text-base text-text-primary bg-transparent"
+          className="w-full bg-bg-header rounded-xl px-4 py-3 text-sm outline-none appearance-none focus:ring-2 focus:ring-brand-mid font-medium"
         >
-          <option value="auto">Auto (suggerita)</option>
+          <option value="auto">Auto (suggested)</option>
           {categories.map((c) => (
             <option key={c.id} value={c.name}>
               {c.name}
@@ -127,34 +127,28 @@ export default function ItemForm({
       </div>
 
       <div>
-        <label className="block text-xs text-text-secondary mb-1">Note</label>
+        <label className="mb-1.5 block text-[11px] font-extrabold uppercase tracking-widest text-text-secondary">
+          Note (optional)
+        </label>
         <input
           type="text"
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
-          placeholder="Marca, dettagli…"
-          className="w-full border-b border-border focus:border-brand-mid outline-none py-2 text-base text-text-primary bg-transparent"
+          placeholder="Brand, details…"
+          className="w-full bg-bg-header rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-brand-mid placeholder:font-normal"
         />
       </div>
 
       {error && <p className="text-sm text-error">{error}</p>}
 
-      <div className="flex gap-2 mt-2">
-        <button
-          type="button"
-          onClick={onDone}
-          className="flex-1 py-3 rounded-lg border border-brand-mid text-brand-mid font-semibold text-base"
-        >
-          Annulla
-        </button>
-        <button
-          type="submit"
-          disabled={pending}
-          className="flex-1 py-3 rounded-lg bg-brand-bright text-white font-semibold text-base disabled:opacity-60"
-        >
-          {pending ? "Salvo…" : initial ? "Salva" : "Aggiungi"}
-        </button>
-      </div>
+      <button
+        type="submit"
+        disabled={pending}
+        className="w-full mt-1 py-4 bg-brand-mid text-white rounded-2xl font-extrabold text-sm active:scale-[0.98] transition-transform"
+        style={{ boxShadow: "0 4px 16px rgba(61,122,86,0.32)" }}
+      >
+        {pending ? "Saving…" : initial ? "Save Changes" : "Add to List"}
+      </button>
     </form>
   );
 }

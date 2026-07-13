@@ -41,7 +41,7 @@ export default function CompleteSessionButton({
         disabled={pending}
         aria-label="Concludi spesa"
         title="Concludi spesa"
-        className="w-10 h-10 flex items-center justify-center text-white rounded-full active:bg-white/10 disabled:opacity-60"
+        className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/15 bg-white/10 text-white disabled:opacity-60"
       >
         <CheckCheck size={22} />
       </button>

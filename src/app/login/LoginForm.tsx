@@ -17,11 +17,11 @@ export default function LoginForm() {
   return (
     <button
       onClick={signInWithGoogle}
-      className="w-full flex items-center justify-center gap-3 rounded-lg bg-white px-4 py-3 text-base font-semibold text-text-primary active:scale-[0.97] transition-transform duration-[120ms]"
-      style={{ boxShadow: '0 1px 2px rgba(0,0,0,0.08)' }}
+      className="flex w-full items-center justify-center gap-3 rounded-2xl border border-border bg-bg-surface px-4 py-4 text-base font-bold text-text-primary active:scale-[0.97] transition-transform duration-[120ms]"
+      style={{ boxShadow: '0 10px 30px rgba(44,36,32,0.06)' }}
     >
       <GoogleIcon />
-      Accedi con Google
+      Sign in with Google
     </button>
   )
 }

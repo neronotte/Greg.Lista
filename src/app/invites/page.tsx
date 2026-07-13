@@ -26,10 +26,10 @@ export default async function InvitesPage() {
   const pendingInvites = invites ?? [];
 
   return (
-    <div className="min-h-screen flex flex-col bg-bg-app">
+    <div className="app-shell">
       <AppBar title="Inviti in attesa" backHref="/profile" />
 
-      <main className="flex-1 overflow-y-auto">
+      <main className="page-body">
         {pendingInvites.length === 0 ? (
           <EmptyState
             icon={<Bell size={64} />}
@@ -38,10 +38,11 @@ export default async function InvitesPage() {
           />
         ) : (
           <section>
-            <p className="px-4 py-2 text-xs uppercase text-text-secondary tracking-[0.08em]">
+            <p className="section-caption">
               {pendingInvites.length}{" "}
               {pendingInvites.length === 1 ? "invito" : "inviti"}
             </p>
+            <div className="space-y-3">
             {pendingInvites.map((invite) => {
               const family = (
                 Array.isArray(invite.family) ? invite.family[0] : invite.family
@@ -51,11 +52,13 @@ export default async function InvitesPage() {
                 <Link
                   key={invite.id}
                   href={`/invite/${invite.token}`}
-                  className="flex items-center gap-3 bg-bg-surface px-4 py-3 border-b border-border"
+                  className="surface-card flex items-center gap-3 p-4"
                 >
-                  <Users size={20} className="text-text-secondary shrink-0" />
+                  <span className="surface-icon">
+                    <Users size={18} className="shrink-0" />
+                  </span>
                   <div className="flex-1 min-w-0">
-                    <p className="text-base text-text-primary truncate">
+                    <p className="truncate text-base font-extrabold text-text-primary">
                       {family?.name ?? "Famiglia"}
                     </p>
                     <p className="text-sm text-text-secondary">
@@ -73,6 +76,7 @@ export default async function InvitesPage() {
                 </Link>
               );
             })}
+            </div>
           </section>
         )}
       </main>

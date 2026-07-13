@@ -1,0 +1,61 @@
+- generic [active] [ref=f9e1]:
+  - generic [ref=f9e3]:
+    - generic [ref=f9e5]:
+      - generic [ref=f9e6]:
+        - heading "My Lists" [level=1] [ref=f9e7]
+        - paragraph [ref=f9e8]: Hello, Riccardo 👋
+      - img "Riccardo Gregori" [ref=f9e9]
+    - main [ref=f9e10]:
+      - generic [ref=f9e12]:
+        - generic [ref=f9e13]: Personal
+        - generic [ref=f9e17]:
+          - link "🧺 Standard Personal 5 items · 3 categories" [ref=f9e18] [cursor=pointer]:
+            - /url: /lists/bbea9064-0602-47e1-a01c-44ce7a866e33
+            - generic [ref=f9e19]:
+              - generic [ref=f9e20]: 🧺
+              - generic [ref=f9e21]:
+                - heading "Standard" [level=3] [ref=f9e22]
+                - generic [ref=f9e23]:
+                  - generic [ref=f9e24]: Personal
+                  - generic [ref=f9e28]: 5 items · 3 categories
+          - link "🧺 Refresh test immediato Personal Empty" [ref=f9e29] [cursor=pointer]:
+            - /url: /lists/218c3dd8-9382-4453-b58a-38bcf36bb5d4
+            - generic [ref=f9e30]:
+              - generic [ref=f9e31]: 🧺
+              - generic [ref=f9e32]:
+                - heading "Refresh test immediato" [level=3] [ref=f9e33]
+                - generic [ref=f9e34]:
+                  - generic [ref=f9e35]: Personal
+                  - generic [ref=f9e39]: Empty
+          - link "🛒 Spesa Personal Empty" [ref=f9e40] [cursor=pointer]:
+            - /url: /lists/4d1e2194-3378-4e13-a91c-4fafbd99d5c5
+            - generic [ref=f9e41]:
+              - generic [ref=f9e42]: 🛒
+              - generic [ref=f9e43]:
+                - heading "Spesa" [level=3] [ref=f9e44]
+                - generic [ref=f9e45]:
+                  - generic [ref=f9e46]: Personal
+                  - generic [ref=f9e50]: Empty
+          - link "🛒 Spesa settimanale Personal Empty" [ref=f9e51] [cursor=pointer]:
+            - /url: /lists/09a23af3-f02d-45f1-aa91-4bc5ba1ae674
+            - generic [ref=f9e52]:
+              - generic [ref=f9e53]: 🛒
+              - generic [ref=f9e54]:
+                - heading "Spesa settimanale" [level=3] [ref=f9e55]
+                - generic [ref=f9e56]:
+                  - generic [ref=f9e57]: Personal
+                  - generic [ref=f9e61]: Empty
+    - button "New list" [ref=f9e62]
+    - navigation [ref=f9e64]:
+      - link "Lists" [ref=f9e65] [cursor=pointer]:
+        - /url: /
+      - link "1 Sessions" [ref=f9e73] [cursor=pointer]:
+        - /url: /history
+        - generic [ref=f9e74]: "1"
+        - generic [ref=f9e79]: Sessions
+      - link "Family" [ref=f9e80] [cursor=pointer]:
+        - /url: /families
+      - link "Profile" [ref=f9e88] [cursor=pointer]:
+        - /url: /profile
+  - button "Open Next.js Dev Tools" [ref=f9e99] [cursor=pointer]
+  - alert [ref=f9e103]

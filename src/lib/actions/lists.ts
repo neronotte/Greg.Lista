@@ -9,6 +9,7 @@ export async function createList(
   name: string,
   visibility: Visibility,
   familyId?: string,
+  icon?: string,
 ) {
   const supabase = await createClient();
   const {
@@ -23,6 +24,7 @@ export async function createList(
       visibility,
       owner_id: user.id,
       family_id: familyId ?? null,
+      icon: icon ?? null,
     })
     .select()
     .single();
@@ -37,6 +39,7 @@ export async function updateList(
   name: string,
   visibility: Visibility,
   familyId?: string | null,
+  icon?: string,
 ) {
   const supabase = await createClient();
   const {
@@ -46,7 +49,12 @@ export async function updateList(
 
   const { error } = await supabase
     .from("lists")
-    .update({ name, visibility, family_id: familyId ?? null })
+    .update({
+      name,
+      visibility,
+      family_id: familyId ?? null,
+      icon: icon ?? null,
+    })
     .eq("id", id)
     .eq("owner_id", user.id);
 
@@ -97,6 +105,7 @@ export async function copyList(id: string) {
       visibility: "private",
       owner_id: user.id,
       family_id: null,
+      icon: list.icon ?? null,
     })
     .select()
     .single();

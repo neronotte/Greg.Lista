@@ -34,43 +34,35 @@ export default function FamiliesActions() {
 
   return (
     <>
-      <FAB onClick={() => setOpen(true)} ariaLabel="Nuova famiglia" />
+      <FAB onClick={() => setOpen(true)} ariaLabel="New family" />
       <BottomSheet
         open={open}
         onClose={() => setOpen(false)}
-        title="Nuova famiglia"
+        title="New Family"
       >
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
-            <label className="block text-xs text-text-secondary mb-1">
-              Nome famiglia
+            <label className="mb-1.5 block text-[11px] font-extrabold uppercase tracking-widest text-text-secondary">
+              Family name
             </label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="es. Famiglia Gregori"
+              placeholder="e.g. The Anderson Family"
               autoFocus
-              className="w-full border-b border-border focus:border-brand-mid outline-none py-2 text-base text-text-primary bg-transparent"
+              className="w-full bg-bg-header rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-brand-mid font-medium placeholder:font-normal"
             />
           </div>
           {error && <p className="text-sm text-error">{error}</p>}
-          <div className="flex gap-2 mt-2">
-            <button
-              type="button"
-              onClick={() => setOpen(false)}
-              className="flex-1 py-3 rounded-lg border border-brand-mid text-brand-mid font-semibold"
-            >
-              Annulla
-            </button>
-            <button
-              type="submit"
-              disabled={pending}
-              className="flex-1 py-3 rounded-lg bg-brand-bright text-white font-semibold disabled:opacity-60"
-            >
-              {pending ? "Creo…" : "Crea"}
-            </button>
-          </div>
+          <button
+            type="submit"
+            disabled={pending}
+            className="w-full mt-1 py-4 bg-brand-mid text-white rounded-2xl font-extrabold text-sm active:scale-[0.98] transition-transform"
+            style={{ boxShadow: "0 4px 16px rgba(61,122,86,0.32)" }}
+          >
+            {pending ? "Creating…" : "Create Family"}
+          </button>
         </form>
       </BottomSheet>
     </>

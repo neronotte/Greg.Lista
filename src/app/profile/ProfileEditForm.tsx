@@ -13,9 +13,9 @@ export default function ProfileEditForm({ currentName }: { currentName: string }
     return (
       <button
         onClick={() => setEditing(true)}
-        className="text-sm text-brand-mid"
+        className="text-sm font-bold text-brand-mid flex items-center gap-1"
       >
-        Modifica nome
+        Edit name
       </button>
     )
   }
@@ -30,26 +30,28 @@ export default function ProfileEditForm({ currentName }: { currentName: string }
             await updateProfile(name)
             setEditing(false)
           } catch (err) {
-            setError(err instanceof Error ? err.message : 'Errore')
+            setError(err instanceof Error ? err.message : 'Error')
           }
         })
       }}
-      className="flex gap-2 items-center"
+      className="flex w-full gap-2"
     >
       <input
         type="text"
         value={name}
         onChange={e => setName(e.target.value)}
         autoFocus
-        className="border-b border-brand-mid outline-none py-1 text-base text-text-primary bg-transparent"
+        className="flex-1 bg-bg-header rounded-xl px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-brand-mid font-medium"
       />
-      <button type="submit" disabled={pending} className="text-sm text-brand-bright font-semibold">
-        {pending ? '…' : 'Salva'}
+      <button type="button" onClick={() => setEditing(false)}
+              className="px-3 py-2 border border-border rounded-xl text-sm font-semibold text-text-secondary">
+        Cancel
       </button>
-      <button type="button" onClick={() => setEditing(false)} className="text-sm text-text-secondary">
-        Annulla
+      <button type="submit" disabled={pending}
+              className="px-3 py-2 bg-brand-mid text-white rounded-xl text-sm font-bold">
+        {pending ? '…' : 'Save'}
       </button>
-      {error && <p className="text-xs text-error">{error}</p>}
+      {error && <p className="text-xs text-error mt-1">{error}</p>}
     </form>
   )
 }

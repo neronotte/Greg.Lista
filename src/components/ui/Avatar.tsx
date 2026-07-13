@@ -1,4 +1,4 @@
-const FALLBACK_COLORS = ['#075E54', '#128C7E', '#6B4C9A', '#D97706', '#DC2626', '#0891B2']
+const FALLBACK_COLORS = ['#3D7A56', '#4A90A4', '#9B7BC8', '#E07A5F', '#E6A020', '#C45C8A']
 
 function colorForEmail(email: string): string {
   let hash = 0
@@ -19,7 +19,7 @@ interface AvatarProps {
 
 export default function Avatar({ name, email, avatarUrl, size = 40 }: AvatarProps) {
   const bg = colorForEmail(email)
-  const style = { width: size, height: size, fontSize: size * 0.35 }
+  const style = { width: size, height: size, fontSize: size * 0.38 }
 
   if (avatarUrl) {
     return (
@@ -35,7 +35,7 @@ export default function Avatar({ name, email, avatarUrl, size = 40 }: AvatarProp
 
   return (
     <div
-      className="rounded-full flex items-center justify-center text-white font-semibold shrink-0"
+      className="rounded-full flex items-center justify-center text-white font-extrabold shrink-0"
       style={{ ...style, backgroundColor: bg }}
       aria-label={name}
     >

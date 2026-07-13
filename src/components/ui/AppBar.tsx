@@ -1,38 +1,59 @@
-import { ArrowLeft } from 'lucide-react'
+import { ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 
 interface AppBarProps {
   title: string
+  subtitle?: string
   backHref?: string
   actions?: React.ReactNode
   variant?: 'default' | 'shopping'
 }
 
-export default function AppBar({ title, backHref, actions, variant = 'default' }: AppBarProps) {
-  const bg = variant === 'shopping' ? 'bg-brand-bright' : 'bg-brand-dark'
+export default function AppBar({
+  title,
+  subtitle,
+  backHref,
+  actions,
+  variant = 'default',
+}: AppBarProps) {
+  const isDefault = variant === 'default'
 
   return (
     <header
-      className={`h-14 ${bg} sticky top-0 z-10 flex items-center px-2`}
-      style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.12)' }}
+      className={`shrink-0 px-5 pt-2 pb-4 ${
+        isDefault ? 'bg-bg-app' : 'border-b border-border bg-bg-surface'
+      }`}
     >
-      {backHref && (
-        <Link
-          href={backHref}
-          aria-label="Indietro"
-          className="w-10 h-10 flex items-center justify-center text-white rounded-full active:bg-white/10 transition-colors shrink-0"
-        >
-          <ArrowLeft size={24} />
-        </Link>
-      )}
-      <h1 className={`flex-1 text-[20px] font-semibold text-white leading-snug truncate ${backHref ? 'ml-1' : 'ml-2'}`}>
-        {title}
-      </h1>
-      {actions && (
-        <div className="flex items-center gap-1 shrink-0">
-          {actions}
-        </div>
-      )}
+      <div className="flex items-center gap-3">
+        {backHref && (
+          <Link
+            href={backHref}
+            aria-label="Back"
+            className="p-2 -ml-2 text-text-secondary rounded-xl active:bg-bg-header transition-colors"
+          >
+            <ChevronLeft size={22} />
+          </Link>
+        )}
+        {!backHref && (
+          <div className="flex-1 min-w-0">
+            <h1 className="text-[26px] font-black text-text-primary leading-tight">{title}</h1>
+            {subtitle && (
+              <p className="text-sm font-medium text-text-secondary">{subtitle}</p>
+            )}
+          </div>
+        )}
+        {backHref && (
+          <div className="flex-1 min-w-0">
+            <h1 className="font-black text-text-primary text-lg leading-tight truncate">{title}</h1>
+            {subtitle && (
+              <p className="text-xs text-text-secondary mt-0.5">{subtitle}</p>
+            )}
+          </div>
+        )}
+        {actions && (
+          <div className="flex shrink-0 items-center gap-2">{actions}</div>
+        )}
+      </div>
     </header>
   )
 }

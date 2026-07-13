@@ -1,14 +1,14 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound, redirect } from "next/navigation";
 import { getNavCounts } from "@/lib/nav-counts";
-import AppBar from "@/components/ui/AppBar";
-import BottomNav from "@/components/ui/BottomNav";
-import SessionHeader from "@/components/session/SessionHeader";
 import CheckableItem from "@/components/session/CheckableItem";
 import CategoryHeader from "@/components/ui/CategoryHeader";
-import { completeSession, reopenSession } from "@/lib/actions/sessions";
+import EmptyState from "@/components/ui/EmptyState";
+import { reopenSession } from "@/lib/actions/sessions";
 import CompleteSessionButton from "./CompleteSessionButton";
 import type { Category, ListItem, SessionEntry } from "@/lib/types";
+import { ChevronLeft, ShoppingCart } from "lucide-react";
+import Link from "next/link";
 
 interface SessionEntryWithItem extends SessionEntry {
   list_item: ListItem & { category?: Category | null };
@@ -33,10 +33,10 @@ export default async function SessionPage({
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const [{ data: session }, { data: entries }, navCounts] = await Promise.all([
+  const [{ data: session }, { data: entries }] = await Promise.all([
     supabase
       .from("shopping_sessions")
-      .select("*, list:lists(name, visibility)")
+      .select("*, list:lists(name, visibility, id)")
       .eq("id", id)
       .single(),
     supabase
@@ -46,7 +46,6 @@ export default async function SessionPage({
       )
       .eq("session_id", id)
       .order("list_item(sort_order)"),
-    getNavCounts(),
   ]);
 
   if (!session) notFound();
@@ -72,43 +71,102 @@ export default async function SessionPage({
     (a, b) => a.sortOrder - b.sortOrder,
   );
 
+  const checked = allEntries.filter((e) => e.checked).length;
+  const total = allEntries.length;
+  const pct = total > 0 ? checked / total : 0;
+
   return (
-    <div className="min-h-screen flex flex-col bg-bg-app">
-      <AppBar
-        title={session.supermarket || session.list?.name || "Spesa"}
-        backHref={`/lists/${session.list_id}`}
-        variant={isCompleted ? "default" : "shopping"}
-        actions={
-          !isCompleted ? <CompleteSessionButton sessionId={id} /> : undefined
-        }
-      />
+    <div className="app-shell">
+      {/* Header */}
+      <div className="shrink-0 px-5 pt-2 pb-3 border-b border-border">
+        <div className="flex items-center gap-3 mb-3">
+          <Link
+            href={session.list?.id ? `/lists/${session.list.id}` : "/"}
+            aria-label="Back"
+            className="p-2 -ml-2 text-text-secondary rounded-xl active:bg-bg-header transition-colors"
+          >
+            <ChevronLeft size={22} />
+          </Link>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="font-black text-text-primary text-base truncate">
+                {session.supermarket || session.list?.name || "Shopping"}
+              </span>
+              <span
+                className={`text-[10px] font-extrabold px-1.5 py-0.5 rounded-full uppercase tracking-wider ${
+                  isCompleted
+                    ? "bg-blue-100 text-blue-700"
+                    : "bg-green-100 text-green-700"
+                }`}
+              >
+                {isCompleted ? "Completed" : "Active"}
+              </span>
+            </div>
+            {session.supermarket && (
+              <p className="text-xs text-text-secondary mt-0.5 font-medium">
+                {session.list?.name}
+              </p>
+            )}
+          </div>
+          {!isCompleted && <CompleteSessionButton sessionId={id} />}
+        </div>
+        {/* Progress */}
+        <div className="flex items-center gap-3">
+          <div className="flex-1 h-2.5 bg-bg-header rounded-full overflow-hidden">
+            <div
+              className="h-full bg-brand-mid rounded-full transition-all duration-300"
+              style={{ width: `${pct * 100}%` }}
+            />
+          </div>
+          <span className="text-xs font-extrabold text-brand-mid whitespace-nowrap tabular-nums">
+            {checked}/{total}
+          </span>
+        </div>
+      </div>
 
-      <SessionHeader
-        supermarket={session.supermarket}
-        startedAt={session.started_at}
-        total={allEntries.length}
-        checked={allEntries.filter((entry) => entry.checked).length}
-      />
-
-      <main
-        className={`flex-1 overflow-y-auto ${isCompleted ? "pb-40" : "pb-24"}`}
-      >
-        {orderedGroups.map((group) => (
-          <section key={group.key}>
-            <CategoryHeader name={group.label} />
-            {group.entries.map((entry) => (
-              <CheckableItem key={entry.id} entry={entry} />
-            ))}
-          </section>
-        ))}
-
-        {allEntries.length === 0 && (
-          <p className="text-center text-text-disabled py-8">Sessione vuota</p>
+      <main className="page-body">
+        {allEntries.length === 0 ? (
+          <EmptyState
+            icon={<ShoppingCart size={48} />}
+            title="Empty session"
+            subtitle="Add items to the list before starting a shopping session."
+          />
+        ) : (
+          <div className="page-stack">
+            {orderedGroups.map((group) => {
+              const groupChecked = group.entries.filter((e) => e.checked).length;
+              return (
+                <section
+                  key={group.key}
+                  className={groupChecked === group.entries.length && group.entries.length > 0 ? "opacity-50" : ""}
+                >
+                  <CategoryHeader
+                    name={group.label}
+                    count={group.entries.length}
+                  />
+                  <div className="space-y-2">
+                    {group.entries.map((entry) => (
+                      <CheckableItem key={entry.id} entry={entry} />
+                    ))}
+                  </div>
+                </section>
+              );
+            })}
+          </div>
         )}
       </main>
 
       {isCompleted && (
-        <div className="fixed bottom-16 left-0 right-0 z-20 px-4 pb-3 pt-4 bg-gradient-to-t from-bg-app via-bg-app/95 to-transparent">
+        <div className="shrink-0 px-5 pb-5 pt-3 border-t border-border">
+          <div className="flex items-center justify-center gap-2 py-1 mb-3">
+            <span className="font-extrabold text-brand-mid text-sm">
+              ✅ Shopping completed ·{" "}
+              {new Date(session.completed_at!).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+              })}
+            </span>
+          </div>
           <form
             action={async () => {
               "use server";
@@ -117,19 +175,13 @@ export default async function SessionPage({
           >
             <button
               type="submit"
-              className="w-full py-3 rounded-lg border border-brand-mid text-brand-mid font-semibold text-base bg-bg-surface"
+              className="w-full py-3.5 border-2 border-border text-text-primary rounded-2xl font-extrabold text-sm flex items-center justify-center gap-2 active:scale-[0.97] transition-transform"
             >
-              Riapri sessione
+              Reopen Session
             </button>
           </form>
         </div>
       )}
-
-      <BottomNav
-        pendingInvites={navCounts.pendingInvites}
-        activeSessions={navCounts.activeSessions}
-        latestActiveSessionId={navCounts.latestActiveSessionId}
-      />
     </div>
   );
 }

@@ -6,8 +6,8 @@ import BottomSheet from "@/components/ui/BottomSheet";
 import ItemForm from "@/components/lists/ItemForm";
 import SortableItemList from "@/components/lists/SortableItemList";
 import { deleteItem } from "@/lib/actions/items";
-import { startSession } from "@/lib/actions/sessions";
 import type { ListItem, Category } from "@/lib/types";
+import { Plus } from "lucide-react";
 
 interface ListDetailActionsProps {
   listId: string;
@@ -16,6 +16,7 @@ interface ListDetailActionsProps {
   fab?: boolean;
   fabClassName?: string;
   sectionOnly?: boolean;
+  inlineButton?: boolean;
 }
 
 export default function ListDetailActions({
@@ -25,11 +26,10 @@ export default function ListDetailActions({
   fab,
   fabClassName,
   sectionOnly,
+  inlineButton,
 }: ListDetailActionsProps) {
   const [sheetOpen, setSheetOpen] = useState(false);
   const [editItem, setEditItem] = useState<ListItem | null>(null);
-  const [sessionSheetOpen, setSessionSheetOpen] = useState(false);
-  const [supermarket, setSupermarket] = useState("");
   const [, startTransition] = useTransition();
 
   return (
@@ -48,15 +48,27 @@ export default function ListDetailActions({
         />
       )}
 
-      {fab && !sectionOnly && (
+      {fab && !sectionOnly && !inlineButton && (
         <FAB
           onClick={() => {
             setEditItem(null);
             setSheetOpen(true);
           }}
-          ariaLabel="Aggiungi articolo"
-          className={fabClassName}
+          ariaLabel="Add item"
+          className={fabClassName ?? "bottom-20"}
         />
+      )}
+
+      {inlineButton && (
+        <button
+          onClick={() => {
+            setEditItem(null);
+            setSheetOpen(true);
+          }}
+          className="flex-1 py-3.5 border-2 border-brand-mid text-brand-mid rounded-2xl font-extrabold text-sm flex items-center justify-center gap-2 active:scale-[0.97] transition-transform"
+        >
+          <Plus size={17} strokeWidth={3} /> Add Item
+        </button>
       )}
 
       <BottomSheet
@@ -65,7 +77,7 @@ export default function ListDetailActions({
           setSheetOpen(false);
           setEditItem(null);
         }}
-        title={editItem ? "Modifica articolo" : "Nuovo articolo"}
+        title={editItem ? "Edit item" : "Add Item"}
       >
         <ItemForm
           listId={listId}
@@ -88,43 +100,6 @@ export default function ListDetailActions({
           }}
         />
       </BottomSheet>
-
-      {!sectionOnly && (
-        <BottomSheet
-          open={sessionSheetOpen}
-          onClose={() => setSessionSheetOpen(false)}
-          title="Avvia spesa"
-        >
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              startTransition(() =>
-                startSession(listId, supermarket || undefined),
-              );
-            }}
-            className="flex flex-col gap-4"
-          >
-            <div>
-              <label className="block text-xs text-text-secondary mb-1">
-                Supermercato (opzionale)
-              </label>
-              <input
-                type="text"
-                value={supermarket}
-                onChange={(e) => setSupermarket(e.target.value)}
-                placeholder="es. Carrefour, Esselunga…"
-                className="w-full border-b border-border focus:border-brand-mid outline-none py-2 text-base text-text-primary bg-transparent"
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full py-3 rounded-lg bg-brand-bright text-white font-semibold text-base mt-2"
-            >
-              Inizia
-            </button>
-          </form>
-        </BottomSheet>
-      )}
     </>
   );
 }
