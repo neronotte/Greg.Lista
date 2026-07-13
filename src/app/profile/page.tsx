@@ -26,20 +26,25 @@ export default async function ProfilePage() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const [{ data: profile }, { data: families }, { data: invites }, navCounts, { t }] =
-    await Promise.all([
-      supabase.from("profiles").select("*").eq("id", user.id).single(),
-      supabase
-        .from("family_members")
-        .select("role, families(id, name)")
-        .eq("user_id", user.id),
-      supabase
-        .from("family_invites")
-        .select("*, family:families(name)")
-        .eq("status", "pending"),
-      getNavCounts(),
-      getServerTranslations(),
-    ]);
+  const [
+    { data: profile },
+    { data: families },
+    { data: invites },
+    navCounts,
+    { t },
+  ] = await Promise.all([
+    supabase.from("profiles").select("*").eq("id", user.id).single(),
+    supabase
+      .from("family_members")
+      .select("role, families(id, name)")
+      .eq("user_id", user.id),
+    supabase
+      .from("family_invites")
+      .select("*, family:families(name)")
+      .eq("status", "pending"),
+    getNavCounts(),
+    getServerTranslations(),
+  ]);
 
   const displayName =
     profile?.display_name ?? user.email?.split("@")[0] ?? "User";
@@ -101,7 +106,9 @@ export default async function ProfilePage() {
                         {t("invite.pendingInvites")}
                       </p>
                       <p className="text-xs text-text-secondary">
-                        {t("invite.toReview", { count: (invites ?? []).length })}
+                        {t("invite.toReview", {
+                          count: (invites ?? []).length,
+                        })}
                       </p>
                     </div>
                   </div>
@@ -169,6 +176,18 @@ export default async function ProfilePage() {
                 </span>
                 <LocaleToggle />
               </div>
+              <Link
+                href="/categories"
+                className="flex items-center justify-between px-4 py-3.5 active:bg-bg-header border-b border-border"
+              >
+                <span className="text-sm font-semibold text-text-primary">
+                  {t("profile.manageCategories")}
+                </span>
+                <ChevronLeft
+                  size={16}
+                  className="rotate-180 text-text-secondary"
+                />
+              </Link>
               <Link
                 href="/families"
                 className="flex items-center justify-between px-4 py-3.5 active:bg-bg-header border-b border-border"

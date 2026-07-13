@@ -26,25 +26,26 @@ export default async function Home() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const [{ data: lists }, { data: families }, navCounts, { t }] = await Promise.all([
-    supabase
-      .from("lists")
-      .select(
-        `
+  const [{ data: lists }, { data: families }, navCounts, { t }] =
+    await Promise.all([
+      supabase
+        .from("lists")
+        .select(
+          `
         *,
         family:families(id, name),
         item_count:list_items(count),
         items:list_items(category_id)
       `,
-      )
-      .order("updated_at", { ascending: false }),
-    supabase
-      .from("family_members")
-      .select("families(id, name)")
-      .eq("user_id", user.id),
-    getNavCounts(),
-    getServerTranslations(),
-  ]);
+        )
+        .order("updated_at", { ascending: false }),
+      supabase
+        .from("family_members")
+        .select("families(id, name)")
+        .eq("user_id", user.id),
+      getNavCounts(),
+      getServerTranslations(),
+    ]);
 
   const myLists = (lists ?? []).filter(
     (l) => l.owner_id === user.id && l.visibility === "private",

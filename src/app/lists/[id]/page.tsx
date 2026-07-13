@@ -6,7 +6,13 @@ import CategoryHeader from "@/components/ui/CategoryHeader";
 import EmptyState from "@/components/ui/EmptyState";
 import ListDetailActions from "./ListDetailActions";
 import DeleteListButton from "./DeleteListButton";
-import { ChevronLeft, Lock, ShoppingBag, ShoppingCart, Users } from "lucide-react";
+import {
+  ChevronLeft,
+  Lock,
+  ShoppingBag,
+  ShoppingCart,
+  Users,
+} from "lucide-react";
 import Link from "next/link";
 import type { ListItem, Category } from "@/lib/types";
 
@@ -27,22 +33,27 @@ export default async function ListDetailPage({
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const [{ data: list }, { data: rawItems }, { data: categories }, navCounts, { t }] =
-    await Promise.all([
-      supabase
-        .from("lists")
-        .select("*, family:families(name)")
-        .eq("id", id)
-        .single(),
-      supabase
-        .from("list_items")
-        .select("*, category:categories(id, name, sort_order)")
-        .eq("list_id", id)
-        .order("sort_order"),
-      supabase.from("categories").select("*").order("sort_order"),
-      getNavCounts(),
-      getServerTranslations(),
-    ]);
+  const [
+    { data: list },
+    { data: rawItems },
+    { data: categories },
+    navCounts,
+    { t },
+  ] = await Promise.all([
+    supabase
+      .from("lists")
+      .select("*, family:families(name)")
+      .eq("id", id)
+      .single(),
+    supabase
+      .from("list_items")
+      .select("*, category:categories(id, name, emoji, sort_order)")
+      .eq("list_id", id)
+      .order("sort_order"),
+    supabase.from("categories").select("*").order("sort_order"),
+    getNavCounts(),
+    getServerTranslations(),
+  ]);
 
   if (!list) notFound();
 
@@ -80,7 +91,9 @@ export default async function ListDetailPage({
           <ChevronLeft size={22} />
         </Link>
         <div className="flex-1 min-w-0">
-          <h1 className="font-black text-text-primary text-lg leading-tight truncate">{list.name}</h1>
+          <h1 className="font-black text-text-primary text-lg leading-tight truncate">
+            {list.name}
+          </h1>
           <div className="flex items-center gap-2 mt-0.5">
             <span
               className={`inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
@@ -89,9 +102,20 @@ export default async function ListDetailPage({
                   : "bg-bg-header text-text-secondary"
               }`}
             >
-              {list.visibility === "family" ? <><Users size={9} /> {t("visibility.family")}</> : <><Lock size={9} /> {t("visibility.personal")}</>}
+              {list.visibility === "family" ? (
+                <>
+                  <Users size={9} /> {t("visibility.family")}
+                </>
+              ) : (
+                <>
+                  <Lock size={9} /> {t("visibility.personal")}
+                </>
+              )}
             </span>
-            <span className="text-xs text-text-secondary">{items.length} {items.length === 1 ? t("home.item") : t("home.items")}</span>
+            <span className="text-xs text-text-secondary">
+              {items.length}{" "}
+              {items.length === 1 ? t("home.item") : t("home.items")}
+            </span>
           </div>
         </div>
         <DeleteListButton listId={id} />
@@ -108,7 +132,7 @@ export default async function ListDetailPage({
           <div className="page-stack">
             {grouped.map((g) => (
               <section key={g.category.id}>
-                <CategoryHeader name={g.category.name} count={g.items.length} />
+                <CategoryHeader name={g.category.name} emoji={g.category.emoji} count={g.items.length} />
                 <ListDetailActions
                   key={`${id}:${g.category.id}:${g.items.map((item) => item.id).join(",")}`}
                   listId={id}
@@ -120,7 +144,10 @@ export default async function ListDetailPage({
             ))}
             {uncategorized.length > 0 && (
               <section>
-                <CategoryHeader name={t("listDetail.miscCategory")} count={uncategorized.length} />
+                <CategoryHeader
+                  name={t("listDetail.miscCategory")}
+                  count={uncategorized.length}
+                />
                 <ListDetailActions
                   key={`${id}:misc:${uncategorized.map((item) => item.id).join(",")}`}
                   listId={id}

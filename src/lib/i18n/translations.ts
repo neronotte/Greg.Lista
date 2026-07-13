@@ -86,7 +86,8 @@ export const translations = {
       paused: "Paused",
       completed: "Completed",
       completeButton: "Complete Shopping",
-      completeMessage: "Complete this session? You can reopen it later from history.",
+      completeMessage:
+        "Complete this session? You can reopen it later from history.",
       completing: "Completing…",
       reopenButton: "Reopen",
       progress: "{checked} of {total}",
@@ -140,7 +141,8 @@ export const translations = {
       declineButton: "Decline",
       invitedBy: "Invited by {name}",
       noInvites: "No invites",
-      noInvitesHint: "When someone invites you to a family, you'll find it here",
+      noInvitesHint:
+        "When someone invites you to a family, you'll find it here",
       inviteCountSingle: "1 invite",
       inviteCount: "{count} invites",
       pendingFrom: "Pending since",
@@ -157,9 +159,28 @@ export const translations = {
       themeLabel: "Theme",
       languageLabel: "Language",
       manageFamilies: "Manage Families",
+      manageCategories: "Manage Categories",
       invitations: "Invitations",
       signOut: "Sign Out",
       editName: "Edit name",
+    },
+
+    // Categories page
+    categories: {
+      title: "Categories",
+      subtitle: "Customize your shopping categories",
+      noCategories: "No categories yet",
+      noCategoriesHint: "Tap + to add your first category",
+      addCategory: "Add Category",
+      editCategory: "Edit Category",
+      nameLabel: "Category name",
+      namePlaceholder: "e.g. Fruits & Vegetables",
+      emojiLabel: "Emoji",
+      nameRequired: "Name is required",
+      deleteConfirm: "Delete this category? Items will become uncategorized.",
+      reorderHint: "Drag to reorder",
+      initializeButton: "Initialize My Categories",
+      initializeHint: "Copy default categories to customize them",
     },
 
     // Theme
@@ -338,7 +359,8 @@ export const translations = {
       declineButton: "Rifiuta",
       invitedBy: "Invitato da {name}",
       noInvites: "Nessun invito",
-      noInvitesHint: "Quando qualcuno ti invita in una famiglia, lo troverai qui",
+      noInvitesHint:
+        "Quando qualcuno ti invita in una famiglia, lo troverai qui",
       inviteCountSingle: "1 invito",
       inviteCount: "{count} inviti",
       pendingFrom: "In attesa dal",
@@ -355,9 +377,28 @@ export const translations = {
       themeLabel: "Tema",
       languageLabel: "Lingua",
       manageFamilies: "Gestisci Famiglie",
+      manageCategories: "Gestisci Categorie",
       invitations: "Inviti",
       signOut: "Esci",
       editName: "Modifica nome",
+    },
+
+    // Categories page
+    categories: {
+      title: "Categorie",
+      subtitle: "Personalizza le tue categorie di spesa",
+      noCategories: "Nessuna categoria",
+      noCategoriesHint: "Tocca + per aggiungere la prima categoria",
+      addCategory: "Aggiungi Categoria",
+      editCategory: "Modifica Categoria",
+      nameLabel: "Nome categoria",
+      namePlaceholder: "es. Frutta e Verdura",
+      emojiLabel: "Emoji",
+      nameRequired: "Il nome è obbligatorio",
+      deleteConfirm: "Eliminare questa categoria? Gli articoli diventeranno senza categoria.",
+      reorderHint: "Trascina per riordinare",
+      initializeButton: "Inizializza le Mie Categorie",
+      initializeHint: "Copia le categorie predefinite per personalizzarle",
     },
 
     // Theme

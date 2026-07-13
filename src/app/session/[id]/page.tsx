@@ -18,6 +18,7 @@ interface SessionEntryWithItem extends SessionEntry {
 interface GroupedEntries {
   key: string;
   label: string;
+  emoji?: string;
   sortOrder: number;
   entries: SessionEntryWithItem[];
 }
@@ -34,21 +35,22 @@ export default async function SessionPage({
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const [{ data: session }, { data: entries }, { t, locale }] = await Promise.all([
-    supabase
-      .from("shopping_sessions")
-      .select("*, list:lists(name, visibility, id)")
-      .eq("id", id)
-      .single(),
-    supabase
-      .from("session_entries")
-      .select(
-        "*, list_item:list_items(*, category:categories(id, name, sort_order))",
-      )
-      .eq("session_id", id)
-      .order("list_item(sort_order)"),
-    getServerTranslations(),
-  ]);
+  const [{ data: session }, { data: entries }, { t, locale }] =
+    await Promise.all([
+      supabase
+        .from("shopping_sessions")
+        .select("*, list:lists(name, visibility, id)")
+        .eq("id", id)
+        .single(),
+      supabase
+        .from("session_entries")
+        .select(
+          "*, list_item:list_items(*, category:categories(id, name, emoji, sort_order))",
+        )
+        .eq("session_id", id)
+        .order("list_item(sort_order)"),
+      getServerTranslations(),
+    ]);
 
   if (!session) notFound();
 
@@ -60,10 +62,11 @@ export default async function SessionPage({
     const category = entry.list_item?.category;
     const key = category ? `category-${category.id}` : "category-misc";
     const label = category?.name ?? t("listDetail.miscCategory");
+    const emoji = category?.emoji;
     const sortOrder = category?.sort_order ?? Number.MAX_SAFE_INTEGER;
 
     if (!groupedEntries.has(key)) {
-      groupedEntries.set(key, { key, label, sortOrder, entries: [] });
+      groupedEntries.set(key, { key, label, emoji, sortOrder, entries: [] });
     }
 
     groupedEntries.get(key)!.entries.push(entry);
@@ -136,14 +139,22 @@ export default async function SessionPage({
         ) : (
           <div className="page-stack">
             {orderedGroups.map((group) => {
-              const groupChecked = group.entries.filter((e) => e.checked).length;
+              const groupChecked = group.entries.filter(
+                (e) => e.checked,
+              ).length;
               return (
                 <section
                   key={group.key}
-                  className={groupChecked === group.entries.length && group.entries.length > 0 ? "opacity-50" : ""}
+                  className={
+                    groupChecked === group.entries.length &&
+                    group.entries.length > 0
+                      ? "opacity-50"
+                      : ""
+                  }
                 >
                   <CategoryHeader
                     name={group.label}
+                    emoji={group.emoji}
                     count={group.entries.length}
                   />
                   <div className="space-y-2">

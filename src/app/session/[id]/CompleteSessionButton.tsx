@@ -24,11 +24,7 @@ export default function CompleteSessionButton({
       try {
         await completeSession(sessionId);
       } catch (err) {
-        setError(
-          err instanceof Error
-            ? err.message
-            : t("error"),
-        );
+        setError(err instanceof Error ? err.message : t("error"));
       } finally {
         setConfirmOpen(false);
       }

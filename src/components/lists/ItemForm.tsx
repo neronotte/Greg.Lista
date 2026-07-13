@@ -122,7 +122,7 @@ export default function ItemForm({
           <option value="auto">{t("itemForm.selectCategory")}</option>
           {categories.map((c) => (
             <option key={c.id} value={c.name}>
-              {c.name}
+              {c.emoji} {c.name}
             </option>
           ))}
         </select>
@@ -149,7 +149,11 @@ export default function ItemForm({
         className="w-full mt-1 py-4 bg-brand-mid text-white rounded-2xl font-extrabold text-sm active:scale-[0.98] transition-transform"
         style={{ boxShadow: "0 4px 16px rgba(61,122,86,0.32)" }}
       >
-        {pending ? t("saving") : initial ? t("itemForm.saveButton") : t("itemForm.addButton")}
+        {pending
+          ? t("saving")
+          : initial
+            ? t("itemForm.saveButton")
+            : t("itemForm.addButton")}
       </button>
     </form>
   );

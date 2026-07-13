@@ -36,7 +36,9 @@ export interface FamilyInvite {
 export interface Category {
   id: number;
   name: string;
+  emoji: string;
   sort_order: number;
+  owner_id?: string | null;
 }
 
 export interface List {

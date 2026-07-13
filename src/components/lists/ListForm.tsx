@@ -156,7 +156,9 @@ export default function ListForm({
                   : "border-border text-text-secondary"
               }`}
             >
-              {v === "private" ? `🔒 ${t("listForm.personal")}` : `👥 ${t("listForm.familyLabel")}`}
+              {v === "private"
+                ? `🔒 ${t("listForm.personal")}`
+                : `👥 ${t("listForm.familyLabel")}`}
             </button>
           ))}
         </div>
@@ -190,7 +192,11 @@ export default function ListForm({
         className="w-full py-4 bg-brand-mid text-white rounded-2xl font-extrabold text-sm active:scale-[0.98] transition-transform mt-1"
         style={{ boxShadow: "0 4px 16px rgba(61,122,86,0.32)" }}
       >
-        {pending ? t("saving") : initial ? t("listForm.saveButton") : t("listForm.createButton")}
+        {pending
+          ? t("saving")
+          : initial
+            ? t("listForm.saveButton")
+            : t("listForm.createButton")}
       </button>
     </form>
   );

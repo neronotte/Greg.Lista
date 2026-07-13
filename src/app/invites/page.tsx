@@ -46,39 +46,44 @@ export default async function InvitesPage() {
                 : t("invite.inviteCount", { count: pendingInvites.length })}
             </p>
             <div className="space-y-3">
-            {pendingInvites.map((invite) => {
-              const family = (
-                Array.isArray(invite.family) ? invite.family[0] : invite.family
-              ) as { name: string } | null;
+              {pendingInvites.map((invite) => {
+                const family = (
+                  Array.isArray(invite.family)
+                    ? invite.family[0]
+                    : invite.family
+                ) as { name: string } | null;
 
-              return (
-                <Link
-                  key={invite.id}
-                  href={`/invite/${invite.token}`}
-                  className="surface-card flex items-center gap-3 p-4"
-                >
-                  <span className="surface-icon">
-                    <Users size={18} className="shrink-0" />
-                  </span>
-                  <div className="flex-1 min-w-0">
-                    <p className="truncate text-base font-extrabold text-text-primary">
-                      {family?.name ?? "Famiglia"}
-                    </p>
-                    <p className="text-sm text-text-secondary">
-                      {t("invite.pendingFrom")}{" "}
-                      {new Date(invite.created_at).toLocaleDateString(locale === "it" ? "it-IT" : "en-US", {
-                        day: "numeric",
-                        month: "short",
-                      })}
-                    </p>
-                  </div>
-                  <ChevronRight
-                    size={16}
-                    className="text-text-disabled shrink-0"
-                  />
-                </Link>
-              );
-            })}
+                return (
+                  <Link
+                    key={invite.id}
+                    href={`/invite/${invite.token}`}
+                    className="surface-card flex items-center gap-3 p-4"
+                  >
+                    <span className="surface-icon">
+                      <Users size={18} className="shrink-0" />
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <p className="truncate text-base font-extrabold text-text-primary">
+                        {family?.name ?? "Famiglia"}
+                      </p>
+                      <p className="text-sm text-text-secondary">
+                        {t("invite.pendingFrom")}{" "}
+                        {new Date(invite.created_at).toLocaleDateString(
+                          locale === "it" ? "it-IT" : "en-US",
+                          {
+                            day: "numeric",
+                            month: "short",
+                          },
+                        )}
+                      </p>
+                    </div>
+                    <ChevronRight
+                      size={16}
+                      className="text-text-disabled shrink-0"
+                    />
+                  </Link>
+                );
+              })}
             </div>
           </section>
         )}

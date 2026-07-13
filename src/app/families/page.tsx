@@ -10,7 +10,10 @@ import { Users, ChevronRight, Crown } from "lucide-react";
 
 type MembershipRow = {
   role: string;
-  families: { id: string; name: string }[] | { id: string; name: string } | null;
+  families:
+    | { id: string; name: string }[]
+    | { id: string; name: string }
+    | null;
 };
 
 export default async function FamiliesPage() {
@@ -43,13 +46,18 @@ export default async function FamiliesPage() {
     <div className="app-shell">
       {/* Header */}
       <div className="shrink-0 px-5 pt-2 pb-4">
-        <h1 className="text-[26px] font-black text-text-primary leading-tight">{t("families.title")}</h1>
+        <h1 className="text-[26px] font-black text-text-primary leading-tight">
+          {t("families.title")}
+        </h1>
         <p className="text-sm font-medium text-text-secondary">
           {families.length === 0
             ? t("families.noFamilies")
             : families.length === 1
               ? t("families.groupCountSingle")
-              : t("families.groupCount").replace("{count}", String(families.length))}
+              : t("families.groupCount").replace(
+                  "{count}",
+                  String(families.length),
+                )}
         </p>
       </div>
 
@@ -78,7 +86,9 @@ export default async function FamiliesPage() {
                         {family.name.slice(0, 2).toUpperCase()}
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="font-bold text-sm text-text-primary">{family.name}</p>
+                        <p className="font-bold text-sm text-text-primary">
+                          {family.name}
+                        </p>
                         <div className="flex items-center gap-1 mt-0.5">
                           {role === "owner" ? (
                             <span className="inline-flex items-center gap-1 text-[10px] font-extrabold px-1.5 py-0.5 rounded-full bg-brand-mid/10 text-brand-mid">
@@ -91,7 +101,10 @@ export default async function FamiliesPage() {
                           )}
                         </div>
                       </div>
-                      <ChevronRight size={18} className="text-text-secondary shrink-0" />
+                      <ChevronRight
+                        size={18}
+                        className="text-text-secondary shrink-0"
+                      />
                     </div>
                   </Link>
                 ),
