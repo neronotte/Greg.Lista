@@ -15,6 +15,7 @@ coverage
 test/.auth/
 test/playwright-report/
 test/test-results/
+.playwright-mcp/
 
 # next.js
 .next/
