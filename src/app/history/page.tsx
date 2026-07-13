@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { getNavCounts } from "@/lib/nav-counts";
+import { getServerTranslations } from "@/lib/i18n/server";
 import BottomNav from "@/components/ui/BottomNav";
 import EmptyState from "@/components/ui/EmptyState";
 import Link from "next/link";
@@ -13,7 +14,7 @@ export default async function HistoryPage() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const [{ data: sessions }, navCounts] = await Promise.all([
+  const [{ data: sessions }, navCounts, { t, locale }] = await Promise.all([
     supabase
       .from("shopping_sessions")
       .select(
@@ -26,6 +27,7 @@ export default async function HistoryPage() {
       )
       .order("started_at", { ascending: false }),
     getNavCounts(),
+    getServerTranslations(),
   ]);
 
   const sessionList = sessions ?? [];
@@ -36,16 +38,16 @@ export default async function HistoryPage() {
     <div className="app-shell">
       {/* Header */}
       <div className="shrink-0 px-5 pt-2 pb-4">
-        <h1 className="text-[26px] font-black text-text-primary leading-tight">Sessions</h1>
-        <p className="text-sm font-medium text-text-secondary">Your shopping history</p>
+        <h1 className="text-[26px] font-black text-text-primary leading-tight">{t("history.title")}</h1>
+        <p className="text-sm font-medium text-text-secondary">{t("history.subtitle")}</p>
       </div>
 
       <main className="page-body">
         {sessionList.length === 0 ? (
           <EmptyState
             icon={<ShoppingBag size={48} />}
-            title="No sessions yet"
-            subtitle="Start a shopping session from a list"
+            title={t("history.noSessions")}
+            subtitle={t("history.noSessionsHint")}
           />
         ) : (
           <div className="page-stack">
@@ -53,21 +55,21 @@ export default async function HistoryPage() {
               <section>
                 <div className="section-caption">
                   <span className="inline-block h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-                  Active & Paused
+                  {t("history.activeSection")}
                 </div>
                 <div className="space-y-3">
                   {active.map((s) => (
-                    <SessionCard key={s.id} session={s} />
+                    <SessionCard key={s.id} session={s} locale={locale} activeLabel={t("session.active")} completedLabel={t("session.completed")} />
                   ))}
                 </div>
               </section>
             )}
             {completed.length > 0 && (
               <section>
-                <div className="section-caption">Completed</div>
+                <div className="section-caption">{t("history.completedSection")}</div>
                 <div className="space-y-3">
                   {completed.map((s) => (
-                    <SessionCard key={s.id} session={s} />
+                    <SessionCard key={s.id} session={s} locale={locale} activeLabel={t("session.active")} completedLabel={t("session.completed")} />
                   ))}
                 </div>
               </section>
@@ -85,9 +87,9 @@ export default async function HistoryPage() {
   );
 }
 
-function SessionCard({ session }: { session: { id: string; supermarket?: string | null; started_at: string; completed_at?: string | null; list?: { name: string } | null } }) {
+function SessionCard({ session, locale, activeLabel, completedLabel }: { session: { id: string; supermarket?: string | null; started_at: string; completed_at?: string | null; list?: { name: string } | null }; locale: string; activeLabel: string; completedLabel: string }) {
   const isCompleted = !!session.completed_at;
-  const date = new Date(session.started_at).toLocaleDateString("en-US", {
+  const date = new Date(session.started_at).toLocaleDateString(locale === "it" ? "it-IT" : "en-US", {
     month: "short",
     day: "numeric",
     hour: "2-digit",
@@ -113,7 +115,7 @@ function SessionCard({ session }: { session: { id: string; supermarket?: string 
                   : "bg-green-100 text-green-700"
               }`}
             >
-              {isCompleted ? "Completed" : "Active"}
+              {isCompleted ? completedLabel : activeLabel}
             </span>
           </div>
           {session.supermarket && (

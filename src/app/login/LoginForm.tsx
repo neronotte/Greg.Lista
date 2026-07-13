@@ -1,9 +1,11 @@
 'use client'
 
 import { createClient } from '@/lib/supabase/client'
+import { useT } from '@/lib/i18n'
 
 export default function LoginForm() {
   const supabase = createClient()
+  const t = useT()
 
   async function signInWithGoogle() {
     await supabase.auth.signInWithOAuth({
@@ -21,7 +23,7 @@ export default function LoginForm() {
       style={{ boxShadow: '0 10px 30px rgba(44,36,32,0.06)' }}
     >
       <GoogleIcon />
-      Sign in with Google
+      {t("login.continueWithGoogle")}
     </button>
   )
 }

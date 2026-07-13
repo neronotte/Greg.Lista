@@ -1,0 +1,64 @@
+- generic:
+  - generic [active]:
+    - generic [ref=f53e3]:
+      - generic [ref=f53e4]:
+        - navigation [ref=f53e6]:
+          - button [disabled] [ref=f53e7]:
+            - img "previous" [ref=f53e8]
+          - generic [ref=f53e10]:
+            - generic [ref=f53e11]: 1/
+            - text: "1"
+          - button [disabled] [ref=f53e12]:
+            - img "next" [ref=f53e13]
+        - generic [ref=f53e16]:
+          - generic "Latest available version is detected (16.2.10)." [ref=f53e19]: Next.js 16.2.10
+          - generic [ref=f53e20]: Turbopack
+      - dialog "Build Error" [ref=f53e22]:
+        - generic [ref=f53e25]:
+          - generic [ref=f53e26]:
+            - generic [ref=f53e27]:
+              - generic [ref=f53e28]: Build Error
+              - generic [ref=f53e30]:
+                - button "Copy Error Info" [ref=f53e31] [cursor=pointer]
+                - link "Go to related documentation" [ref=f53e34] [cursor=pointer]:
+                  - /url: https://nextjs.org/docs/app/building-your-application/rendering/server-components
+                - button "Attach Node.js inspector" [ref=f53e37] [cursor=pointer]
+            - generic [ref=f53e46]: You're importing a module that depends on "next/headers". This API is only available in Server Components in the App Router, but you are using it in the Pages Router.
+          - generic [ref=f53e49]:
+            - generic [ref=f53e51]:
+              - generic [ref=f53e57]: ./lib/supabase/server.ts (2:1)
+              - button "Open in editor" [ref=f53e58] [cursor=pointer]
+            - generic [ref=f53e63]:
+              - generic [ref=f53e64]:
+                - text: "You're importing a module that depends on \"next/headers\". This API is only available in Server Components in the App Router, but you are using it in the Pages Router. Learn more:"
+                - link "https://nextjs.org/docs/app/building-your-application/rendering/server-components" [ref=f53e65] [cursor=pointer]:
+                  - /url: https://nextjs.org/docs/app/building-your-application/rendering/server-components
+              - generic [ref=f53e66]: 1 |
+              - text: import
+              - generic [ref=f53e67]: "{ createServerClient }"
+              - text: from '@supabase/ssr' >
+              - generic [ref=f53e68]: 2 |
+              - text: import
+              - generic [ref=f53e69]: "{ cookies }"
+              - text: from 'next/headers'
+              - generic [ref=f53e70]: "|"
+              - text: ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              - generic [ref=f53e71]: 3 |
+              - generic [ref=f53e72]: 4 |
+              - text: export async function
+              - generic [ref=f53e73]: "createClient() {"
+              - generic [ref=f53e74]: 5 |
+              - text: const
+              - generic [ref=f53e75]: cookieStore =
+              - text: await
+              - generic [ref=f53e76]: "cookies() Ecmascript file had an error Import traces: #1 [Server Component]: ./lib/supabase/server.ts ./app/layout.tsx #2 [Server Component]: ./lib/supabase/server.ts ./app/login/page.tsx #3 [Server Component]: ./lib/supabase/server.ts ./lib/actions/profile.ts #4 [Client Component Browser]: ./lib/supabase/server.ts [Client Component Browser] ./lib/i18n/server.ts [Client Component Browser] ./lib/i18n/index.ts [Client Component Browser] ./app/login/LoginForm.tsx [Client Component Browser] ./app/login/LoginForm.tsx [Server Component] ./app/login/page.tsx [Server Component] #5 [Client Component SSR]: ./lib/supabase/server.ts [Client Component SSR] ./lib/i18n/server.ts [Client Component SSR] ./lib/i18n/index.ts [Client Component SSR] ./app/login/LoginForm.tsx [Client Component SSR] ./app/login/LoginForm.tsx [Server Component] ./app/login/page.tsx [Server Component]"
+        - generic [ref=f53e77]: "1"
+        - generic [ref=f53e78]: "2"
+    - generic [ref=f53e83] [cursor=pointer]:
+      - button "Open Next.js Dev Tools" [ref=f53e84]
+      - button "Open issues overlay" [ref=f53e89]:
+        - generic [ref=f53e90]:
+          - generic [ref=f53e91]: "0"
+          - generic [ref=f53e92]: "1"
+        - generic [ref=f53e93]: Issue
+  - alert [ref=f53e94]

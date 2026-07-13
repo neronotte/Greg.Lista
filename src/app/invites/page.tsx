@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { getNavCounts } from "@/lib/nav-counts";
+import { getServerTranslations } from "@/lib/i18n/server";
 import AppBar from "@/components/ui/AppBar";
 import BottomNav from "@/components/ui/BottomNav";
 import EmptyState from "@/components/ui/EmptyState";
@@ -14,33 +15,35 @@ export default async function InvitesPage() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const [{ data: invites }, navCounts] = await Promise.all([
+  const [{ data: invites }, navCounts, { t, locale }] = await Promise.all([
     supabase
       .from("family_invites")
       .select("id, token, created_at, family:families(name)")
       .eq("status", "pending")
       .order("created_at", { ascending: false }),
     getNavCounts(),
+    getServerTranslations(),
   ]);
 
   const pendingInvites = invites ?? [];
 
   return (
     <div className="app-shell">
-      <AppBar title="Inviti in attesa" backHref="/profile" />
+      <AppBar title={t("invite.pendingInvites")} backHref="/profile" />
 
       <main className="page-body">
         {pendingInvites.length === 0 ? (
           <EmptyState
             icon={<Bell size={64} />}
-            title="Nessun invito"
-            subtitle="Quando qualcuno ti invita in una famiglia, lo troverai qui"
+            title={t("invite.noInvites")}
+            subtitle={t("invite.noInvitesHint")}
           />
         ) : (
           <section>
             <p className="section-caption">
-              {pendingInvites.length}{" "}
-              {pendingInvites.length === 1 ? "invito" : "inviti"}
+              {pendingInvites.length === 1
+                ? t("invite.inviteCountSingle")
+                : t("invite.inviteCount", { count: pendingInvites.length })}
             </p>
             <div className="space-y-3">
             {pendingInvites.map((invite) => {
@@ -62,8 +65,8 @@ export default async function InvitesPage() {
                       {family?.name ?? "Famiglia"}
                     </p>
                     <p className="text-sm text-text-secondary">
-                      In attesa dal{" "}
-                      {new Date(invite.created_at).toLocaleDateString("it-IT", {
+                      {t("invite.pendingFrom")}{" "}
+                      {new Date(invite.created_at).toLocaleDateString(locale === "it" ? "it-IT" : "en-US", {
                         day: "numeric",
                         month: "short",
                       })}

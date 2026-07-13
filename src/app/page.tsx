@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { getNavCounts } from "@/lib/nav-counts";
+import { getServerTranslations } from "@/lib/i18n/server";
 import BottomNav from "@/components/ui/BottomNav";
 import EmptyState from "@/components/ui/EmptyState";
 import ListCard from "@/components/ui/ListCard";
@@ -25,7 +26,7 @@ export default async function Home() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const [{ data: lists }, { data: families }, navCounts] = await Promise.all([
+  const [{ data: lists }, { data: families }, navCounts, { t }] = await Promise.all([
     supabase
       .from("lists")
       .select(
@@ -42,6 +43,7 @@ export default async function Home() {
       .select("families(id, name)")
       .eq("user_id", user.id),
     getNavCounts(),
+    getServerTranslations(),
   ]);
 
   const myLists = (lists ?? []).filter(
@@ -69,10 +71,10 @@ export default async function Home() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-[26px] font-black text-text-primary leading-tight">
-              My Lists
+              {t("home.title")}
             </h1>
             <p className="text-sm font-medium text-text-secondary">
-              Hello, {firstName} 👋
+              {t("home.greeting", { name: firstName })}
             </p>
           </div>
           <Link href="/profile" className="block">
@@ -90,8 +92,8 @@ export default async function Home() {
         {myLists.length === 0 && familyLists.length === 0 ? (
           <EmptyState
             icon={<ShoppingCart size={48} />}
-            title="No lists yet"
-            subtitle="Tap + to create your first shopping list"
+            title={t("home.noLists")}
+            subtitle={t("home.noListsHint")}
           />
         ) : (
           <div className="page-stack">
@@ -99,7 +101,7 @@ export default async function Home() {
               <section>
                 <div className="section-caption">
                   <Users size={12} />
-                  Family
+                  {t("home.familySection")}
                 </div>
                 <div className="space-y-3">
                   {familyLists.map((l) => (
@@ -131,7 +133,7 @@ export default async function Home() {
               <section>
                 <div className="section-caption">
                   <Lock size={12} />
-                  Personal
+                  {t("home.personalSection")}
                 </div>
                 <div className="space-y-3">
                   {myLists.map((l) => (

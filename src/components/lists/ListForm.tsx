@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { createList, updateList } from "@/lib/actions/lists";
+import { useT } from "@/lib/i18n";
 import type { Visibility } from "@/lib/types";
 
 const EMOJI_OPTIONS = [
@@ -58,6 +59,7 @@ export default function ListForm({
   onDone,
 }: ListFormProps) {
   const router = useRouter();
+  const t = useT();
   const [name, setName] = useState(initial?.name ?? "");
   const [icon, setIcon] = useState(initial?.icon ?? "🧺");
   const [visibility, setVisibility] = useState<Visibility>(
@@ -70,7 +72,7 @@ export default function ListForm({
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!name.trim()) {
-      setError("Il nome è obbligatorio");
+      setError(t("listForm.nameRequired"));
       return;
     }
     setError(null);
@@ -95,7 +97,7 @@ export default function ListForm({
         router.refresh();
         onDone();
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Errore");
+        setError(err instanceof Error ? err.message : t("error"));
       }
     });
   }
@@ -104,13 +106,13 @@ export default function ListForm({
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <div>
         <label className="mb-1.5 block text-[11px] font-extrabold uppercase tracking-widest text-text-secondary">
-          List name
+          {t("listForm.nameLabel")}
         </label>
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="e.g. Weekly Groceries"
+          placeholder={t("listForm.namePlaceholder")}
           autoFocus
           className="w-full bg-bg-header rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-brand-mid font-medium placeholder:font-normal"
         />
@@ -118,7 +120,7 @@ export default function ListForm({
 
       <div>
         <label className="mb-2 block text-[11px] font-extrabold uppercase tracking-widest text-text-secondary">
-          Icon
+          {t("listForm.iconLabel")}
         </label>
         <div className="grid grid-cols-8 gap-2">
           {EMOJI_OPTIONS.map((emoji) => (
@@ -140,7 +142,7 @@ export default function ListForm({
 
       <div>
         <label className="mb-2 block text-[11px] font-extrabold uppercase tracking-widest text-text-secondary">
-          Visibility
+          {t("listForm.visibilityLabel")}
         </label>
         <div className="flex gap-3">
           {(["private", "family"] as Visibility[]).map((v) => (
@@ -154,7 +156,7 @@ export default function ListForm({
                   : "border-border text-text-secondary"
               }`}
             >
-              {v === "private" ? "🔒 Personal" : "👥 Family"}
+              {v === "private" ? `🔒 ${t("listForm.personal")}` : `👥 ${t("listForm.familyLabel")}`}
             </button>
           ))}
         </div>
@@ -163,14 +165,14 @@ export default function ListForm({
       {visibility === "family" && families.length > 0 && (
         <div>
           <label className="mb-1.5 block text-[11px] font-extrabold uppercase tracking-widest text-text-secondary">
-            Family
+            {t("listForm.familyLabel")}
           </label>
           <select
             value={familyId}
             onChange={(e) => setFamilyId(e.target.value)}
             className="w-full bg-bg-header rounded-xl px-4 py-3 text-sm outline-none appearance-none focus:ring-2 focus:ring-brand-mid font-medium"
           >
-            <option value="">Select family…</option>
+            <option value="">{t("listForm.selectFamily")}</option>
             {families.map((f) => (
               <option key={f.id} value={f.id}>
                 {f.name}
@@ -188,7 +190,7 @@ export default function ListForm({
         className="w-full py-4 bg-brand-mid text-white rounded-2xl font-extrabold text-sm active:scale-[0.98] transition-transform mt-1"
         style={{ boxShadow: "0 4px 16px rgba(61,122,86,0.32)" }}
       >
-        {pending ? "Saving…" : initial ? "Save Changes" : "Create List"}
+        {pending ? t("saving") : initial ? t("listForm.saveButton") : t("listForm.createButton")}
       </button>
     </form>
   );

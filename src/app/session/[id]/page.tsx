@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound, redirect } from "next/navigation";
 import { getNavCounts } from "@/lib/nav-counts";
+import { getServerTranslations } from "@/lib/i18n/server";
 import CheckableItem from "@/components/session/CheckableItem";
 import CategoryHeader from "@/components/ui/CategoryHeader";
 import EmptyState from "@/components/ui/EmptyState";
@@ -33,7 +34,7 @@ export default async function SessionPage({
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const [{ data: session }, { data: entries }] = await Promise.all([
+  const [{ data: session }, { data: entries }, { t, locale }] = await Promise.all([
     supabase
       .from("shopping_sessions")
       .select("*, list:lists(name, visibility, id)")
@@ -46,6 +47,7 @@ export default async function SessionPage({
       )
       .eq("session_id", id)
       .order("list_item(sort_order)"),
+    getServerTranslations(),
   ]);
 
   if (!session) notFound();
@@ -57,7 +59,7 @@ export default async function SessionPage({
   for (const entry of allEntries) {
     const category = entry.list_item?.category;
     const key = category ? `category-${category.id}` : "category-misc";
-    const label = category?.name ?? "Varie";
+    const label = category?.name ?? t("listDetail.miscCategory");
     const sortOrder = category?.sort_order ?? Number.MAX_SAFE_INTEGER;
 
     if (!groupedEntries.has(key)) {
@@ -99,7 +101,7 @@ export default async function SessionPage({
                     : "bg-green-100 text-green-700"
                 }`}
               >
-                {isCompleted ? "Completed" : "Active"}
+                {isCompleted ? t("session.completed") : t("session.active")}
               </span>
             </div>
             {session.supermarket && (
@@ -128,8 +130,8 @@ export default async function SessionPage({
         {allEntries.length === 0 ? (
           <EmptyState
             icon={<ShoppingCart size={48} />}
-            title="Empty session"
-            subtitle="Add items to the list before starting a shopping session."
+            title={t("session.emptyTitle")}
+            subtitle={t("session.emptyHint")}
           />
         ) : (
           <div className="page-stack">
@@ -160,10 +162,11 @@ export default async function SessionPage({
         <div className="shrink-0 px-5 pb-5 pt-3 border-t border-border">
           <div className="flex items-center justify-center gap-2 py-1 mb-3">
             <span className="font-extrabold text-brand-mid text-sm">
-              ✅ Shopping completed ·{" "}
-              {new Date(session.completed_at!).toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
+              {t("session.completedOn", {
+                date: new Date(session.completed_at!).toLocaleDateString(
+                  locale === "it" ? "it-IT" : "en-US",
+                  { month: "short", day: "numeric" },
+                ),
               })}
             </span>
           </div>
@@ -177,7 +180,7 @@ export default async function SessionPage({
               type="submit"
               className="w-full py-3.5 border-2 border-border text-text-primary rounded-2xl font-extrabold text-sm flex items-center justify-center gap-2 active:scale-[0.97] transition-transform"
             >
-              Reopen Session
+              {t("session.reopenButton")}
             </button>
           </form>
         </div>

@@ -4,6 +4,7 @@ import pkg from "../package.json";
 import { Nunito } from "next/font/google";
 import { createClient } from "@/lib/supabase/server";
 import { ThemeProvider } from "@/lib/theme/ThemeProvider";
+import { LocaleProvider, type Locale } from "@/lib/i18n";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -53,25 +54,54 @@ async function getThemePreference(): Promise<"light" | "dark" | "system"> {
   }
 }
 
+async function getLocalePreference(): Promise<Locale> {
+  try {
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) return "en";
+
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("*")
+      .eq("id", user.id)
+      .single();
+
+    // Handle case where locale column doesn't exist yet
+    const locale = profile?.locale;
+    if (locale === "en" || locale === "it") {
+      return locale;
+    }
+    return "en";
+  } catch {
+    return "en";
+  }
+}
+
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   const theme = await getThemePreference();
+  const locale = await getLocalePreference();
 
   return (
     <html
-      lang="it"
+      lang={locale}
       className={`h-full ${nunito.variable} ${theme !== "system" ? theme : ""}`}
       suppressHydrationWarning
     >
       <link rel="icon" type="image/x-icon" href="favicon.png"></link>
       <body className="min-h-full bg-bg-app antialiased font-sans">
         <ThemeProvider initialTheme={theme}>
-          <div className="flex min-h-full w-full flex-col bg-bg-app">
-            {children}
-          </div>
+          <LocaleProvider initialLocale={locale}>
+            <div className="flex min-h-full w-full flex-col bg-bg-app">
+              {children}
+            </div>
+          </LocaleProvider>
         </ThemeProvider>
       </body>
     </html>

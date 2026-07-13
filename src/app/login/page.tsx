@@ -1,5 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
+import { getServerTranslations } from '@/lib/i18n/server'
 import LoginForm from './LoginForm'
 
 export default async function LoginPage({
@@ -12,7 +13,10 @@ export default async function LoginPage({
 
   if (user) redirect('/')
 
-  const { error } = await searchParams
+  const [{ error }, { t }] = await Promise.all([
+    searchParams,
+    getServerTranslations(),
+  ])
 
   return (
     <div className="app-shell items-center justify-center px-5">
@@ -23,13 +27,13 @@ export default async function LoginPage({
                  style={{ boxShadow: "0 6px 24px rgba(61,122,86,0.42)" }}>
               L@
             </div>
-            <h1 className="text-4xl font-black text-text-primary">List@</h1>
-            <p className="mt-2 text-base text-text-secondary font-medium">Your shopping list</p>
+            <h1 className="text-4xl font-black text-text-primary">{t("login.title")}</h1>
+            <p className="mt-2 text-base text-text-secondary font-medium">{t("login.subtitle")}</p>
           </div>
 
           {error && (
             <p className="mb-6 w-full rounded-2xl bg-brand-accent/10 px-4 py-3 text-center text-sm text-brand-accent">
-              Sign in failed. Please try again.
+              {t("login.signInFailed")}
             </p>
           )}
 

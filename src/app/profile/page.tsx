@@ -1,11 +1,13 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { getNavCounts } from "@/lib/nav-counts";
+import { getServerTranslations } from "@/lib/i18n/server";
 import BottomNav from "@/components/ui/BottomNav";
 import Avatar from "@/components/ui/Avatar";
 import ProfileEditForm from "./ProfileEditForm";
 import SignOutButton from "./SignOutButton";
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import { LocaleToggle } from "@/components/ui/LocaleToggle";
 import Link from "next/link";
 import { Bell, ChevronLeft, Crown, Users } from "lucide-react";
 
@@ -24,7 +26,7 @@ export default async function ProfilePage() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const [{ data: profile }, { data: families }, { data: invites }, navCounts] =
+  const [{ data: profile }, { data: families }, { data: invites }, navCounts, { t }] =
     await Promise.all([
       supabase.from("profiles").select("*").eq("id", user.id).single(),
       supabase
@@ -36,6 +38,7 @@ export default async function ProfilePage() {
         .select("*, family:families(name)")
         .eq("status", "pending"),
       getNavCounts(),
+      getServerTranslations(),
     ]);
 
   const displayName =
@@ -52,7 +55,7 @@ export default async function ProfilePage() {
       {/* Header */}
       <div className="shrink-0 px-5 pt-2 pb-4">
         <h1 className="text-[26px] font-black text-text-primary leading-tight">
-          Profile
+          {t("profile.title")}
         </h1>
       </div>
 
@@ -81,7 +84,7 @@ export default async function ProfilePage() {
 
           {/* Account section */}
           <section>
-            <p className="section-caption">Account</p>
+            <p className="section-caption">{t("profile.accountSection")}</p>
             <div className="bg-bg-surface rounded-2xl border border-border overflow-hidden">
               <div className="px-4 py-3.5 border-b border-border">
                 <ProfileEditForm currentName={displayName} />
@@ -95,10 +98,10 @@ export default async function ProfilePage() {
                     <Bell size={16} className="text-text-secondary" />
                     <div>
                       <p className="text-sm font-semibold text-text-primary">
-                        Pending Invites
+                        {t("invite.pendingInvites")}
                       </p>
                       <p className="text-xs text-text-secondary">
-                        {(invites ?? []).length} to review
+                        {t("invite.toReview", { count: (invites ?? []).length })}
                       </p>
                     </div>
                   </div>
@@ -119,7 +122,7 @@ export default async function ProfilePage() {
           {/* Families section */}
           {profileFamilies.length > 0 && (
             <section>
-              <p className="section-caption">My Families</p>
+              <p className="section-caption">{t("profile.familiesSection")}</p>
               <div className="bg-bg-surface rounded-2xl border border-border overflow-hidden">
                 {profileFamilies.map(({ role, family }, i) => (
                   <Link
@@ -135,7 +138,7 @@ export default async function ProfilePage() {
                         </p>
                         {role === "owner" && (
                           <span className="inline-flex items-center gap-0.5 text-[10px] font-extrabold text-brand-mid">
-                            <Crown size={9} /> Admin
+                            <Crown size={9} /> {t("families.admin")}
                           </span>
                         )}
                       </div>
@@ -152,20 +155,26 @@ export default async function ProfilePage() {
 
           {/* App section */}
           <section>
-            <p className="section-caption">Settings</p>
+            <p className="section-caption">{t("profile.settingsSection")}</p>
             <div className="bg-bg-surface rounded-2xl border border-border overflow-hidden">
               <div className="flex items-center justify-between px-4 py-3.5 border-b border-border">
                 <span className="text-sm font-semibold text-text-primary">
-                  Theme
+                  {t("profile.themeLabel")}
                 </span>
                 <ThemeToggle />
+              </div>
+              <div className="flex items-center justify-between px-4 py-3.5 border-b border-border">
+                <span className="text-sm font-semibold text-text-primary">
+                  {t("profile.languageLabel")}
+                </span>
+                <LocaleToggle />
               </div>
               <Link
                 href="/families"
                 className="flex items-center justify-between px-4 py-3.5 active:bg-bg-header border-b border-border"
               >
                 <span className="text-sm font-semibold text-text-primary">
-                  Manage Families
+                  {t("profile.manageFamilies")}
                 </span>
                 <ChevronLeft
                   size={16}
@@ -177,7 +186,7 @@ export default async function ProfilePage() {
                 className="flex items-center justify-between px-4 py-3.5 active:bg-bg-header"
               >
                 <span className="text-sm font-semibold text-text-primary">
-                  Invitations
+                  {t("profile.invitations")}
                 </span>
                 <ChevronLeft
                   size={16}

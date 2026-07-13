@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { addItem, updateItem } from "@/lib/actions/items";
+import { useT } from "@/lib/i18n";
 import type { Category } from "@/lib/types";
 
 interface ItemFormProps {
@@ -26,6 +27,7 @@ export default function ItemForm({
   onDone,
 }: ItemFormProps) {
   const router = useRouter();
+  const t = useT();
   const [name, setName] = useState(initial?.name ?? "");
   const [quantity, setQuantity] = useState(initial?.quantity ?? "");
   const [unit, setUnit] = useState(initial?.unit ?? "");
@@ -39,7 +41,7 @@ export default function ItemForm({
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!name.trim()) {
-      setError("Il nome è obbligatorio");
+      setError(t("itemForm.nameRequired"));
       return;
     }
     setError(null);
@@ -60,7 +62,7 @@ export default function ItemForm({
         router.refresh();
         onDone();
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Errore");
+        setError(err instanceof Error ? err.message : t("error"));
       }
     });
   }
@@ -69,13 +71,13 @@ export default function ItemForm({
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <div>
         <label className="mb-1.5 block text-[11px] font-extrabold uppercase tracking-widest text-text-secondary">
-          Item name *
+          {t("itemForm.nameLabel")} *
         </label>
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="e.g. Organic Apples"
+          placeholder={t("itemForm.namePlaceholder")}
           autoFocus
           className="w-full bg-bg-header rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-brand-mid font-medium placeholder:font-normal"
         />
@@ -84,25 +86,25 @@ export default function ItemForm({
       <div className="flex gap-3">
         <div className="flex-1">
           <label className="mb-1.5 block text-[11px] font-extrabold uppercase tracking-widest text-text-secondary">
-            Quantity
+            {t("itemForm.quantityLabel")}
           </label>
           <input
             type="text"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
-            placeholder="500"
+            placeholder={t("itemForm.quantityPlaceholder")}
             className="w-full bg-bg-header rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-brand-mid font-medium"
           />
         </div>
         <div className="w-24">
           <label className="mb-1.5 block text-[11px] font-extrabold uppercase tracking-widest text-text-secondary">
-            Unit
+            {t("itemForm.unitLabel")}
           </label>
           <input
             type="text"
             value={unit}
             onChange={(e) => setUnit(e.target.value)}
-            placeholder="g, L, pcs"
+            placeholder={t("itemForm.unitPlaceholder")}
             className="w-full bg-bg-header rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-brand-mid font-medium"
           />
         </div>
@@ -110,14 +112,14 @@ export default function ItemForm({
 
       <div>
         <label className="mb-1.5 block text-[11px] font-extrabold uppercase tracking-widest text-text-secondary">
-          Category
+          {t("itemForm.categoryLabel")}
         </label>
         <select
           value={categoryName}
           onChange={(e) => setCategoryName(e.target.value)}
           className="w-full bg-bg-header rounded-xl px-4 py-3 text-sm outline-none appearance-none focus:ring-2 focus:ring-brand-mid font-medium"
         >
-          <option value="auto">Auto (suggested)</option>
+          <option value="auto">{t("itemForm.selectCategory")}</option>
           {categories.map((c) => (
             <option key={c.id} value={c.name}>
               {c.name}
@@ -128,13 +130,13 @@ export default function ItemForm({
 
       <div>
         <label className="mb-1.5 block text-[11px] font-extrabold uppercase tracking-widest text-text-secondary">
-          Note (optional)
+          {t("itemForm.notesLabel")}
         </label>
         <input
           type="text"
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
-          placeholder="Brand, details…"
+          placeholder={t("itemForm.notesPlaceholder")}
           className="w-full bg-bg-header rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-brand-mid placeholder:font-normal"
         />
       </div>
@@ -147,7 +149,7 @@ export default function ItemForm({
         className="w-full mt-1 py-4 bg-brand-mid text-white rounded-2xl font-extrabold text-sm active:scale-[0.98] transition-transform"
         style={{ boxShadow: "0 4px 16px rgba(61,122,86,0.32)" }}
       >
-        {pending ? "Saving…" : initial ? "Save Changes" : "Add to List"}
+        {pending ? t("saving") : initial ? t("itemForm.saveButton") : t("itemForm.addButton")}
       </button>
     </form>
   );

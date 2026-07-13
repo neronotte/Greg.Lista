@@ -5,7 +5,7 @@ import Skeleton from "@/components/ui/Skeleton";
 export default function Loading() {
   return (
     <div className="min-h-screen flex flex-col bg-bg-app">
-      <AppBar title="Inviti in attesa" backHref="/profile" />
+      <AppBar title="Pending Invites" backHref="/profile" />
 
       <main className="flex-1 overflow-y-auto">
         <section className="mt-4 bg-bg-surface border-y border-border">

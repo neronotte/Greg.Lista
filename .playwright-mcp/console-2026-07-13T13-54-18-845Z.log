@@ -1,0 +1,1323 @@
+[     905ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[    1003ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15305
+[    1051ms] Error: ./lib/supabase/server.ts:2:1
+You're importing a module that depends on "next/headers". This API is only available in Server Components in the App Router, but you are using it in the Pages Router.
+    Learn more: https://nextjs.org/docs/app/building-your-application/rendering/server-components
+  1 | import { createServerClient } from '@supabase/ssr'
+> 2 | import { cookies } from 'next/headers'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 |
+  4 | export async function createClient() {
+  5 |   const cookieStore = await cookies()
+
+Ecmascript file had an error
+
+Import traces:
+  #1 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/layout.tsx
+
+  #2 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/login/page.tsx
+
+  #3 [Server Component]:
+    ./lib/supabase/server.ts
+    ./lib/actions/profile.ts
+
+  #4 [Client Component Browser]:
+    ./lib/supabase/server.ts [Client Component Browser]
+    ./lib/i18n/server.ts [Client Component Browser]
+    ./lib/i18n/index.ts [Client Component Browser]
+    ./app/login/LoginForm.tsx [Client Component Browser]
+    ./app/login/LoginForm.tsx [Server Component]
+    ./app/login/page.tsx [Server Component]
+
+  #5 [Client Component SSR]:
+    ./lib/supabase/server.ts [Client Component SSR]
+    ./lib/i18n/server.ts [Client Component SSR]
+    ./lib/i18n/index.ts [Client Component SSR]
+    ./app/login/LoginForm.tsx [Client Component SSR]
+    ./app/login/LoginForm.tsx [Server Component]
+    ./app/login/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./lib/supabase/server.ts:2:1)
+    at Object.getCompilationErrors (file://C:\Sources\Greg\Greg.Lista\src\node_modules\next\dist\server\dev\hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file://C:\Sources\Greg\Greg.Lista\src\node_modules\next\dist\server\lib\dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file://C:\Sources\Greg\Greg.Lista\src\node_modules\next\dist\server\dev\next-dev-server.js:720:42)
+    at DevServer.findPageComponents (file://C:\Sources\Greg\Greg.Lista\src\node_modules\next\dist\server\dev\next-dev-server.js:690:43)
+    at async DevServer.renderErrorToResponseImpl (file://C:\Sources\Greg\Greg.Lista\src\node_modules\next\dist\server\base-server.js:1753:26)
+[    1052ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1226
+[    1076ms] [ERROR] ./lib/supabase/server.ts:2:1
+You're importing a module that depends on "next/headers". This API is only available in Server Components in the App Router, but you are using it in the Pages Router.
+    Learn more: https://nextjs.org/docs/app/building-your-application/rendering/server-components
+  1 | import { createServerClient } from '@supabase/ssr'
+> 2 | import { cookies } from 'next/headers'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 |
+  4 | export async function createClient() {
+  5 |   const cookieStore = await cookies()
+
+Ecmascript file had an error
+
+Import traces:
+  #1 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/layout.tsx
+
+  #2 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/login/page.tsx
+
+  #3 [Server Component]:
+    ./lib/supabase/server.ts
+    ./lib/actions/profile.ts
+
+  #4 [Client Component Browser]:
+    ./lib/supabase/server.ts [Client Component Browser]
+    ./lib/i18n/server.ts [Client Component Browser]
+    ./lib/i18n/index.ts [Client Component Browser]
+    ./app/login/LoginForm.tsx [Client Component Browser]
+    ./app/login/LoginForm.tsx [Server Component]
+    ./app/login/page.tsx [Server Component]
+
+  #5 [Client Component SSR]:
+    ./lib/supabase/server.ts [Client Component SSR]
+    ./lib/i18n/server.ts [Client Component SSR]
+    ./lib/i18n/index.ts [Client Component SSR]
+    ./app/login/LoginForm.tsx [Client Component SSR]
+    ./app/login/LoginForm.tsx [Server Component]
+    ./app/login/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[    1076ms] [ERROR] ./lib/supabase/server.ts:2:1
+You're importing a module that depends on "next/headers". This API is only available in Server Components in the App Router, but you are using it in the Pages Router.
+    Learn more: https://nextjs.org/docs/app/building-your-application/rendering/server-components
+  1 | import { createServerClient } from '@supabase/ssr'
+> 2 | import { cookies } from 'next/headers'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 |
+  4 | export async function createClient() {
+  5 |   const cookieStore = await cookies()
+
+Ecmascript file had an error
+
+Import traces:
+  #1 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/layout.tsx
+
+  #2 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/page.tsx
+
+  #3 [Server Component]:
+    ./lib/supabase/server.ts
+    ./lib/actions/lists.ts
+
+  #4 [Client Component Browser]:
+    ./lib/supabase/server.ts [Client Component Browser]
+    ./lib/i18n/server.ts [Client Component Browser]
+    ./lib/i18n/index.ts [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/page.tsx [Server Component]
+
+  #5 [Client Component SSR]:
+    ./lib/supabase/server.ts [Client Component SSR]
+    ./lib/i18n/server.ts [Client Component SSR]
+    ./lib/i18n/index.ts [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[    1076ms] [ERROR] ./lib/supabase/server.ts:2:1
+You're importing a module that depends on "next/headers". This API is only available in Server Components in the App Router, but you are using it in the Pages Router.
+    Learn more: https://nextjs.org/docs/app/building-your-application/rendering/server-components
+  1 | import { createServerClient } from '@supabase/ssr'
+> 2 | import { cookies } from 'next/headers'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 |
+  4 | export async function createClient() {
+  5 |   const cookieStore = await cookies()
+
+Ecmascript file had an error
+
+Import traces:
+  #1 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/layout.tsx
+
+  #2 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/lists/[id]/page.tsx
+
+  #3 [Server Component]:
+    ./lib/supabase/server.ts
+    ./lib/actions/lists.ts
+
+  #4 [Client Component Browser]:
+    ./lib/supabase/server.ts [Client Component Browser]
+    ./lib/i18n/server.ts [Client Component Browser]
+    ./lib/i18n/index.ts [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/lists/[id]/loading.tsx [Server Component]
+
+  #5 [Client Component Browser]:
+    ./lib/supabase/server.ts [Client Component Browser]
+    ./lib/i18n/server.ts [Client Component Browser]
+    ./lib/i18n/index.ts [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/lists/loading.tsx [Server Component]
+
+  #6 [Client Component SSR]:
+    ./lib/supabase/server.ts [Client Component SSR]
+    ./lib/i18n/server.ts [Client Component SSR]
+    ./lib/i18n/index.ts [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/lists/[id]/loading.tsx [Server Component]
+
+  #7 [Client Component SSR]:
+    ./lib/supabase/server.ts [Client Component SSR]
+    ./lib/i18n/server.ts [Client Component SSR]
+    ./lib/i18n/index.ts [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/lists/loading.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[    1076ms] [ERROR] ./lib/supabase/server.ts:2:1
+You're importing a module that depends on "next/headers". This API is only available in Server Components in the App Router, but you are using it in the Pages Router.
+    Learn more: https://nextjs.org/docs/app/building-your-application/rendering/server-components
+  1 | import { createServerClient } from '@supabase/ssr'
+> 2 | import { cookies } from 'next/headers'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 |
+  4 | export async function createClient() {
+  5 |   const cookieStore = await cookies()
+
+Ecmascript file had an error
+
+Import traces:
+  #1 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/history/page.tsx
+
+  #2 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/layout.tsx
+
+  #3 [Server Component]:
+    ./lib/supabase/server.ts
+    ./lib/actions/profile.ts
+
+  #4 [Client Component Browser]:
+    ./lib/supabase/server.ts [Client Component Browser]
+    ./lib/i18n/server.ts [Client Component Browser]
+    ./lib/i18n/index.ts [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/history/loading.tsx [Server Component]
+
+  #5 [Client Component Browser]:
+    ./lib/supabase/server.ts [Client Component Browser]
+    ./lib/i18n/server.ts [Client Component Browser]
+    ./lib/i18n/index.ts [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/history/page.tsx [Server Component]
+
+  #6 [Client Component SSR]:
+    ./lib/supabase/server.ts [Client Component SSR]
+    ./lib/i18n/server.ts [Client Component SSR]
+    ./lib/i18n/index.ts [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/history/loading.tsx [Server Component]
+
+  #7 [Client Component SSR]:
+    ./lib/supabase/server.ts [Client Component SSR]
+    ./lib/i18n/server.ts [Client Component SSR]
+    ./lib/i18n/index.ts [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/history/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[    1076ms] [ERROR] ./lib/supabase/server.ts:2:1
+You're importing a module that depends on "next/headers". This API is only available in Server Components in the App Router, but you are using it in the Pages Router.
+    Learn more: https://nextjs.org/docs/app/building-your-application/rendering/server-components
+  1 | import { createServerClient } from '@supabase/ssr'
+> 2 | import { cookies } from 'next/headers'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 |
+  4 | export async function createClient() {
+  5 |   const cookieStore = await cookies()
+
+Ecmascript file had an error
+
+Import traces:
+  #1 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/layout.tsx
+
+  #2 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/profile/page.tsx
+
+  #3 [Server Component]:
+    ./lib/supabase/server.ts
+    ./lib/actions/sessions.ts
+
+  #4 [Client Component Browser]:
+    ./lib/supabase/server.ts [Client Component Browser]
+    ./lib/i18n/server.ts [Client Component Browser]
+    ./lib/i18n/index.ts [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/profile/loading.tsx [Server Component]
+
+  #5 [Client Component Browser]:
+    ./lib/supabase/server.ts [Client Component Browser]
+    ./lib/i18n/server.ts [Client Component Browser]
+    ./lib/i18n/index.ts [Client Component Browser]
+    ./components/ui/LocaleToggle.tsx [Client Component Browser]
+    ./components/ui/LocaleToggle.tsx [Server Component]
+    ./app/profile/page.tsx [Server Component]
+
+  #6 [Client Component SSR]:
+    ./lib/supabase/server.ts [Client Component SSR]
+    ./lib/i18n/server.ts [Client Component SSR]
+    ./lib/i18n/index.ts [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/profile/loading.tsx [Server Component]
+
+  #7 [Client Component SSR]:
+    ./lib/supabase/server.ts [Client Component SSR]
+    ./lib/i18n/server.ts [Client Component SSR]
+    ./lib/i18n/index.ts [Client Component SSR]
+    ./components/ui/LocaleToggle.tsx [Client Component SSR]
+    ./components/ui/LocaleToggle.tsx [Server Component]
+    ./app/profile/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[    1077ms] [ERROR] ./lib/supabase/server.ts:2:1
+You're importing a module that depends on "next/headers". This API is only available in Server Components in the App Router, but you are using it in the Pages Router.
+    Learn more: https://nextjs.org/docs/app/building-your-application/rendering/server-components
+  1 | import { createServerClient } from '@supabase/ssr'
+> 2 | import { cookies } from 'next/headers'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 |
+  4 | export async function createClient() {
+  5 |   const cookieStore = await cookies()
+
+Ecmascript file had an error
+
+Import traces:
+  #1 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/families/page.tsx
+
+  #2 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/layout.tsx
+
+  #3 [Server Component]:
+    ./lib/supabase/server.ts
+    ./lib/actions/families.ts
+
+  #4 [Client Component Browser]:
+    ./lib/supabase/server.ts [Client Component Browser]
+    ./lib/i18n/server.ts [Client Component Browser]
+    ./lib/i18n/index.ts [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/families/loading.tsx [Server Component]
+
+  #5 [Client Component Browser]:
+    ./lib/supabase/server.ts [Client Component Browser]
+    ./lib/i18n/server.ts [Client Component Browser]
+    ./lib/i18n/index.ts [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/families/page.tsx [Server Component]
+
+  #6 [Client Component SSR]:
+    ./lib/supabase/server.ts [Client Component SSR]
+    ./lib/i18n/server.ts [Client Component SSR]
+    ./lib/i18n/index.ts [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/families/loading.tsx [Server Component]
+
+  #7 [Client Component SSR]:
+    ./lib/supabase/server.ts [Client Component SSR]
+    ./lib/i18n/server.ts [Client Component SSR]
+    ./lib/i18n/index.ts [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/families/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[    1077ms] [ERROR] ./lib/supabase/server.ts:2:1
+You're importing a module that depends on "next/headers". This API is only available in Server Components in the App Router, but you are using it in the Pages Router.
+    Learn more: https://nextjs.org/docs/app/building-your-application/rendering/server-components
+  1 | import { createServerClient } from '@supabase/ssr'
+> 2 | import { cookies } from 'next/headers'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 |
+  4 | export async function createClient() {
+  5 |   const cookieStore = await cookies()
+
+Ecmascript file had an error
+
+Import traces:
+  #1 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/layout.tsx
+
+  #2 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/session/[id]/page.tsx
+
+  #3 [Server Component]:
+    ./lib/supabase/server.ts
+    ./lib/actions/profile.ts
+
+  #4 [Client Component Browser]:
+    ./lib/supabase/server.ts [Client Component Browser]
+    ./lib/i18n/server.ts [Client Component Browser]
+    ./lib/i18n/index.ts [Client Component Browser]
+    ./app/session/[id]/CompleteSessionButton.tsx [Client Component Browser]
+    ./app/session/[id]/CompleteSessionButton.tsx [Server Component]
+    ./app/session/[id]/page.tsx [Server Component]
+
+  #5 [Client Component SSR]:
+    ./lib/supabase/server.ts [Client Component SSR]
+    ./lib/i18n/server.ts [Client Component SSR]
+    ./lib/i18n/index.ts [Client Component SSR]
+    ./app/session/[id]/CompleteSessionButton.tsx [Client Component SSR]
+    ./app/session/[id]/CompleteSessionButton.tsx [Server Component]
+    ./app/session/[id]/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[    1077ms] [ERROR] ./lib/supabase/server.ts:2:1
+You're importing a module that depends on "next/headers". This API is only available in Server Components in the App Router, but you are using it in the Pages Router.
+    Learn more: https://nextjs.org/docs/app/building-your-application/rendering/server-components
+  1 | import { createServerClient } from '@supabase/ssr'
+> 2 | import { cookies } from 'next/headers'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 |
+  4 | export async function createClient() {
+  5 |   const cookieStore = await cookies()
+
+Ecmascript file had an error
+
+Import traces:
+  #1 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/invites/page.tsx
+
+  #2 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/layout.tsx
+
+  #3 [Server Component]:
+    ./lib/supabase/server.ts
+    ./lib/actions/profile.ts
+
+  #4 [Client Component Browser]:
+    ./lib/supabase/server.ts [Client Component Browser]
+    ./lib/i18n/server.ts [Client Component Browser]
+    ./lib/i18n/index.ts [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/invites/loading.tsx [Server Component]
+
+  #5 [Client Component Browser]:
+    ./lib/supabase/server.ts [Client Component Browser]
+    ./lib/i18n/server.ts [Client Component Browser]
+    ./lib/i18n/index.ts [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/invites/page.tsx [Server Component]
+
+  #6 [Client Component SSR]:
+    ./lib/supabase/server.ts [Client Component SSR]
+    ./lib/i18n/server.ts [Client Component SSR]
+    ./lib/i18n/index.ts [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/invites/loading.tsx [Server Component]
+
+  #7 [Client Component SSR]:
+    ./lib/supabase/server.ts [Client Component SSR]
+    ./lib/i18n/server.ts [Client Component SSR]
+    ./lib/i18n/index.ts [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/invites/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[    1077ms] [ERROR] ./lib/supabase/server.ts:2:1
+You're importing a module that depends on "next/headers". This API is only available in Server Components in the App Router, but you are using it in the Pages Router.
+    Learn more: https://nextjs.org/docs/app/building-your-application/rendering/server-components
+  1 | import { createServerClient } from '@supabase/ssr'
+> 2 | import { cookies } from 'next/headers'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 |
+  4 | export async function createClient() {
+  5 |   const cookieStore = await cookies()
+
+Ecmascript file had an error
+
+Import traces:
+  #1 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/families/[id]/page.tsx
+
+  #2 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/layout.tsx
+
+  #3 [Server Component]:
+    ./lib/supabase/server.ts
+    ./lib/actions/families.ts
+
+  #4 [Client Component Browser]:
+    ./lib/supabase/server.ts [Client Component Browser]
+    ./lib/i18n/server.ts [Client Component Browser]
+    ./lib/i18n/index.ts [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/families/[id]/page.tsx [Server Component]
+
+  #5 [Client Component Browser]:
+    ./lib/supabase/server.ts [Client Component Browser]
+    ./lib/i18n/server.ts [Client Component Browser]
+    ./lib/i18n/index.ts [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Client Component Browser]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/families/loading.tsx [Server Component]
+
+  #6 [Client Component SSR]:
+    ./lib/supabase/server.ts [Client Component SSR]
+    ./lib/i18n/server.ts [Client Component SSR]
+    ./lib/i18n/index.ts [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/families/[id]/page.tsx [Server Component]
+
+  #7 [Client Component SSR]:
+    ./lib/supabase/server.ts [Client Component SSR]
+    ./lib/i18n/server.ts [Client Component SSR]
+    ./lib/i18n/index.ts [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Client Component SSR]
+    ./components/ui/BottomNav.tsx [Server Component]
+    ./app/families/loading.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[    1128ms] [ERROR] ./lib/supabase/server.ts:2:1
+You're importing a module that depends on "next/headers". This API is only available in Server Components in the App Router, but you are using it in the Pages Router.
+    Learn more: https://nextjs.org/docs/app/building-your-application/rendering/server-components
+  1 | import { createServerClient } from '@supabase/ssr'
+> 2 | import { cookies } from 'next/headers'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 |
+  4 | export async function createClient() {
+  5 |   const cookieStore = await cookies()
+
+Ecmascript file had an error
+
+Import traces:
+  #1 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/layout.tsx
+
+  #2 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/login/page.tsx
+
+  #3 [Server Component]:
+    ./lib/supabase/server.ts
+    ./lib/actions/profile.ts
+
+  #4 [Client Component Browser]:
+    ./lib/supabase/server.ts [Client Component Browser]
+    ./lib/i18n/server.ts [Client Component Browser]
+    ./lib/i18n/index.ts [Client Component Browser]
+    ./app/login/LoginForm.tsx [Client Component Browser]
+    ./app/login/LoginForm.tsx [Server Component]
+    ./app/login/page.tsx [Server Component]
+
+  #5 [Client Component SSR]:
+    ./lib/supabase/server.ts [Client Component SSR]
+    ./lib/i18n/server.ts [Client Component SSR]
+    ./lib/i18n/index.ts [Client Component SSR]
+    ./app/login/LoginForm.tsx [Client Component SSR]
+    ./app/login/LoginForm.tsx [Server Component]
+    ./app/login/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[    1178ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1226
+[   59114ms] [ERROR] ./lib/supabase/server.ts:2:1
+You're importing a module that depends on "next/headers". This API is only available in Server Components in the App Router, but you are using it in the Pages Router.
+    Learn more: https://nextjs.org/docs/app/building-your-application/rendering/server-components
+  1 | import { createServerClient } from '@supabase/ssr'
+> 2 | import { cookies } from 'next/headers'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 |
+  4 | export async function createClient() {
+  5 |   const cookieStore = await cookies()
+
+Ecmascript file had an error
+
+Import traces:
+  #1 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/layout.tsx
+
+  #2 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/login/page.tsx
+
+  #3 [Server Component]:
+    ./lib/supabase/server.ts
+    ./lib/actions/profile.ts
+
+  #4 [Client Component Browser]:
+    ./lib/supabase/server.ts [Client Component Browser]
+    ./lib/i18n/server.ts [Client Component Browser]
+    ./lib/i18n/index.ts [Client Component Browser]
+    ./app/login/LoginForm.tsx [Client Component Browser]
+    ./app/login/LoginForm.tsx [Server Component]
+    ./app/login/page.tsx [Server Component]
+
+  #5 [Client Component SSR]:
+    ./lib/supabase/server.ts [Client Component SSR]
+    ./lib/i18n/server.ts [Client Component SSR]
+    ./lib/i18n/index.ts [Client Component SSR]
+    ./app/login/LoginForm.tsx [Client Component SSR]
+    ./app/login/LoginForm.tsx [Server Component]
+    ./app/login/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[   59231ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1226
+[   59390ms] [ERROR] ./lib/supabase/server.ts:2:1
+You're importing a module that depends on "next/headers". This API is only available in Server Components in the App Router, but you are using it in the Pages Router.
+    Learn more: https://nextjs.org/docs/app/building-your-application/rendering/server-components
+  1 | import { createServerClient } from '@supabase/ssr'
+> 2 | import { cookies } from 'next/headers'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 |
+  4 | export async function createClient() {
+  5 |   const cookieStore = await cookies()
+
+Ecmascript file had an error
+
+Import traces:
+  #1 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/layout.tsx
+
+  #2 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/login/page.tsx
+
+  #3 [Server Component]:
+    ./lib/supabase/server.ts
+    ./lib/actions/profile.ts
+
+  #4 [Client Component Browser]:
+    ./lib/supabase/server.ts [Client Component Browser]
+    ./lib/i18n/server.ts [Client Component Browser]
+    ./lib/i18n/index.ts [Client Component Browser]
+    ./app/login/LoginForm.tsx [Client Component Browser]
+    ./app/login/LoginForm.tsx [Server Component]
+    ./app/login/page.tsx [Server Component]
+
+  #5 [Client Component SSR]:
+    ./lib/supabase/server.ts [Client Component SSR]
+    ./lib/i18n/server.ts [Client Component SSR]
+    ./lib/i18n/index.ts [Client Component SSR]
+    ./app/login/LoginForm.tsx [Client Component SSR]
+    ./app/login/LoginForm.tsx [Server Component]
+    ./app/login/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[   59543ms] [ERROR] ./lib/supabase/server.ts:2:1
+You're importing a module that depends on "next/headers". This API is only available in Server Components in the App Router, but you are using it in the Pages Router.
+    Learn more: https://nextjs.org/docs/app/building-your-application/rendering/server-components
+  1 | import { createServerClient } from '@supabase/ssr'
+> 2 | import { cookies } from 'next/headers'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 |
+  4 | export async function createClient() {
+  5 |   const cookieStore = await cookies()
+
+Ecmascript file had an error
+
+Import traces:
+  #1 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/layout.tsx
+
+  #2 [Server Component]:
+    ./lib/supabase/server.ts
+    ./app/login/page.tsx
+
+  #3 [Server Component]:
+    ./lib/supabase/server.ts
+    ./lib/actions/profile.ts
+
+  #4 [Client Component Browser]:
+    ./lib/supabase/server.ts [Client Component Browser]
+    ./lib/i18n/server.ts [Client Component Browser]
+    ./lib/i18n/index.ts [Client Component Browser]
+    ./app/login/LoginForm.tsx [Client Component Browser]
+    ./app/login/LoginForm.tsx [Server Component]
+    ./app/login/page.tsx [Server Component]
+
+  #5 [Client Component SSR]:
+    ./lib/supabase/server.ts [Client Component SSR]
+    ./lib/i18n/server.ts [Client Component SSR]
+    ./lib/i18n/index.ts [Client Component SSR]
+    ./app/login/LoginForm.tsx [Client Component SSR]
+    ./app/login/LoginForm.tsx [Server Component]
+    ./app/login/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[   59594ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1226
+[  132051ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1226
+[  180208ms] [ERROR] ./app/login/page.tsx:3:1
+Export getServerTranslations doesn't exist in target module
+  1 | import { createClient } from '@/lib/supabase/server'
+  2 | import { redirect } from 'next/navigation'
+> 3 | import { getServerTranslations } from '@/lib/i18n'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import LoginForm from './LoginForm'
+  5 |
+  6 | export default async function LoginPage({
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180209ms] [ERROR] ./app/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import ListCard from "@/components/ui/ListCard";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180209ms] [ERROR] ./app/lists/[id]/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { notFound, redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import CategoryHeader from "@/components/ui/CategoryHeader";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import ListDetailActions from "./ListDetailActions";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180209ms] [ERROR] ./app/history/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import Link from "next/link";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180209ms] [ERROR] ./app/profile/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import Avatar from "@/components/ui/Avatar";
+  7 | import ProfileEditForm from "./ProfileEditForm";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180209ms] [ERROR] ./app/families/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import FamiliesActions from "./FamiliesActions";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180209ms] [ERROR] ./app/session/[id]/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { notFound, redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import CheckableItem from "@/components/session/CheckableItem";
+  6 | import CategoryHeader from "@/components/ui/CategoryHeader";
+  7 | import EmptyState from "@/components/ui/EmptyState";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180209ms] [ERROR] ./app/invites/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import AppBar from "@/components/ui/AppBar";
+  6 | import BottomNav from "@/components/ui/BottomNav";
+  7 | import EmptyState from "@/components/ui/EmptyState";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180254ms] [ERROR] ./app/login/page.tsx:3:1
+Export getServerTranslations doesn't exist in target module
+  1 | import { createClient } from '@/lib/supabase/server'
+  2 | import { redirect } from 'next/navigation'
+> 3 | import { getServerTranslations } from '@/lib/i18n'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import LoginForm from './LoginForm'
+  5 |
+  6 | export default async function LoginPage({
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180254ms] [ERROR] ./app/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import ListCard from "@/components/ui/ListCard";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180254ms] [ERROR] ./app/lists/[id]/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { notFound, redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import CategoryHeader from "@/components/ui/CategoryHeader";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import ListDetailActions from "./ListDetailActions";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180254ms] [ERROR] ./app/history/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import Link from "next/link";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180254ms] [ERROR] ./app/profile/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import Avatar from "@/components/ui/Avatar";
+  7 | import ProfileEditForm from "./ProfileEditForm";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180254ms] [ERROR] ./app/families/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import FamiliesActions from "./FamiliesActions";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180254ms] [ERROR] ./app/session/[id]/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { notFound, redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import CheckableItem from "@/components/session/CheckableItem";
+  6 | import CategoryHeader from "@/components/ui/CategoryHeader";
+  7 | import EmptyState from "@/components/ui/EmptyState";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180255ms] [ERROR] ./app/invites/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import AppBar from "@/components/ui/AppBar";
+  6 | import BottomNav from "@/components/ui/BottomNav";
+  7 | import EmptyState from "@/components/ui/EmptyState";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180275ms] [ERROR] ./app/login/page.tsx:3:1
+Export getServerTranslations doesn't exist in target module
+  1 | import { createClient } from '@/lib/supabase/server'
+  2 | import { redirect } from 'next/navigation'
+> 3 | import { getServerTranslations } from '@/lib/i18n'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import LoginForm from './LoginForm'
+  5 |
+  6 | export default async function LoginPage({
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180275ms] [ERROR] ./app/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import ListCard from "@/components/ui/ListCard";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180275ms] [ERROR] ./app/lists/[id]/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { notFound, redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import CategoryHeader from "@/components/ui/CategoryHeader";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import ListDetailActions from "./ListDetailActions";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180275ms] [ERROR] ./app/history/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import Link from "next/link";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180276ms] [ERROR] ./app/profile/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import Avatar from "@/components/ui/Avatar";
+  7 | import ProfileEditForm from "./ProfileEditForm";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180276ms] [ERROR] ./app/families/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import FamiliesActions from "./FamiliesActions";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180276ms] [ERROR] ./app/session/[id]/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { notFound, redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import CheckableItem from "@/components/session/CheckableItem";
+  6 | import CategoryHeader from "@/components/ui/CategoryHeader";
+  7 | import EmptyState from "@/components/ui/EmptyState";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180277ms] [ERROR] ./app/invites/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import AppBar from "@/components/ui/AppBar";
+  6 | import BottomNav from "@/components/ui/BottomNav";
+  7 | import EmptyState from "@/components/ui/EmptyState";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180293ms] [ERROR] ./app/login/page.tsx:3:1
+Export getServerTranslations doesn't exist in target module
+  1 | import { createClient } from '@/lib/supabase/server'
+  2 | import { redirect } from 'next/navigation'
+> 3 | import { getServerTranslations } from '@/lib/i18n'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import LoginForm from './LoginForm'
+  5 |
+  6 | export default async function LoginPage({
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180293ms] [ERROR] ./app/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import ListCard from "@/components/ui/ListCard";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180294ms] [ERROR] ./app/lists/[id]/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { notFound, redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import CategoryHeader from "@/components/ui/CategoryHeader";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import ListDetailActions from "./ListDetailActions";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180294ms] [ERROR] ./app/history/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import Link from "next/link";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180294ms] [ERROR] ./app/profile/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import Avatar from "@/components/ui/Avatar";
+  7 | import ProfileEditForm from "./ProfileEditForm";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180294ms] [ERROR] ./app/families/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import FamiliesActions from "./FamiliesActions";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180294ms] [ERROR] ./app/session/[id]/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { notFound, redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import CheckableItem from "@/components/session/CheckableItem";
+  6 | import CategoryHeader from "@/components/ui/CategoryHeader";
+  7 | import EmptyState from "@/components/ui/EmptyState";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180294ms] [ERROR] ./app/invites/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import AppBar from "@/components/ui/AppBar";
+  6 | import BottomNav from "@/components/ui/BottomNav";
+  7 | import EmptyState from "@/components/ui/EmptyState";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180318ms] [ERROR] ./app/login/page.tsx:3:1
+Export getServerTranslations doesn't exist in target module
+  1 | import { createClient } from '@/lib/supabase/server'
+  2 | import { redirect } from 'next/navigation'
+> 3 | import { getServerTranslations } from '@/lib/i18n'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import LoginForm from './LoginForm'
+  5 |
+  6 | export default async function LoginPage({
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180318ms] [ERROR] ./app/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import ListCard from "@/components/ui/ListCard";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180318ms] [ERROR] ./app/lists/[id]/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { notFound, redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import CategoryHeader from "@/components/ui/CategoryHeader";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import ListDetailActions from "./ListDetailActions";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180318ms] [ERROR] ./app/history/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import Link from "next/link";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180318ms] [ERROR] ./app/profile/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import Avatar from "@/components/ui/Avatar";
+  7 | import ProfileEditForm from "./ProfileEditForm";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180318ms] [ERROR] ./app/families/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import FamiliesActions from "./FamiliesActions";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180318ms] [ERROR] ./app/session/[id]/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { notFound, redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import CheckableItem from "@/components/session/CheckableItem";
+  6 | import CategoryHeader from "@/components/ui/CategoryHeader";
+  7 | import EmptyState from "@/components/ui/EmptyState";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180319ms] [ERROR] ./app/invites/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import AppBar from "@/components/ui/AppBar";
+  6 | import BottomNav from "@/components/ui/BottomNav";
+  7 | import EmptyState from "@/components/ui/EmptyState";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180322ms] [ERROR] ./app/login/page.tsx:3:1
+Export getServerTranslations doesn't exist in target module
+  1 | import { createClient } from '@/lib/supabase/server'
+  2 | import { redirect } from 'next/navigation'
+> 3 | import { getServerTranslations } from '@/lib/i18n'
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import LoginForm from './LoginForm'
+  5 |
+  6 | export default async function LoginPage({
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180322ms] [ERROR] ./app/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import ListCard from "@/components/ui/ListCard";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180322ms] [ERROR] ./app/lists/[id]/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { notFound, redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import CategoryHeader from "@/components/ui/CategoryHeader";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import ListDetailActions from "./ListDetailActions";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180322ms] [ERROR] ./app/history/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import Link from "next/link";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180322ms] [ERROR] ./app/profile/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import Avatar from "@/components/ui/Avatar";
+  7 | import ProfileEditForm from "./ProfileEditForm";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180322ms] [ERROR] ./app/families/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import BottomNav from "@/components/ui/BottomNav";
+  6 | import EmptyState from "@/components/ui/EmptyState";
+  7 | import FamiliesActions from "./FamiliesActions";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180322ms] [ERROR] ./app/session/[id]/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { notFound, redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import CheckableItem from "@/components/session/CheckableItem";
+  6 | import CategoryHeader from "@/components/ui/CategoryHeader";
+  7 | import EmptyState from "@/components/ui/EmptyState";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180322ms] [ERROR] ./app/invites/page.tsx:4:1
+Export getServerTranslations doesn't exist in target module
+  2 | import { redirect } from "next/navigation";
+  3 | import { getNavCounts } from "@/lib/nav-counts";
+> 4 | import { getServerTranslations } from "@/lib/i18n";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import AppBar from "@/components/ui/AppBar";
+  6 | import BottomNav from "@/components/ui/BottomNav";
+  7 | import EmptyState from "@/components/ui/EmptyState";
+
+The export getServerTranslations was not found in module [project]/lib/i18n/index.ts [app-rsc] (ecmascript).
+Did you mean to import translations?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  180432ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1226
+[  186500ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1226
+[  186500ms] [LOG] [Fast Refresh] done in 15ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1226
+[  229612ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1226
+[  231498ms] [LOG] [Fast Refresh] done in 1993ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1226
+[  235190ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  235441ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  238420ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  238485ms] [LOG] [Fast Refresh] done in 169ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  238896ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  239715ms] [LOG] [Fast Refresh] done in 922ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  241010ms] [ERROR] Manifest: Line: 1, column: 1, Syntax error. @ http://localhost:3000/manifest.json:0
+[  318327ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  318412ms] [LOG] [Fast Refresh] done in 185ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  320246ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  320692ms] [LOG] [Fast Refresh] done in 556ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  322184ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  322185ms] [LOG] [Fast Refresh] done in 107ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  390365ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  393114ms] [LOG] [Fast Refresh] done in 2848ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  393985ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  394762ms] [LOG] [Fast Refresh] done in 890ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  399317ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  399596ms] [LOG] [Fast Refresh] done in 380ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  400068ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  400227ms] [LOG] [Fast Refresh] done in 262ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  400810ms] [ERROR] Manifest: Line: 1, column: 1, Syntax error. @ http://localhost:3000/manifest.json:0
+[  403820ms] [WARNING] The resource http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__0tbke--._.css was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/profile:0

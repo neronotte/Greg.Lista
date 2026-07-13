@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { getNavCounts } from "@/lib/nav-counts";
+import { getServerTranslations } from "@/lib/i18n/server";
 import BottomNav from "@/components/ui/BottomNav";
 import EmptyState from "@/components/ui/EmptyState";
 import FamiliesActions from "./FamiliesActions";
@@ -19,12 +20,13 @@ export default async function FamiliesPage() {
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const [{ data: memberships }, navCounts] = await Promise.all([
+  const [{ data: memberships }, navCounts, { t }] = await Promise.all([
     supabase
       .from("family_members")
       .select("role, families(id, name)")
       .eq("user_id", user.id),
     getNavCounts(),
+    getServerTranslations(),
   ]);
 
   const families = (memberships ?? [])
@@ -41,11 +43,13 @@ export default async function FamiliesPage() {
     <div className="app-shell">
       {/* Header */}
       <div className="shrink-0 px-5 pt-2 pb-4">
-        <h1 className="text-[26px] font-black text-text-primary leading-tight">Family</h1>
+        <h1 className="text-[26px] font-black text-text-primary leading-tight">{t("families.title")}</h1>
         <p className="text-sm font-medium text-text-secondary">
           {families.length === 0
-            ? "No families yet"
-            : `${families.length} ${families.length === 1 ? "group" : "groups"}`}
+            ? t("families.noFamilies")
+            : families.length === 1
+              ? t("families.groupCountSingle")
+              : t("families.groupCount").replace("{count}", String(families.length))}
         </p>
       </div>
 
@@ -53,8 +57,8 @@ export default async function FamiliesPage() {
         {families.length === 0 ? (
           <EmptyState
             icon={<Users size={48} />}
-            title="No family yet"
-            subtitle="Create a family to share lists with others"
+            title={t("families.noFamiliesSubtitle")}
+            subtitle={t("families.noFamiliesHint")}
           />
         ) : (
           <div className="space-y-3">
@@ -78,11 +82,11 @@ export default async function FamiliesPage() {
                         <div className="flex items-center gap-1 mt-0.5">
                           {role === "owner" ? (
                             <span className="inline-flex items-center gap-1 text-[10px] font-extrabold px-1.5 py-0.5 rounded-full bg-brand-mid/10 text-brand-mid">
-                              <Crown size={9} /> Admin
+                              <Crown size={9} /> {t("families.admin")}
                             </span>
                           ) : (
                             <span className="text-xs text-text-secondary font-medium capitalize">
-                              {role}
+                              {t("families.member")}
                             </span>
                           )}
                         </div>

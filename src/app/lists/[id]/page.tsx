@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { notFound, redirect } from "next/navigation";
 import { getNavCounts } from "@/lib/nav-counts";
+import { getServerTranslations } from "@/lib/i18n/server";
 import CategoryHeader from "@/components/ui/CategoryHeader";
 import EmptyState from "@/components/ui/EmptyState";
 import ListDetailActions from "./ListDetailActions";
@@ -26,7 +27,7 @@ export default async function ListDetailPage({
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  const [{ data: list }, { data: rawItems }, { data: categories }, navCounts] =
+  const [{ data: list }, { data: rawItems }, { data: categories }, navCounts, { t }] =
     await Promise.all([
       supabase
         .from("lists")
@@ -40,6 +41,7 @@ export default async function ListDetailPage({
         .order("sort_order"),
       supabase.from("categories").select("*").order("sort_order"),
       getNavCounts(),
+      getServerTranslations(),
     ]);
 
   if (!list) notFound();
@@ -87,9 +89,9 @@ export default async function ListDetailPage({
                   : "bg-bg-header text-text-secondary"
               }`}
             >
-              {list.visibility === "family" ? <><Users size={9} /> Family</> : <><Lock size={9} /> Personal</>}
+              {list.visibility === "family" ? <><Users size={9} /> {t("visibility.family")}</> : <><Lock size={9} /> {t("visibility.personal")}</>}
             </span>
-            <span className="text-xs text-text-secondary">{items.length} items</span>
+            <span className="text-xs text-text-secondary">{items.length} {items.length === 1 ? t("home.item") : t("home.items")}</span>
           </div>
         </div>
         <DeleteListButton listId={id} />
@@ -99,8 +101,8 @@ export default async function ListDetailPage({
         {items.length === 0 ? (
           <EmptyState
             icon={<ShoppingBag size={48} />}
-            title="Empty list"
-            subtitle='Tap "Add Item" to get started'
+            title={t("listDetail.emptyTitle")}
+            subtitle={t("listDetail.emptyHint")}
           />
         ) : (
           <div className="page-stack">
@@ -118,7 +120,7 @@ export default async function ListDetailPage({
             ))}
             {uncategorized.length > 0 && (
               <section>
-                <CategoryHeader name="Varie" count={uncategorized.length} />
+                <CategoryHeader name={t("listDetail.miscCategory")} count={uncategorized.length} />
                 <ListDetailActions
                   key={`${id}:misc:${uncategorized.map((item) => item.id).join(",")}`}
                   listId={id}
@@ -147,7 +149,7 @@ export default async function ListDetailPage({
             className="w-full py-3.5 bg-brand-mid text-white rounded-2xl font-extrabold text-sm flex items-center justify-center gap-2 active:scale-[0.97] transition-transform"
             style={{ boxShadow: "0 4px 16px rgba(61,122,86,0.35)" }}
           >
-            <ShoppingCart size={17} /> Start Shopping
+            <ShoppingCart size={17} /> {t("listDetail.startShopping")}
           </button>
         </form>
       </div>

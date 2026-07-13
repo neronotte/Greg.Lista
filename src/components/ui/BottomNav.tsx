@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ShoppingCart, ShoppingBag, Users } from "lucide-react";
+import { useT } from "@/lib/i18n";
 
 interface BottomNavProps {
   pendingInvites?: number;
@@ -12,7 +13,7 @@ interface BottomNavProps {
 
 interface NavTab {
   href?: string;
-  label: string;
+  labelKey: string;
   icon: typeof ShoppingCart;
   match: (pathname: string) => boolean;
   disabled?: boolean;
@@ -23,23 +24,24 @@ export default function BottomNav({
   activeSessions = 0,
 }: BottomNavProps) {
   const pathname = usePathname();
+  const t = useT();
 
   const tabs: NavTab[] = [
     {
       href: "/",
-      label: "Lists",
+      labelKey: "nav.lists",
       icon: ShoppingCart,
       match: (p: string) => p === "/" || p.startsWith("/lists"),
     },
     {
       href: "/history",
-      label: "Sessions",
+      labelKey: "nav.sessions",
       icon: ShoppingBag,
       match: (p: string) => p.startsWith("/history"),
     },
     {
       href: "/families",
-      label: "Family",
+      labelKey: "nav.family",
       icon: Users,
       match: (p: string) =>
         p.startsWith("/families") ||
@@ -83,7 +85,7 @@ export default function BottomNav({
                 active ? "text-brand-mid" : "text-text-secondary"
               }`}
             >
-              {tab.label}
+              {t(tab.labelKey)}
             </span>
             <span
               className={`mt-0.5 h-1 w-1 rounded-full bg-brand-mid transition-all duration-200 ${
@@ -98,7 +100,7 @@ export default function BottomNav({
 
         return tab.href && !tab.disabled ? (
           <Link
-            key={tab.label}
+            key={tab.labelKey}
             href={tab.href}
             className={commonClassName}
             aria-current={active ? "page" : undefined}
@@ -107,7 +109,7 @@ export default function BottomNav({
           </Link>
         ) : (
           <div
-            key={tab.label}
+            key={tab.labelKey}
             className={`${commonClassName} ${tab.disabled ? "cursor-not-allowed opacity-40" : ""}`}
             aria-current={active ? "page" : undefined}
           >
